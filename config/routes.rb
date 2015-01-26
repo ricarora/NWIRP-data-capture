@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :removability_grounds
+  resources :removability_grounds, param: :name
 
   devise_for :users
   resources :conviction_grounds

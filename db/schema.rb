@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20150126222635) do
     t.datetime "updated_at"
   end
 
+  add_index "removability_grounds", ["name"], name: "index_removability_grounds_on_name", unique: true
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
