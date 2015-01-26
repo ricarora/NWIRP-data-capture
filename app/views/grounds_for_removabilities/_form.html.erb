@@ -1,0 +1,21 @@
+<%= form_for(@grounds_for_removability) do |f| %>
+  <% if @grounds_for_removability.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@grounds_for_removability.errors.count, "error") %> prohibited this grounds_for_removability from being saved:</h2>
+
+      <ul>
+      <% @grounds_for_removability.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
