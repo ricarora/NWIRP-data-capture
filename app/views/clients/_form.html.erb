@@ -1,0 +1,53 @@
+<%= form_for(@client) do |f| %>
+  <% if @client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% @client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :nationality %><br>
+    <%= f.text_field :nationality %>
+  </div>
+  <div class="field">
+    <%= f.label :ethnicity %><br>
+    <%= f.text_field :ethnicity %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :relief_sought %><br>
+    <%= f.text_field :relief_sought %>
+  </div>
+  <div class="field">
+    <%= f.label :represented %><br>
+    <%= f.check_box :represented %>
+  </div>
+  <div class="field">
+    <%= f.label :drru_case %><br>
+    <%= f.check_box :drru_case %>
+  </div>
+  <div class="field">
+    <%= f.label :a_number %><br>
+    <%= f.text_field :a_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

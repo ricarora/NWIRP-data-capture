@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @client.last_name %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @client.first_name %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @client.nationality %>
+</p>
+
+<p>
+  <strong>Ethnicity:</strong>
+  <%= @client.ethnicity %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @client.gender %>
+</p>
+
+<p>
+  <strong>Relief sought:</strong>
+  <%= @client.relief_sought %>
+</p>
+
+<p>
+  <strong>Represented:</strong>
+  <%= @client.represented %>
+</p>
+
+<p>
+  <strong>Drru case:</strong>
+  <%= @client.drru_case %>
+</p>
+
+<p>
+  <strong>A number:</strong>
+  <%= @client.a_number %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>
