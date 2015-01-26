@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gor name:</strong>
+  <%= @conviction_ground.gor_name %>
+</p>
+
+<p>
+  <strong>Conviction:</strong>
+  <%= @conviction_ground.conviction_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @conviction_ground.status %>
+</p>
+
+<%= link_to 'Edit', edit_conviction_ground_path(@conviction_ground) %> |
+<%= link_to 'Back', conviction_grounds_path %>

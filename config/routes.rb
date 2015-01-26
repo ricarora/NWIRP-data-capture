@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :conviction_grounds
+
   resources :grounds_for_removabilities
 
   resources :convictions
