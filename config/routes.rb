@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :conviction_grounds
 
   resources :grounds_for_removabilities
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   resources :convictions
 
   resources :clients
+
+  root to: "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
