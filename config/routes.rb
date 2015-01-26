@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :removability_grounds
+
   devise_for :users
   resources :conviction_grounds
-
-  resources :grounds_for_removabilities
 
   resources :convictions
 

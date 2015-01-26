@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "grounds_for_removabilities/show", :type => :view do
+RSpec.describe "removability_grounds/show", :type => :view do
   before(:each) do
-    @grounds_for_removability = assign(:grounds_for_removability, GroundsForRemovability.create!(
+    @removability_ground = assign(:removability_ground, RemovabilityGround.create!(
       :name => "Name"
     ))
   end
