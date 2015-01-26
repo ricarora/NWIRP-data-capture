@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Crime name:</strong>
+  <%= @conviction.crime_name %>
+</p>
+
+<p>
+  <strong>Rcw:</strong>
+  <%= @conviction.rcw %>
+</p>
+
+<p>
+  <strong>Subsection:</strong>
+  <%= @conviction.subsection %>
+</p>
+
+<p>
+  <strong>Sentence:</strong>
+  <%= @conviction.sentence %>
+</p>
+
+<p>
+  <strong>Ij name:</strong>
+  <%= @conviction.ij_name %>
+</p>
+
+<p>
+  <strong>Nta charges:</strong>
+  <%= @conviction.nta_charges %>
+</p>
+
+<p>
+  <strong>Ij decision date:</strong>
+  <%= @conviction.ij_decision_date %>
+</p>
+
+<p>
+  <strong>Ij finding:</strong>
+  <%= @conviction.ij_finding %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @conviction.client_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @conviction.notes %>
+</p>
+
+<%= link_to 'Edit', edit_conviction_path(@conviction) %> |
+<%= link_to 'Back', convictions_path %>

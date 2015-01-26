@@ -1,0 +1,57 @@
+<%= form_for(@conviction) do |f| %>
+  <% if @conviction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
+
+      <ul>
+      <% @conviction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :crime_name %><br>
+    <%= f.text_field :crime_name %>
+  </div>
+  <div class="field">
+    <%= f.label :rcw %><br>
+    <%= f.text_field :rcw %>
+  </div>
+  <div class="field">
+    <%= f.label :subsection %><br>
+    <%= f.text_field :subsection %>
+  </div>
+  <div class="field">
+    <%= f.label :sentence %><br>
+    <%= f.number_field :sentence %>
+  </div>
+  <div class="field">
+    <%= f.label :ij_name %><br>
+    <%= f.text_field :ij_name %>
+  </div>
+  <div class="field">
+    <%= f.label :nta_charges %><br>
+    <%= f.text_field :nta_charges %>
+  </div>
+  <div class="field">
+    <%= f.label :ij_decision_date %><br>
+    <%= f.datetime_select :ij_decision_date %>
+  </div>
+  <div class="field">
+    <%= f.label :ij_finding %><br>
+    <%= f.text_field :ij_finding %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id %><br>
+    <%= f.number_field :client_id %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

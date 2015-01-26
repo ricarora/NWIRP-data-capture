@@ -1,0 +1,43 @@
+<h1>Listing convictions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Crime name</th>
+      <th>Rcw</th>
+      <th>Subsection</th>
+      <th>Sentence</th>
+      <th>Ij name</th>
+      <th>Nta charges</th>
+      <th>Ij decision date</th>
+      <th>Ij finding</th>
+      <th>Client</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @convictions.each do |conviction| %>
+      <tr>
+        <td><%= conviction.crime_name %></td>
+        <td><%= conviction.rcw %></td>
+        <td><%= conviction.subsection %></td>
+        <td><%= conviction.sentence %></td>
+        <td><%= conviction.ij_name %></td>
+        <td><%= conviction.nta_charges %></td>
+        <td><%= conviction.ij_decision_date %></td>
+        <td><%= conviction.ij_finding %></td>
+        <td><%= conviction.client_id %></td>
+        <td><%= conviction.notes %></td>
+        <td><%= link_to 'Show', conviction %></td>
+        <td><%= link_to 'Edit', edit_conviction_path(conviction) %></td>
+        <td><%= link_to 'Destroy', conviction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Conviction', new_conviction_path %>
