@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127211141) do
+ActiveRecord::Schema.define(version: 20150127211356) do
 
   create_table "assessments", force: true do |t|
     t.datetime "date"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150127211141) do
     t.string   "nationality"
     t.string   "ethnicity"
     t.string   "gender"
-    t.string   "relief_sought"
     t.boolean  "represented"
     t.boolean  "drru_case"
     t.string   "a_number"
