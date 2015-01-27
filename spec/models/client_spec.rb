@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Client, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { FactoryGirl.create(:user) }
+  describe ".validations" do
+    it "must have a first name" do
+      user = FactoryGirl.create(:user, first_name: nil)
+      expect((user).valid?).to eq false
+    end
+  end
 end
