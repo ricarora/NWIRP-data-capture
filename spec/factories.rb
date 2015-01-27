@@ -14,7 +14,7 @@ FactoryGirl.define do
     sentence 365
     ij_name "Judge Fitting"
     nta_charges "212(a)(2)(A)(i)"
-    ij_decision_date "2015-01-27"
+    ij_decision_date Date.parse("2015-01-27")
     ij_finding "Vol Dept"
   end
 end

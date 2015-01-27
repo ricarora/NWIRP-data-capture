@@ -24,4 +24,9 @@ RSpec.describe Conviction, :type => :model do
     subject { FactoryGirl.build(:conviction, ij_decision_date: "Jan 4")}
     it { should_not be_valid }
   end
+
+  context "ij decision date must be a date on or before today" do
+    subject { FactoryGirl.build(:conviction, ij_decision_date: Date.today + 1)}
+    it { should_not be_valid }
+  end
 end
