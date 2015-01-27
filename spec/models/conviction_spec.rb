@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Conviction, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "must have a crime_name" do
+    subject { FactoryGirl.build(:conviction, crime_name: nil)}
+    it { should_not be_valid }
+  end
 end
