@@ -6,6 +6,7 @@ RSpec.describe Client, :type => :model do
     it "must have a first name" do
       client = FactoryGirl.create(:client, first_name: nil)
       expect((client).valid?).to eq false
+      expect((:client).valid?).to eq true
     end
   end
 end
