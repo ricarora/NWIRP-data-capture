@@ -5,6 +5,6 @@ FactoryGirl.define do
     a_number "1234567"
     nationality "Mexican"
     gender "Male"
-    represented "Yes"
+    represented true
   end
 end

@@ -23,5 +23,10 @@ RSpec.describe Client, :type => :model do
       subject { FactoryGirl.build(:client, gender: "m") }
       it { should_not be_valid}
     end
+
+    context "must have value in represented field" do
+      subject { FactoryGirl.build(:client, represented: nil)}
+      it { should_not be_valid}
+    end
   end
 end
