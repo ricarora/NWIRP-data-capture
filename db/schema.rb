@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127210828) do
+ActiveRecord::Schema.define(version: 20150127211141) do
 
   create_table "assessments", force: true do |t|
     t.datetime "date"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_reliefs", force: true do |t|
+    t.string   "relief_name"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
