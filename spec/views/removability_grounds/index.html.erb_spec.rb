@@ -7,13 +7,13 @@ RSpec.describe "removability_grounds/index", :type => :view do
         :name => "Name"
       ),
       RemovabilityGround.create!(
-        :name => "Name"
+        :name => "DV"
       )
     ])
   end
 
   it "renders a list of removability_grounds" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "tr>td", :text => "Name".to_s, :count => 1
   end
 end

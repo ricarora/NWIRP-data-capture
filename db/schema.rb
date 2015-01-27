@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126222635) do
+ActiveRecord::Schema.define(version: 20150127211356) do
 
   create_table "assessments", force: true do |t|
     t.datetime "date"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_reliefs", force: true do |t|
+    t.string   "relief_name"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -26,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150126222635) do
     t.string   "nationality"
     t.string   "ethnicity"
     t.string   "gender"
-    t.string   "relief_sought"
     t.boolean  "represented"
     t.boolean  "drru_case"
     t.string   "a_number"
@@ -56,6 +62,14 @@ ActiveRecord::Schema.define(version: 20150126222635) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "relief_soughts", id: false, force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relief_soughts", ["name"], name: "index_relief_soughts_on_name", unique: true
 
   create_table "removability_grounds", id: false, force: true do |t|
     t.string   "name",       null: false

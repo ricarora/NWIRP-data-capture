@@ -12,11 +12,11 @@ RSpec.describe RemovabilityGroundsController, :type => :routing do
     end
 
     it "routes to #show" do
-      expect(:get => "/removability_grounds/1").to route_to("removability_grounds#show", :id => "1")
+      expect(:get => "/removability_grounds/1").to route_to("removability_grounds#show", :name => "1")
     end
 
     it "routes to #edit" do
-      expect(:get => "/removability_grounds/1/edit").to route_to("removability_grounds#edit", :id => "1")
+      expect(:get => "/removability_grounds/1/edit").to route_to("removability_grounds#edit", :name => "1")
     end
 
     it "routes to #create" do
@@ -24,11 +24,11 @@ RSpec.describe RemovabilityGroundsController, :type => :routing do
     end
 
     it "routes to #update" do
-      expect(:put => "/removability_grounds/1").to route_to("removability_grounds#update", :id => "1")
+      expect(:put => "/removability_grounds/1").to route_to("removability_grounds#update", :name => "1")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/removability_grounds/1").to route_to("removability_grounds#destroy", :id => "1")
+      expect(:delete => "/removability_grounds/1").to route_to("removability_grounds#destroy", :name => "1")
     end
 
   end
