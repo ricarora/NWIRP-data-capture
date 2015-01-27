@@ -28,5 +28,16 @@ RSpec.describe Client, :type => :model do
       subject { FactoryGirl.build(:client, represented: nil)}
       it { should_not be_valid}
     end
+
+    context "must have an a_number" do
+      subject { FactoryGirl.build(:client, a_number: nil)}
+      it { should_not be_valid}
+    end
+
+    it "the a_number must be unique" do
+      expect((client).valid?).to eq true
+      invalid_client = Client.create(first_name: "Miguel", last_name: "Contreras", gender: "Male", represented: true, a_number: "1234567", nationality: "Mexican")
+      expect((invalid_client).valid?).to eq false
+    end
   end
 end
