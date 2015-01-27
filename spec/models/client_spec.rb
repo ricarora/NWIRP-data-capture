@@ -4,15 +4,18 @@ RSpec.describe Client, :type => :model do
   let(:client) { FactoryGirl.create(:client) }
   describe ".validations" do
     it "must have a first name" do
-      invalid_client = Client.create(first_name: nil)
+      invalid_client = Client.create(first_name: nil, last_name: "Contreras")
       expect((invalid_client).valid?).to eq false
       expect((client).valid?).to eq true
     end
 
-    it "must have a last name" do
-      invalid_client = Client.create(first_name: "Miguel", last_name: nil)
-      expect((invalid_client).valid?).to eq false
-      expect((client).valid?).to eq true
+    context "must have a last name" do
+      subject { FactoryGirl.build(:client, last_name: nil)}
+      it { should_not be_valid }
+    end
+
+    it "must have a a_number" do
+
     end
   end
 end
