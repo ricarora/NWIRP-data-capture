@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name  "Contreras"
     a_number "1234567"
     nationality "Mexican"
-    gender "M"
+    gender "Male"
     represented "Yes"
   end
 end

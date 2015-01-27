@@ -14,8 +14,9 @@ RSpec.describe Client, :type => :model do
       it { should_not be_valid }
     end
 
-    it "must have a a_number" do
-
+    context "must be either Male or Female" do
+      subject { FactoryGirl.build(:client, gender: "m") }
+      it { should_not be_valid}
     end
   end
 end
