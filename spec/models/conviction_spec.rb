@@ -19,4 +19,9 @@ RSpec.describe Conviction, :type => :model do
       expect((conviction).valid?).to eq true
     end
   end
+
+  context "ij decision date must be a date object" do
+    subject { FactoryGirl.build(:conviction, ij_decision_date: "Jan 4")}
+    it { should_not be_valid }
+  end
 end
