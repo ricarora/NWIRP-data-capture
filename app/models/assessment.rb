@@ -1,4 +1,5 @@
 class Assessment < ActiveRecord::Base
+  belongs_to :client
   validates :client_id, :date, presence: true
   validates :client_id, numericality: { only_integer: true }
   validate :is_a_date?, :date_cannot_be_in_the_future
