@@ -12,4 +12,8 @@ RSpec.describe Assessment, :type => :model do
   it "date must be date object" do
     expect(Assessment.create(date: "Jan 4", client_id: 4).valid?).to eq false
   end
+
+  it "date can not be in the future" do
+    expect(Assessment.create(date: Date.today + 1, client_id: 2).valid?).to eq false
+  end
 end
