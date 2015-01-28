@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127211356) do
+ActiveRecord::Schema.define(version: 20150127223523) do
 
   create_table "assessments", force: true do |t|
-    t.datetime "date"
+    t.date     "date"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150127211356) do
     t.integer  "sentence"
     t.string   "ij_name"
     t.string   "nta_charges"
-    t.datetime "ij_decision_date"
+    t.date     "ij_decision_date"
     t.string   "ij_finding"
     t.integer  "client_id"
     t.text     "notes"
