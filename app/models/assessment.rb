@@ -1,5 +1,6 @@
 class Assessment < ActiveRecord::Base
   validates :client_id, :date, presence: true
+  validates :client_id, numericality: { only_integer: true }
   validate :is_a_date?, :date_cannot_be_in_the_future
   validates :date, :uniqueness => { scope: [:client_id]}
 
