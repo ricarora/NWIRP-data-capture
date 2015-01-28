@@ -7,6 +7,7 @@ RSpec.describe RemovabilityGround, :type => :model do
       removability.update(name: "")
       expect((removability).valid?).to eq false
     end
+    
     it "name is unique" do
       expect((removability).valid?).to eq true
       invalid_ground = RemovabilityGround.create(name: "DV")
