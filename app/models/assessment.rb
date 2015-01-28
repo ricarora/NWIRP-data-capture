@@ -1,6 +1,7 @@
 class Assessment < ActiveRecord::Base
   validates :client_id, :date, presence: true
   validate :is_a_date?, :date_cannot_be_in_the_future
+  validates :date, :uniqueness => { scope: [:client_id]}
 
   def is_a_date?
     if !date.respond_to?(:strftime)
