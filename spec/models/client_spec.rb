@@ -52,5 +52,10 @@ RSpec.describe Client, :type => :model do
       subject { FactoryGirl.build(:client, nationality: nil)}
       it { should_not be_valid}
     end
+
+    context "must have valid nationality" do
+      subject { FactoryGirl.build(:client, nationality: "Nothing") }
+      it { should_not be_valid}
+    end
   end
 end
