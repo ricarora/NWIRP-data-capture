@@ -1,5 +1,5 @@
 class Conviction < ActiveRecord::Base
-  belong_to :client
+  belongs_to :client
   has_many :removability_grounds, through: :conviction_ground
   validates :crime_name, :sentence, presence: true
   validates :sentence, numericality: { only_integer: true }
