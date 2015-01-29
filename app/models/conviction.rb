@@ -1,6 +1,7 @@
 class Conviction < ActiveRecord::Base
   belongs_to :client
-  has_many :removability_grounds, through: :conviction_ground
+  has_many :removability_grounds, through: :conviction_grounds
+  has_many :conviction_grounds
   validates :crime_name, :sentence, presence: true
   validates :sentence, numericality: { only_integer: true }
   validate :ij_decision_date_is_date?
