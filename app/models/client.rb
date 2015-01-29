@@ -48,6 +48,6 @@ class Client < ActiveRecord::Base
                 "Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan",
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
-
-    validates :nationality, inclusion: { in: NATIONALITY }
+                
+  validates :nationality, inclusion: { in: NATIONALITY }
 end
