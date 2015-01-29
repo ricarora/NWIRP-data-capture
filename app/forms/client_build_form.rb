@@ -16,11 +16,11 @@ attr_reader :client
                             drru_case: @attributes[:drru_case],
                             a_number: @attributes[:a_number])
     @attributes[:relief_sought].each do |name|
-      if name_found = ReliefSought.find(name)
-        ClientRelief.create(relief_name: name_found.name,
-                            client_id: @client.id)
-      else
+      if ReliefSought.where(name: "something").empty?
         add_relief(name)
+      else
+        ClientRelief.create(relief_name: ReliefSought.find(name).name,
+        client_id: @client.id)
       end
     end
     Assessment.create(date: @attributes[:assessment], client_id: @client.id)

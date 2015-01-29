@@ -1,7 +1,8 @@
 class Client < ActiveRecord::Base
   has_many :assessments
   has_many :convictions
-  has_many :relief_soughts, through: :client_relief
+  has_many :relief_soughts, through: :client_reliefs
+  has_many :client_reliefs
   validates :first_name, :last_name, :gender, :represented, :a_number,
             :nationality, presence: true
   validates_uniqueness_of :a_number
@@ -48,6 +49,6 @@ class Client < ActiveRecord::Base
                 "Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan",
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
-                
+
   validates :nationality, inclusion: { in: NATIONALITY }
 end

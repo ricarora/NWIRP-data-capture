@@ -27,7 +27,9 @@
 
 <p>
   <strong>Relief sought:</strong>
-  <%= @client.relief_sought %>
+  <% @client.client_reliefs.each do |relief| %>
+    <%= relief.relief_name %>
+  <% end %>
 </p>
 
 <p>
