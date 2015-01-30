@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :conviction_grounds
 
-  resources :convictions
-
-  resources :clients
+  resources :clients do
+    resources :convictions
+  end
 
   root to: "home#index"
 

@@ -54,6 +54,6 @@
   <% end %>
 </p>
 
-<%= link_to "Add Conviction", new_conviction_path(client: @client.id) %>
+<%= link_to "Add Conviction", new_client_conviction_path(@client.id) %>
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>
