@@ -21,11 +21,9 @@
           <% end %>
       <% end %>
 
-      <% if !@client_form.errors[:assessment].nil? %>
+      <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment][0].messages[:date].nil? %>
         <ul>
-          <% @client_form.errors[:assessment].messages.each do |key, message| %>
-          <li><%= key %><%= message[0] %></li>
-          <% end %>
+        <li>Date <%= @client_form.errors[:client_assessment][0].messages[:date][0] %></li>
         </ul>
       <% end %>
     </div>

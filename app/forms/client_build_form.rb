@@ -24,11 +24,10 @@ class ClientBuildForm
     if !@client.id.nil?
       @attributes[:relief_sought].each do |name|
         if ReliefSought.where(name: name).empty?
-          add_relief(name)
+          new_relief = ReliefSought.create(name: name)
+          add_client_relief(new_relief.name)
         else
-          client_relief = ClientRelief.create(relief_name: ReliefSought.find(name).name,
-          client_id: @client.id)
-          client_errors(client_relief, :client_relief)
+          add_client_relief(ReliefSought.find(name).name)
         end
       end
     end
@@ -40,10 +39,9 @@ class ClientBuildForm
     @client.valid?
   end
 
-  def add_relief(name)
-    new_relief = ReliefSought.create(name: name)
-    client_relief = ClientRelief.create(relief_name: new_relief.name, client_id: @client.id)
-    client_errors(client_relief, :client_relief)
+  def add_client_relief(name)
+    relief = ClientRelief.create(relief_name: name, client_id: @client.id)
+    client_errors(relief, :client_relief)
   end
 
   def client_errors(name, name_sym)
