@@ -24,11 +24,11 @@ class ConvictionsController < ApplicationController
   # POST /convictions
   # POST /convictions.json
   def create
-    @conviction = Conviction.new(conviction_params)
+    @conviction_form = ConvictionBuildForm.new(params[:conviction_form])
 
     respond_to do |format|
-      if @conviction.save
-        format.html { redirect_to @conviction, notice: 'Conviction was successfully created.' }
+      if @conviction_form.save
+        format.html { redirect_to client_path(@conviction_form.client.id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
         format.html { render :new }

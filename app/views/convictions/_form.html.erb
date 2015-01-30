@@ -1,4 +1,5 @@
-<%= form_for(@conviction) do |f| %>
+<%= form_tag convictions_path do |f| %>
+
   <% if @conviction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
@@ -12,46 +13,46 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :crime_name %><br>
-    <%= f.text_field :crime_name %>
+    <%= label_tag "conviction_form[crime_name]", "Crime Name" %><br>
+    <%= text_field_tag "conviction_form[crime_name]" %>
   </div>
   <div class="field">
-    <%= f.label :rcw %><br>
-    <%= f.text_field :rcw %>
+    <%= label_tag "conviction_form[rcw]", "RCW" %><br>
+    <%= text_field_tag "conviction_form[rcw]" %>
   </div>
   <div class="field">
-    <%= f.label :subsection %><br>
-    <%= f.text_field :subsection %>
+    <%= label_tag "conviction_form[subsection]", "Subsection" %><br>
+    <%= text_field_tag "conviction_form[subsection]" %>
   </div>
   <div class="field">
-    <%= f.label :sentence %><br>
-    <%= f.number_field :sentence %>
+    <%= label_tag "conviction_form[sentence]", "Sentence" %><br>
+    <%= text_field_tag "conviction_form[sentence]" %>
   </div>
   <div class="field">
-    <%= f.label :ij_name %><br>
-    <%= f.text_field :ij_name %>
+    <%= label_tag "conviction_form[ij_name]", "IJ Name" %><br>
+    <%= text_field_tag "conviction_form[ij_name]" %>
   </div>
   <div class="field">
-    <%= f.label :nta_charges %><br>
-    <%= f.text_field :nta_charges %>
+    <%= label_tag "conviction_form[nta_charges]", "NTA Charges" %><br>
+    <%= text_field_tag "conviction_form[nta_charges]" %>
   </div>
   <div class="field">
-    <%= f.label :ij_decision_date %><br>
-    <%= f.datetime_select :ij_decision_date %>
+    <%= label_tag "conviction_form[ij_decision_date]", "IJ Decision Date" %><br>
+    <%= date_field_tag "conviction_form[ij_decision_date]" %>
   </div>
   <div class="field">
-    <%= f.label :ij_finding %><br>
-    <%= f.text_field :ij_finding %>
+    <%= label_tag "conviction_form[ij_finding]", "IJ Finding" %><br>
+    <%= text_field_tag "conviction_form[ij_finding]" %>
   </div>
   <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.number_field :client_id %>
+
+    <%= hidden_field_tag "conviction_form[client_id]", params[:client] %>
   </div>
   <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+    <%= label_tag "conviction_form[notes]", "Notes" %><br>
+    <%= text_area_tag "conviction_form[notes]" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= submit_tag %>
   </div>
 <% end %>
