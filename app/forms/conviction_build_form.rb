@@ -6,6 +6,7 @@ class ConvictionBuildForm
   end
 
   def save
+    raise
     @conviction = Conviction.create(crime_name: @attributes[:crime_name],
                                     rcw: @attributes[:rcw],
                                     subsection: @attributes[:subsection],
@@ -16,10 +17,10 @@ class ConvictionBuildForm
                                     ij_finding: @attributes[:ij_finding],
                                     client_id: @attributes[:client_id],
                                     notes: @attributes[:notes])
-    @attributes.removability_grounds.each do |name, value|
-      ConvictionGround.create(gor_name: name, conviction_id: @conviction.id, status: status(value))
+    @attributes[:removability_grounds].each do |name, value|
+      ConvictionGround.create(gor_name: name, conviction_id: @conviction.id, status: value)
     end
-
+    @conviction.valid?
   end
 
 end

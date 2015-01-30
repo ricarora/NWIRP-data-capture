@@ -15,6 +15,7 @@ class ConvictionsController < ApplicationController
   # GET /convictions/new
   def new
     @conviction = Conviction.new
+    @removability_grounds = RemovabilityGround.all
   end
 
   # GET /convictions/1/edit
@@ -28,7 +29,7 @@ class ConvictionsController < ApplicationController
 
     respond_to do |format|
       if @conviction_form.save
-        format.html { redirect_to client_path(@conviction_form.client.id), notice: 'Conviction was successfully created.' }
+        format.html { redirect_to client_path(@conviction_form.conviction.client_id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
         format.html { render :new }
