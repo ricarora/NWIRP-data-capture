@@ -26,32 +26,32 @@ class ClientBuildForm
       if ReliefSought.where(name: name).empty?
         add_relief(name)
       else
-        ClientRelief.create(relief_name: ReliefSought.find(name).name,
+        client_relief = ClientRelief.create(relief_name: ReliefSought.find(name).name,
         client_id: @client.id)
-      end
-
-      if @client.errors[:relief_sought].any?
-        @errors[:relief_sought]=@client.errors
-      end
-
-      if @client.errors[:client_relief].any?
-        @errors[:client_relief]=@client.errors
+        client_errors(client_relief, :client_relief)
       end
 
     end
     if !@attributes[:assessment].empty?
-      Assessment.create(date: Date.parse(@attributes[:assessment]), client_id: @client.id)
-
-      if @client.errors[:assessment].any?
-        @errors[:assessment]=@client.errors
-      end
-
+      client_assessment = Assessment.create(date: Date.parse(@attributes[:assessment]), client_id: @client.id)
+      client_errors(client_assessment, :client_assessment)
     end
     @client.valid?
   end
 
   def add_relief(name)
     new_relief = ReliefSought.create(name: name)
-    ClientRelief.create(relief_name: new_relief.name, client_id: @client.id)
+    client_relief = ClientRelief.create(relief_name: new_relief.name, client_id: @client.id)
+    client_errors(client_relief, :client_relief)
+  end
+
+  def client_errors(name, name_sym)
+    if name.errors.any?
+      if @errors[name_sym]
+        @errors[name_sym] += [name.errors]
+      else
+        @errors[name_sym] = [name.errors]
+      end
+    end
   end
 end

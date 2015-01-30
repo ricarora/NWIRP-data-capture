@@ -5,24 +5,26 @@
 
       <% if !@client_form.errors[:client].nil? %>
         <ul>
-        <% @client_form.errors[:client].messages.each do |message| %>
-          <li><%= message %></li>
+        <% @client_form.errors[:client].messages.each do |key, message| %>
+          <li><%= key %><%= message[0] %></li>
         <% end %>
         </ul>
       <% end %>
 
       <% if !@client_form.errors[:client_relief].nil? %>
+          <%  @client_form.errors[:client_relief].each do |client_relief| %>
         <ul>
-          <% @client_form.errors[:client_relief].messages.each do |message| %>
-          <li><%= message %></li>
+          <% client_relief.messages.each do |key, message| %>
+          <li><%= key %><%= message[0] %></li>
           <% end %>
         </ul>
+          <% end %>
       <% end %>
 
       <% if !@client_form.errors[:assessment].nil? %>
         <ul>
-          <% @client_form.errors[:assessment].messages.each do |message| %>
-          <li><%= message %></li>
+          <% @client_form.errors[:assessment].messages.each do |key, message| %>
+          <li><%= key %><%= message[0] %></li>
           <% end %>
         </ul>
       <% end %>
