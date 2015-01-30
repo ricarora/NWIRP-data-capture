@@ -1,9 +1,11 @@
 class ClientBuildForm
-attr_reader :client
+
+  attr_reader :client, :errors
 
   def initialize(attributes, client = nil)
     @attributes = attributes
     @client = client
+    @errors = {}
   end
 
   def save
@@ -15,6 +17,11 @@ attr_reader :client
                             represented: @attributes[:represented],
                             drru_case: @attributes[:drru_case],
                             a_number: @attributes[:a_number])
+
+    if @client.errors.any?
+      @errors[:client]=@client.errors
+    end
+
     @attributes[:relief_sought].each do |name|
       if ReliefSought.where(name: name).empty?
         add_relief(name)
@@ -22,9 +29,23 @@ attr_reader :client
         ClientRelief.create(relief_name: ReliefSought.find(name).name,
         client_id: @client.id)
       end
+
+      if @client.errors[:relief_sought].any?
+        @errors[:relief_sought]=@client.errors
+      end
+
+      if @client.errors[:client_relief].any?
+        @errors[:client_relief]=@client.errors
+      end
+
     end
     if !@attributes[:assessment].empty?
       Assessment.create(date: Date.parse(@attributes[:assessment]), client_id: @client.id)
+
+      if @client.errors[:assessment].any?
+        @errors[:assessment]=@client.errors
+      end
+
     end
     @client.valid?
   end
