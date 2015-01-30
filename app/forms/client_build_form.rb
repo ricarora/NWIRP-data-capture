@@ -17,21 +17,22 @@ class ClientBuildForm
                             represented: @attributes[:represented],
                             drru_case: @attributes[:drru_case],
                             a_number: @attributes[:a_number])
-
     if @client.errors.any?
       @errors[:client]=@client.errors
     end
 
-    @attributes[:relief_sought].each do |name|
-      if ReliefSought.where(name: name).empty?
-        add_relief(name)
-      else
-        client_relief = ClientRelief.create(relief_name: ReliefSought.find(name).name,
-        client_id: @client.id)
-        client_errors(client_relief, :client_relief)
+    if !@client.id.nil?
+      @attributes[:relief_sought].each do |name|
+        if ReliefSought.where(name: name).empty?
+          add_relief(name)
+        else
+          client_relief = ClientRelief.create(relief_name: ReliefSought.find(name).name,
+          client_id: @client.id)
+          client_errors(client_relief, :client_relief)
+        end
       end
-
     end
+
     if !@attributes[:assessment].empty?
       client_assessment = Assessment.create(date: Date.parse(@attributes[:assessment]), client_id: @client.id)
       client_errors(client_assessment, :client_assessment)
