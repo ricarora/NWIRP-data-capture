@@ -15,7 +15,7 @@ class ConvictionBuildForm
                                     sentence: @attributes[:sentence],
                                     ij_name: @attributes[:ij_name],
                                     nta_charges: @attributes[:nta_charges],
-                                    ij_decision_date: Date.parse(@attributes[:ij_decision_date]),
+                                    ij_decision_date: @attributes[:ij_decision_date],
                                     ij_finding: @attributes[:ij_finding],
                                     client_id: @client_id,
                                     notes: @attributes[:notes])
