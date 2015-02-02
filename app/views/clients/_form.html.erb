@@ -67,11 +67,11 @@
   </div>
   <div class="field">
     <%= label_tag "client_form[drru_case]", "Drru Case" %><br>
-    <%= check_box_tag "client_form[drru_case]", "on", @client_form && @client_form.attributes[:drru_case]=='on' ? @client_form.attributes[:drru_case] : nil %>
+    <%= check_box_tag "client_form[drru_case]", "on", @client_form && @client_form.attributes[:drru_case] == 'on' ? true : false %>
   </div>
   <div class="field">
     <%= label_tag "client_form[assessment]", "Assessment" %><br>
-    <%= date_field_tag "client_form[assessment]", @client_form && @client_form.attributes ? @client_form.attributes[:assessment] : nil %>
+    <%= date_field_tag "client_form[assessment]", @client_form && @client_form.attributes ? @client_form.attributes[:assessment] : nil, {placeholder: "mm/dd/yyyy"} %>
   </div>
   <div class="actions">
     <%= submit_tag %>
