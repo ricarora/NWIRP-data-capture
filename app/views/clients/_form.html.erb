@@ -44,7 +44,7 @@
   <div class="field">
     <%= label_tag "client_form[nationality]", "Nationality" %><br>
     <!-- <%= text_field_tag "client_form[nationality]", @client_form && @client_form.client ? @client_form.client.nationality : nil, {placeholder: "Nationality"} %> -->
-    <%= select_tag "client_form[nationality]", options_for_select(Client::NATIONALITY, "name"), {include_blank: @client_form && @client_form.client ? @client_form.client.nationality : nil } %>
+    <%= select_tag "client_form[nationality]", options_for_select(Client::NATIONALITY, ""), { include_blank: @client_form && @client_form.client ? @client_form.client.nationality : nil } %>
   </div>
   <div class="field">
     <%= label_tag "client_form[ethnicity]", "Ethnicity" %><br>
@@ -75,7 +75,6 @@
     <%= date_field_tag "client_form[assessment]", @client_form && @client_form.attributes ? @client_form.attributes[:assessment] : nil, {placeholder: "mm/dd/yyyy"} %>
   </div>
   <div class="actions">
-
     <%= submit_tag %>
   </div>
 <% end %>
