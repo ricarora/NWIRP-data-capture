@@ -1,6 +1,6 @@
 class ClientBuildForm
 
-  attr_reader :client, :errors
+  attr_reader :attributes, :client, :errors
 
   def initialize(attributes, client = nil)
     @attributes = attributes
