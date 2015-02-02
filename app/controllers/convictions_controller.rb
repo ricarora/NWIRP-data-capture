@@ -25,6 +25,7 @@ class ConvictionsController < ApplicationController
   # POST /convictions
   # POST /convictions.json
   def create
+    @removability_grounds = RemovabilityGround.all
     @conviction_form = ConvictionBuildForm.new(params[:conviction_form], params[:client_id])
 
     respond_to do |format|

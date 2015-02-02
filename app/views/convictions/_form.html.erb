@@ -1,15 +1,16 @@
 <%= form_tag client_convictions_path do |f| %>
+  <% if @conviction_form && @conviction_form.errors.any? %>
+    <% if @conviction_form.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@conviction_form.errors.count, "error") %> prohibited this conviction from being saved:</h2>
 
-  <% if @conviction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
-
-      <ul>
-      <% @conviction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% @conviction_form.errors[:conviction].messages.each do |key, message| %>
+          <li><%=key %> <%= message[0] %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="field">
@@ -48,14 +49,14 @@
 
     <%= hidden_field_tag "conviction_form[client_id]", params[:client] %>
   </div>
-
+  <p>Grounds of Removability</p>
   <% @removability_grounds.each do |ground| %>
   <div class="field">
     <%= label_tag "conviction_form[removability_grounds][#{ground.name}]", "#{ground.name}" %><br>
     <%= select_tag "conviction_form[removability_grounds][#{ground.name}]", options_for_select([['Yes', 'Yes'], ['No', 'No'], ['Finding Not Found', 'Finding Not Found']]) %>
   </div>
   <% end %>
-
+  <p>Additional Notes</p>
   <div class="field">
     <%= label_tag "conviction_form[notes]", "Notes" %><br>
     <%= text_area_tag "conviction_form[notes]" %>

@@ -1,15 +1,33 @@
 <%= form_tag clients_path do %>
-  <!-- <% if @client.errors.any? %>
+  <% if @client_form && @client_form.errors.any? %>
     <div id="error_explanation">
-      <h2><%#= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(@client_form.errors[:client].count, "error") %> prohibited this client from being saved:</h2>
 
-      <ul>
-      <% @client.errors.full_messages.each do |message| %>
-        <li><%#= message %></li>
+      <% if !@client_form.errors[:client].nil? %>
+        <ul>
+        <% @client_form.errors[:client].messages.each do |key, message| %>
+          <li><%= key %><%= message[0] %></li>
+        <% end %>
+        </ul>
       <% end %>
-      </ul>
+
+      <% if !@client_form.errors[:client_relief].nil? %>
+          <%  @client_form.errors[:client_relief].each do |client_relief| %>
+        <ul>
+          <% client_relief.messages.each do |key, message| %>
+          <li><%= key %><%= message[0] %></li>
+          <% end %>
+        </ul>
+          <% end %>
+      <% end %>
+
+      <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment][0].messages[:date].nil? %>
+        <ul>
+        <li>Date <%= @client_form.errors[:client_assessment][0].messages[:date][0] %></li>
+        </ul>
+      <% end %>
     </div>
-  <% end %> -->
+  <% end %>
 
   <div class="field">
     <%= label_tag "client_form[last_name]", "Last Name" %><br>
