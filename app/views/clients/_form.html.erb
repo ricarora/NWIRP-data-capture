@@ -30,48 +30,48 @@
   <% end %>
 
   <div class="field">
-    <%= label_tag "client_form[last_name]", "Last Name" %><br>
-    <%= text_field_tag "client_form[last_name]" %>
+    <%= label_tag "client_form[last_name]", "Last Name"%><br>
+    <%= text_field_tag "client_form[last_name]", @client_form && @client_form.client ? @client_form.client.last_name : nil, {placeholder: "Last Name"}  %>
   </div>
   <div class="field">
     <%= label_tag "client_form[first_name]", "First Name" %><br>
-    <%= text_field_tag "client_form[first_name]" %>
+    <%= text_field_tag "client_form[first_name]", @client_form && @client_form.client ? @client_form.client.first_name : nil, {placeholder: "First Name"} %>
   </div>
   <div class="field">
     <%= label_tag "client_form[a_number]", "A Number" %><br>
-    <%= text_field_tag "client_form[a_number]" %>
+    <%= text_field_tag "client_form[a_number]", @client_form && @client_form.client ? @client_form.client.a_number : nil, {placeholder: "A Number"} %>
   </div>
   <div class="field">
     <%= label_tag "client_form[nationality]", "Nationality" %><br>
-    <%= text_field_tag "client_form[nationality]" %>
+    <%= text_field_tag "client_form[nationality]", @client_form && @client_form.client ? @client_form.client.nationality : nil, {placeholder: "Nationality"} %>
   </div>
   <div class="field">
     <%= label_tag "client_form[ethnicity]", "Ethnicity" %><br>
-    <%= text_field_tag "client_form[ethnicity]" %>
+    <%= text_field_tag "client_form[ethnicity]", @client_form && @client_form.client ? @client_form.client.ethnicity : nil, {placeholder: "Ethnicity"} %>
   </div>
   <div class="field">
     <%= label_tag "client_form[gender]", "Gender" %><br>
-    <%= text_field_tag "client_form[gender]" %>
+    <%= text_field_tag "client_form[gender]", @client_form && @client_form.client ? @client_form.client.gender : nil, {placeholder: "Male/Female"} %>
   </div>
   <div class="field">
     <%= label_tag "client_form[relief_sought][]", "Relief Sought" %><br>
-    <%= text_field_tag "client_form[relief_sought][]" %>
-    <%= text_field_tag "client_form[relief_sought][]" %>
-    <%= text_field_tag "client_form[relief_sought][]" %>
-    <%= text_field_tag "client_form[relief_sought][]" %>
-    <%= text_field_tag "client_form[relief_sought][]" %>
+    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][0] : nil, {placeholder: "Relief Sought"} %>
+    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][1] : nil, {placeholder: "Relief Sought"}  %>
+    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][2] : nil, {placeholder: "Relief Sought"}  %>
+    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][3] : nil, {placeholder: "Relief Sought"}  %>
+    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][4] : nil, {placeholder: "Relief Sought"}  %>
   </div>
   <div class="field">
     <%= label_tag "client_form[represented]", "Represented" %><br>
-    <%= check_box_tag "client_form[represented]"%>
+    <%= check_box_tag "client_form[represented]", 'on', @client_form && @client_form.attributes[:represented] =='on' ? true : false %>
   </div>
   <div class="field">
     <%= label_tag "client_form[drru_case]", "Drru Case" %><br>
-    <%= check_box_tag "client_form[drru_case]" %>
+    <%= check_box_tag "client_form[drru_case]", "on", @client_form && @client_form.attributes[:drru_case]=='on' ? @client_form.attributes[:drru_case] : nil %>
   </div>
   <div class="field">
     <%= label_tag "client_form[assessment]", "Assessment" %><br>
-    <%= date_field_tag "client_form[assessment]" %>
+    <%= date_field_tag "client_form[assessment]", @client_form && @client_form.attributes ? @client_form.attributes[:assessment] : nil %>
   </div>
   <div class="actions">
     <%= submit_tag %>
