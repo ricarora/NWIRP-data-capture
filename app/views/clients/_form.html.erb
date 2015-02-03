@@ -1,7 +1,7 @@
 <%= form_tag clients_path do %>
   <% if @client_form && @client_form.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@client_form.errors[:client].count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
 
       <% if !@client_form.errors[:client].nil? %>
         <ul>
@@ -21,9 +21,9 @@
           <% end %>
       <% end %>
 
-      <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment][0].messages[:date].nil? %>
+      <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment].messages[:date].nil? %>
         <ul>
-        <li>Date <%= @client_form.errors[:client_assessment][0].messages[:date][0] %></li>
+        <li>Date <%= @client_form.errors[:client_assessment].messages[:date][0] %></li>
         </ul>
       <% end %>
     </div>
