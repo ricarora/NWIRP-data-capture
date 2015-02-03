@@ -6,7 +6,7 @@ class Assessment < ActiveRecord::Base
   validates :date, :uniqueness => { scope: [:client_id]}
 
   def is_a_date?
-    if !date.respond_to?(:strftime)
+    if date.present? && !date.respond_to?(:strftime)
       errors.add(:date, "must be a valid date")
     end
   end

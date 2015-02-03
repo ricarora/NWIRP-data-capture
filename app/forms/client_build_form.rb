@@ -19,24 +19,29 @@ class ClientBuildForm
                           represented: @attributes[:represented],
                           drru_case: @attributes[:drru_case],
                           a_number: @attributes[:a_number])
-
-    @assessment = Assessment.new(date: @attributes[:assessment])
-    @assessment.client = @client
-
+    if !@attributes[:assessment].empty?
+      @assessment = Assessment.new(date: Date.parse(@attributes[:assessment]))
+      @assessment.client = @client
+    end
   end
 
   def save
     create
     if @client.valid?
-      if @assessment.valid?
-        # let us save client_relief here
-        @client.save
-        @assessment.save
-        create_client_relief
+      if @assessment
+        if @assessment.valid?
+          # let us save client_relief here
+          @client.save
+          @assessment.save
+          create_client_relief
+        else
+          @assessment.save
+          @errors[:client_assessment] = @assessment.errors
+          return false
+        end
       else
-        @assessment.save
-        @errors[:client_assessment] = @assessment.errors
-        return false
+        @client.save
+        create_client_relief
       end
     else
       @client.save
