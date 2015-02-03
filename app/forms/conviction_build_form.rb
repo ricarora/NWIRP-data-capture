@@ -1,5 +1,5 @@
 class ConvictionBuildForm
-  attr_reader :conviction, :errors
+  attr_reader :attributes, :conviction, :errors
 
   def initialize(attributes, client_id, conviction = nil)
     @attributes = attributes

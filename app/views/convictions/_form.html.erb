@@ -39,7 +39,7 @@
   </div>
   <div class="field">
     <%= label_tag "conviction_form[ij_decision_date]", "IJ Decision Date" %><br>
-    <%= date_field_tag "conviction_form[ij_decision_date]" %>
+    <%= date_field_tag "conviction_form[ij_decision_date]", @conviction_form && @conviction_form.attributes ? @conviction_form.attributes[:ij_decision_date] : "", {placeholder: "mm/dd/yyyy"} %>
   </div>
   <div class="field">
     <%= label_tag "conviction_form[ij_finding]", "IJ Finding" %><br>
