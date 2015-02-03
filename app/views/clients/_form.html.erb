@@ -23,7 +23,7 @@
 
       <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment].messages[:date].nil? %>
         <ul>
-        <li>Date <%= @client_form.errors[:client_assessment].messages[:date] %></li>
+        <li>Date <%= @client_form.errors[:client_assessment].messages[:date][0] %></li>
         </ul>
       <% end %>
     </div>
