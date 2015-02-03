@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= label_tag "conviction_form[sentence]", "Sentence (in days)" %><br>
-    <%= number_field_tag "conviction_form[sentence]", @conviction_form && @conviction_form.attributes ? @conviction_form.attributes[:crime_name] : nil, {placeholder: "Sentence in days", min: 0 } %>
+    <%= number_field_tag "conviction_form[sentence]", @conviction_form && @conviction_form.attributes ? @conviction_form.attributes[:sentence].to_i : nil, {placeholder: "Sentence in days", min: 0 } %>
   </div>
   <div class="field">
     <%= label_tag "conviction_form[ij_name]", "IJ Name" %><br>
@@ -49,7 +49,11 @@
   <% @removability_grounds.each do |ground| %>
   <div class="field">
     <%= label_tag "conviction_form[removability_grounds][#{ground.name}]", "#{ground.name}" %><br>
-    <%= select_tag "conviction_form[removability_grounds][#{ground.name}]", options_for_select([['Yes', 'Yes'], ['No', 'No'], ['Finding Not Found', 'Finding Not Found']]), { include_blank: @conviction_form && @conviction_form.attributes[:removability_grounds][ground.name.to_sym] ? @conviction_form.attributes[:removability_grounds][ground.name.to_sym] : nil } %>
+    <%= select_tag "conviction_form[removability_grounds][#{ground.name}]",
+                    options_for_select(
+                    [['Yes', 'Yes'], ['No', 'No'], ['Finding Not Found', 'Finding Not Found']], "#{@conviction_form &&
+                    @conviction_form.attributes[:removability_grounds][ground.name.to_sym] ? @conviction_form.attributes[:removability_grounds][ground.name.to_sym] : nil}"),
+                    {include_blank: "Please select" } %>
   </div>
   <% end %>
   <p>Additional Notes</p>
@@ -57,7 +61,6 @@
     <%= label_tag "conviction_form[notes]", "Notes" %><br>
     <%= text_area_tag "conviction_form[notes]", @conviction_form && @conviction_form.attributes ? @conviction_form.attributes[:notes] : nil, {placeholder: "Add comments or notes"} %>
   </div>
-
   <div class="actions">
     <%= submit_tag %>
   </div>
