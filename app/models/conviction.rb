@@ -4,7 +4,7 @@ class Conviction < ActiveRecord::Base
   has_many :conviction_grounds
   validates :crime_name, :sentence, presence: true
   validates :sentence, numericality: { only_integer: true }
-  # validates :ij_decision_date, allow_blank: true
+  validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
 
