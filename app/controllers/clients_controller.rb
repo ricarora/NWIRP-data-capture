@@ -14,7 +14,15 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    @client = Client.new
+    # @client = Client.new()
+    @client_form = ClientBuildForm.new({first_name: nil,
+                          last_name: nil,
+                          nationality: nil,
+                          ethnicity: nil,
+                          gender: nil,
+                          represented: nil,
+                          drru_case: nil,
+                          a_number: nil, relief_sought: ["","","","",""], assessment: nil})
   end
 
   # GET /clients/1/edit
