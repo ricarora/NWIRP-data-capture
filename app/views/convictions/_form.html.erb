@@ -4,11 +4,23 @@
       <div id="error_explanation">
         <h2><%= pluralize(@conviction_form.errors.count, "error") %> prohibited this conviction from being saved:</h2>
 
+        <% if !@conviction_form.errors[:conviction].nil? %>
         <ul>
         <% @conviction_form.errors[:conviction].messages.each do |key, message| %>
           <li><%=key %> <%= message[0] %></li>
         <% end %>
         </ul>
+        <% end %>
+
+        <% if !@conviction_form.errors[:conviction_grounds].nil? %>
+          <%  @conviction_form.errors[:conviction_grounds].each do |ground| %>
+          <ul>
+            <% ground.messages.each do |key, message| %>
+            <li><%= key %><%= message[0] %></li>
+            <% end %>
+          </ul>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   <% end %>
