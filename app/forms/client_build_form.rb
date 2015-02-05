@@ -39,8 +39,10 @@ class ClientBuildForm
 
     if valid?
       client.save!
-      assessment.client = client
-      assessment.save!
+      if !assessment.date.nil?
+        assessment.client = client
+        assessment.save!
+      end
       check_relief_sought(params)
       true
     else
