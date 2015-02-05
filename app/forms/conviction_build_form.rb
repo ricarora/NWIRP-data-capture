@@ -39,6 +39,7 @@ class ConvictionBuildForm
   end
 
   def submit(params)
+    raise
     conviction.crime_name = params[:crime_name]
     conviction.rcw = params[:rcw]
     conviction.subsection = params[:subsection]
