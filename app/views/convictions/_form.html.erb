@@ -44,16 +44,11 @@
     <%= f.text_field :ij_finding %>
   </div>
 
-  <p>Grounds of Removability</p>
+  <p>Grounds of Removability:</p>
   <% @removability_grounds.each do |ground| %>
-  <div class="field">
-    <%= label_tag "conviction_form[removability_grounds][#{ground.name}]", "#{ground.name}" %><br>
-    <%= select_tag "conviction_form[removability_grounds][#{ground.name}]",
-    options_for_select(
-    [['Yes', 'Yes'], ['No', 'No'], ['Finding Not Found', 'Finding Not Found']], ""),
-    {include_blank: "Please select" } %>
-  </div>
+  <%= ground.name %>
   <% end %>
+
 
 
   <div class="field">
