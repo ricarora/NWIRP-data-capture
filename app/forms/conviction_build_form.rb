@@ -50,7 +50,7 @@ class ConvictionBuildForm
     conviction.ij_finding = params[:ij_finding]
     conviction.notes = params[:notes]
     conviction.client = Client.find(41) #need to get this not hard coded
-    conviction_ground.gor_name = params[:gor_name]
+    #conviction_ground.gor_name = params[:gor_name]
     #conviction_ground.status = params[:status]
     #create_conviction_ground(params[:conviction_grounds])
     if valid?
@@ -63,9 +63,9 @@ class ConvictionBuildForm
     end
   end
 
-  def create_conviction_ground(cg_params)
-    cg_params.each do |name, value|
-      conviction_ground.gor_name, conviction_ground.status = name, value
+  def create_conviction_ground(grounds)
+    grounds.each do |name, status|
+      conviction_ground.gor_name, conviction_ground.status = name, status
       if valid?
         conviction_ground.save!
         true
