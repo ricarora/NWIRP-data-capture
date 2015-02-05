@@ -25,10 +25,7 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-
     @client_form = ClientBuildForm.new
-
-
     if @client_form.submit(params[:client_build_form])
       redirect_to client_path(@client_form.client.id)
     else

@@ -43,7 +43,7 @@ class ConvictionBuildForm
     conviction.ij_name, conviction.nta_charges = params[:ij_name], params[:nta_charges]
     conviction.ij_decision_date, conviction.ij_finding = params[:ij_decision_date], params[:ij_finding]
     conviction.notes, conviction.client_id = params[:notes], params[:client_id]
-    conviction.crime_name, conviction.rcw, convicton.subsection, conviction.sentence = conviction_params
+    conviction.crime_name, conviction.rcw, conviction.subsection, conviction.sentence = conviction_params
     conviction_ground.gor_name, conviction_ground.status = params[:gor_name], params[:status]
     create_conviction_ground(params[:conviction_grounds])
     if valid?

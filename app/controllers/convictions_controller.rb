@@ -14,7 +14,7 @@ class ConvictionsController < ApplicationController
 
   # GET /convictions/new
   def new
-    @conviction = Conviction.new
+    @conviction_form = ConvictionBuildForm.new
     @removability_grounds = RemovabilityGround.all
   end
 
@@ -26,10 +26,10 @@ class ConvictionsController < ApplicationController
   # POST /convictions.json
   def create
     @removability_grounds = RemovabilityGround.all
-    @conviction_form = ConvictionBuildForm.new(params[:conviction_form], params[:client_id])
+    @conviction_form = ConvictionBuildForm.new
 
     respond_to do |format|
-      if @conviction_form.save
+      if @conviction_form.submit(params[:conviction_build_form])
         format.html { redirect_to client_path(@conviction_form.conviction.client_id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
