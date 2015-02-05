@@ -39,15 +39,22 @@ class ConvictionBuildForm
   end
 
   def submit(params)
-    conviction_params = params.slice(:crime_name, :rcw, :subsection, :sentence)
-    conviction.ij_name, conviction.nta_charges = params[:ij_name], params[:nta_charges]
-    conviction.ij_decision_date, conviction.ij_finding = params[:ij_decision_date], params[:ij_finding]
-    conviction.notes, conviction.client_id = params[:notes], params[:client_id]
-    conviction.crime_name, conviction.rcw, conviction.subsection, conviction.sentence = conviction_params
-    conviction_ground.gor_name, conviction_ground.status = params[:gor_name], params[:status]
-    create_conviction_ground(params[:conviction_grounds])
+    conviction.crime_name = params[:crime_name]
+    conviction.rcw = params[:rcw]
+    conviction.subsection = params[:subsection]
+    conviction.sentence = params[:sentence]
+    conviction.ij_name = params[:ij_name]
+    conviction.nta_charges = params[:nta_charges]
+    conviction.ij_decision_date = params[:ij_decision_date]
+    conviction.ij_finding = params[:ij_finding]
+    conviction.notes = params[:notes]
+    conviction.client = Client.find(41) #need to get this not hard coded
+    conviction_ground.gor_name = params[:gor_name]
+    #conviction_ground.status = params[:status]
+    #create_conviction_ground(params[:conviction_grounds])
     if valid?
       conviction.save!
+      raise
       conviction_ground.save!
       true
     else
