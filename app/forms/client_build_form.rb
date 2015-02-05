@@ -49,13 +49,14 @@ class ClientBuildForm
   end
 
   def check_relief_sought(params)
-    raise
-    params.slice(:relief_name).each do |key, value|
-      if ReliefSought.where(name: value).empty?
-        new_relief = ReliefSought.create(name: value)
-        add_client_relief(new_relief.name)
-      else
-        add_client_relief(ReliefSought.find(value).name)
+    params[:relief_name].each do |value|
+      if value != ""
+        if ReliefSought.where(name: value).empty?
+          new_relief = ReliefSought.create(name: value)
+          add_client_relief(new_relief.name)
+        else
+          add_client_relief(ReliefSought.find(value).name)
+        end
       end
     end
     return true
