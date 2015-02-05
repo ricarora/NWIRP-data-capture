@@ -47,7 +47,7 @@
   <% @removability_grounds.each do |ground| %>
   <div class="field">
     <%= f.label ground.name %>
-    <%= f.text_field :gor_name %>
+    <%= f.select :gor_name, options_for_select([['Yes', 'Yes'], ['No', 'No'], ['Finding Not Found', 'Finding Not Found']]), {include_blank: "Please select" } %>
   </div>
   <% end %>
   <div class="field">
