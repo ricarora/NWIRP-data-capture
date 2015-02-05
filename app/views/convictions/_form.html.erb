@@ -43,7 +43,6 @@
     <%= f.label :ij_finding %><br>
     <%= f.text_field :ij_finding %>
   </div>
-
   <p>Grounds of Removability:</p>
   <% @removability_grounds.each do |ground| %>
   <div class="field">
@@ -51,9 +50,6 @@
     <%= f.text_field :gor_name %>
   </div>
   <% end %>
-
-
-
   <div class="field">
     <%= f.label :notes %><br>
     <%= f.text_area :notes %>
