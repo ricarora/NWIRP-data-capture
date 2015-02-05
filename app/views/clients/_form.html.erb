@@ -1,5 +1,5 @@
-<%= form_for(@client_form) do |f| %>
-  <!-- <% if @client_form.errors.any? %>
+<%= form_for(@client_form, url: clients_path) do |f| %>
+  <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
 
@@ -9,52 +9,49 @@
       <% end %>
       </ul>
     </div>
-  <% end %> -->
+  <% end %>
 
   <div class="field">
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name %>
-    <%= render "shared/error_messages", obj: @client_form, col: :last_name %>
   </div>
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
-    <%= render "shared/error_messages", obj: @client_form, col: :first_name %>
   </div>
   <div class="field">
     <%= f.label :nationality %><br>
     <%= f.text_field :nationality %>
-    <%= render "shared/error_messages", obj: @client_form, col: :nationality %>
   </div>
   <div class="field">
     <%= f.label :ethnicity %><br>
     <%= f.text_field :ethnicity %>
-    <%= render "shared/error_messages", obj: @client_form, col: :ethnicity %>
   </div>
   <div class="field">
     <%= f.label :gender %><br>
     <%= f.text_field :gender %>
-    <%= render "shared/error_messages", obj: @client_form, col: :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :relief_sought %><br>
-    <%= f.text_field :relief_sought %>
-    <%= render "shared/error_messages", obj: @client_form, col: :relief_sought %>
   </div>
   <div class="field">
     <%= f.label :represented %><br>
     <%= f.check_box :represented %>
-    <%= render "shared/error_messages", obj: @client_form, col: :represented %>
   </div>
   <div class="field">
     <%= f.label :drru_case %><br>
     <%= f.check_box :drru_case %>
-    <%= render "shared/error_messages", obj: @client_form, col: :drru_case %>
   </div>
   <div class="field">
     <%= f.label :a_number %><br>
     <%= f.text_field :a_number %>
-    <%= render "shared/error_messages", obj: @client_form, col: :a_number %>
+  </div>
+  <% @client_form.attributes[:relief_sought].each do |relief| %>
+    <div class="field">
+      <%= f.label :relief_name %><br>
+      <%= f.text_field :relief_name %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date %>
   </div>
   <div class="actions">
     <%= f.submit %>

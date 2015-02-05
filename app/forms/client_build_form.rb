@@ -1,6 +1,23 @@
 class ClientBuildForm
-
+  include ActiveModel::Model
   attr_reader :attributes, :client, :errors
+
+  delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
+            :represented, :drru_case, :a_number, to: :client
+  delegate :relief_name, to: :client_relief
+  delegate :date, to: :assessment
+
+  def client
+    @client ||= Client.new
+  end
+
+  def client_relief
+    @client_relief = ClientRelief.new
+  end
+
+  def assessment
+    @assessment = Assessment.new
+  end
 
   def initialize(attributes, client = nil)
     @attributes = attributes
@@ -63,9 +80,9 @@ class ClientBuildForm
   end
 
   def add_client_relief(name)
-    @relief = ClientRelief.new(relief_name: name)
-    @relief.client = @client
-    @relief.save
+    @client_relief = ClientRelief.new(relief_name: name)
+    @client_relief.client = @client
+    @client_relief.save
     if @relief.invalid?
       if @errors[:client_relief]
         @errors[:client_relief] += [@relief.errors]
