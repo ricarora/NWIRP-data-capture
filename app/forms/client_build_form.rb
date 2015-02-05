@@ -1,16 +1,15 @@
 class ClientBuildForm
   include ActiveModel::Model
-  # attr_reader :attributes, :client, :errors
 
   def persisted?
     false
   end
 
   validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
-  
   validates :gender, inclusion: { in: %w(Male Female),
     message: "Only accepts Male or Female."}
   validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+  validates :nationality, :inclusion => {:in => Client::NATIONALITY}
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
@@ -45,54 +44,6 @@ class ClientBuildForm
       false
     end
   end
-
-  # def initialize(attributes, client = nil)
-  #   @attributes = attributes
-  #   @client = client
-  #   @assessment = nil
-  #   @relief = nil
-  #   @errors = {}
-  # end
-
-  # def create
-  #   @client.first_name = @attributes[:first_name]
-  #   @client.last_name = @attributes[:last_name]
-  #   @client.nationality = @attributes[:nationality]
-  #   @client.ethnicity = @attributes[:ethnicity]
-  #   @client.gender = @attributes[:gender]
-  #   @client.represented = @attributes[:represented]
-  #   @client.drru_case = @attributes[:drru_case]
-  #   @client.a_number = @attributes[:a_number]
-  #   if !@attributes[:assessment].empty?
-  #     @assessment = Assessment.new(date: Date.parse(@attributes[:assessment]))
-  #     @assessment.client = @client
-  #   end
-  # end
-  #
-  # def save
-  #   create
-  #   if @client.valid?
-  #     if @assessment
-  #       if @assessment.valid?
-  #         # let us save client_relief here
-  #         @client.save
-  #         @assessment.save
-  #         create_client_relief
-  #       else
-  #         @assessment.save
-  #         @errors[:client_assessment] = @assessment.errors
-  #         return false
-  #       end
-  #     else
-  #       @client.save
-  #       create_client_relief
-  #     end
-  #   else
-  #     @client.save
-  #     @errors[:client] = @client.errors
-  #     return false
-  #   end
-  # end
 
   def check_relief_sought
     params[:client_build_form].slice(:relief_name).each do |name|
