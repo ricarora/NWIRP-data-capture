@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :nationality %><br>
-    <%= f.text_field :nationality %>
+    <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
   </div>
   <div class="field">
     <%= f.label :ethnicity %><br>
