@@ -46,7 +46,10 @@
 
   <p>Grounds of Removability:</p>
   <% @removability_grounds.each do |ground| %>
-  <%= ground.name %>
+  <div class="field">
+    <%= f.label ground.name %>
+    <%= f.text_field :gor_name %>
+  </div>
   <% end %>
 
 
