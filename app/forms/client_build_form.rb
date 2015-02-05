@@ -29,29 +29,32 @@ class ClientBuildForm
   end
 
   def submit(params)
-    client_params = params.slice(:gender, :represented, :drru_case, :a_number)
     client.last_name, client.first_name = params[:last_name], params[:first_name]
     client.nationality, client.ethnicity = params[:nationality], params[:ethnicity]
-    client.gender, client.represented, client.drru_case, client.a_number = client_params
+    client.gender = params[:gender]
+    client.represented = params[:represented]
+    client.drru_case = params[:drru_case]
+    client.a_number = params[:a_number]
     assessment.date = params[:date]
 
     if valid?
       client.save!
+      assessment.client = client
       assessment.save!
-      check_relief_sought
+      check_relief_sought(params)
       true
     else
       false
     end
   end
 
-  def check_relief_sought
-    params[:client_build_form].slice(:relief_name).each do |name|
-      if ReliefSought.where(name: name).empty?
-        new_relief = ReliefSought.create(name: name)
+  def check_relief_sought(params)
+    params.slice(:relief_name).each do |key, value|
+      if ReliefSought.where(name: value).empty?
+        new_relief = ReliefSought.create(name: value)
         add_client_relief(new_relief.name)
       else
-        add_client_relief(ReliefSought.find(name).name)
+        add_client_relief(ReliefSought.find(value).name)
       end
     end
     return true
@@ -61,7 +64,7 @@ class ClientBuildForm
     @client_relief = ClientRelief.new(relief_name: name)
     @client_relief.client = @client
     @client_relief.save
-    if @relief.invalid?
+    if @client_relief.invalid?
       if @errors[:client_relief]
         @errors[:client_relief] += [@relief.errors]
       else
