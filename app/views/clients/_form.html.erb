@@ -43,12 +43,12 @@
     <%= f.label :a_number %><br>
     <%= f.text_field :a_number %>
   </div>
-  <% @client_form.attributes[:relief_sought].each do |relief| %>
+
     <div class="field">
       <%= f.label :relief_name %><br>
       <%= f.text_field :relief_name %>
     </div>
-  <% end %>
+  
   <div class="field">
     <%= f.label :date %><br>
     <%= f.text_field :date %>
