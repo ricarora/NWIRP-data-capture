@@ -22,11 +22,17 @@ body {
 }
 
 h1 {
+  color: #444;
   font-family: 'Lato', sans-serif;
   font-weight: 900;
 }
 
 h2 {
+  color: #444;
   font-family: 'Lato', sans-serif;
-  font-weight: 700;   
+  font-weight: 700;
+}
+
+a {
+  text-decoration: underline;
 }
