@@ -1,4 +1,4 @@
-<%= form_for(@client_form, url: clients_path) do |f| %> 
+<%= form_for(@client_form, url: clients_path) do |f| %>
   <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -11,48 +11,88 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :last_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :last_name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="field row">
+    <div class="small-3 columns" >
+      <%= f.label :first_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :first_name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :a_number %><br>
-    <%= f.text_field :a_number %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :a_number, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :a_number %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :nationality %><br>
-    <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :nationality, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ethnicity %><br>
-    <%= f.text_field :ethnicity %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ethnicity, class: "right inline" %><br>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :ethnicity %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.select :gender, options_for_select(Client::GENDER), {include_blank: "Please select"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :gender, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :gender, options_for_select(Client::GENDER), {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :represented %><br>
-    <%= f.check_box :represented %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :represented, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.check_box :represented %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :drru_case %><br>
-    <%= f.check_box :drru_case %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :drru_case, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.check_box :drru_case %>
+    </div>
   </div>
-  <div class="field relief_field">
-    <%= f.label :relief_name %><br>
-    <%= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
-    <%= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :relief_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns relief_field">
+      <%= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
+      <%= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_field :date %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :date, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.date_field :date %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "button round center" %>
   </div>
 <% end %>

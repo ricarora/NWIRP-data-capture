@@ -25,6 +25,7 @@ h1 {
   color: #444;
   font-family: 'Lato', sans-serif;
   font-weight: 900;
+  text-align: center;
 }
 
 h2 {
@@ -35,4 +36,13 @@ h2 {
 
 a {
   text-decoration: underline;
+}
+
+.button {
+  background-color: #444;
+  float: right;
+}
+
+.button:focus, .button:hover {
+  background-color: #CC6633;
 }
