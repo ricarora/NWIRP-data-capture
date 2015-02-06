@@ -16,6 +16,8 @@
  *= require_self
  */
 
+/* GLOBAL CSS */
+
 body {
   color: #444;
   font-family: 'Lato', sans-serif;
@@ -48,12 +50,22 @@ a {
   background-color: #ffcc00;
 }
 
-input[type=checkbox] {
-  background-color: #444;
-}
+/* New Client Form */
 
 .remove_field {
   background-color: #ffcc00;
   float: right;
   margin-bottom: 10px;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type="checkbox"] + .label-text:before {
+  content: "No"
+}
+
+input[type="checkbox"]:checked + .label-text:before {
+  content: "Yes"
 }
