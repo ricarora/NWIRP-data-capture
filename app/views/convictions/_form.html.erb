@@ -43,9 +43,20 @@
     <%= f.label :ij_finding %><br>
     <%= f.text_field :ij_finding %>
   </div>
+  <%= f.fields_for :conviction_grounds do |builder| %>
+  <div class="field">
+    <%= builder.label :gor_name, builder.object.gor_name %><br>
+    <%= builder.hidden_field :gor_name, value: builder.object.gor_name %>
+    <%= %>
+  </div>
+  <div class="field">
+    <%= builder.select(:status, ConvictionGround::STATUS_OPTION, :include_blank => "Please Select")  %>
+  </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+    <%= f.text_area :notes, row: 3 %>
   </div>
   <div class="actions">
     <%= f.submit %>
