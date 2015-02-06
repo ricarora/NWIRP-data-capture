@@ -8,6 +8,8 @@ class Conviction < ActiveRecord::Base
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
 
+  accepts_nested_attributes_for :conviction_grounds
+
   def ij_decision_date_is_date?
     if ij_decision_date.present? && !ij_decision_date.respond_to?(:strftime)
       errors.add(:ij_decision_date, "must be a valid date")

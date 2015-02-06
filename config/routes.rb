@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   resources :removability_grounds, param: :name
 
   devise_for :users
-  resources :conviction_grounds
+
 
   resources :clients do
-    resources :convictions
+    resources :convictions do
+      resources :conviction_grounds
+    end
   end
 
   root to: "home#index"

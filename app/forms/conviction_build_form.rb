@@ -1,6 +1,8 @@
 class ConvictionBuildForm
   include ActiveModel::Model
-
+# passed like this: {"crime_name"=>"Go Fun", "rcw"=>"", "subsection"=>"",
+# "sentence"=>"49", "ij_name"=>"", "nta_charges"=>"", "ij_decision_date"=>"",
+# "ij_finding"=>"", "grounds"=>{"DV"=>"Yes", "Aggrevate felon"=>"No"}, "notes"=>""}
   def initialize
     @conviction_removability_grounds
   end
@@ -28,7 +30,7 @@ class ConvictionBuildForm
   end
 
   validates :status, inclusion: { in: ["Yes", "No", "Finding Not Found"],
-    message: "Only accepts Yes, No or Finding Not Found."}
+    message: "Only accepts Yes, No or Finding Not Found."}, on: :create
 
   delegate :crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges,
             :ij_decision_date, :ij_finding, :client_id, :notes, to: :conviction
@@ -39,23 +41,10 @@ class ConvictionBuildForm
   end
 
   def conviction_ground
-    @conviction_ground ||= ConvictionGround.new(conviction_id: @conviction.id)
+    @conviction_ground = ConvictionGround.new(conviction_id: @conviction.id)
   end
 
   def submit(params, client_id)
-    # {
-    #   crime_name: '',
-    #   grounds: [ # one array member for each ground
-    #     name: [
-    #       'status'
-    #     ]
-    #     { name: '', status: ''},
-    #     { name: '', status: ''},
-    #     { name: '', status: ''}
-    #   ]
-    # }
-
-
     conviction.crime_name = params[:crime_name]
     conviction.rcw = params[:rcw]
     conviction.subsection = params[:subsection]
@@ -66,9 +55,8 @@ class ConvictionBuildForm
     conviction.ij_finding = params[:ij_finding]
     conviction.notes = params[:notes]
     conviction.client = Client.find(client_id)
-    grounds = params[:grounds]
-    create_conviction_ground(grounds)
-    if valid?
+    grounds = params[:conviction_grounds]
+    if valid? && create_conviction_ground(grounds)
       conviction.save!
       save_conviction_ground(grounds)
       true
@@ -78,15 +66,28 @@ class ConvictionBuildForm
   end
 
   def create_conviction_ground(grounds)
+    check_array = []
     grounds.each do |name, status|
-      conviction_ground.gor_name, conviction_ground.status = name, status
+      conviction_ground
+      @conviction_ground.gor_name, @conviction_ground.status = name, status
+      if ["Yes", "No", "Finding Not Found"].include?(@conviction_ground.status)
+        check_array << true
+      else
+        check_array << false
+      end
+    end
+    if check_array.include?(false)
+      return false
+    else
+      return true
     end
   end
 
   def save_conviction_ground(grounds)
     grounds.each do |name, status|
-      conviction_ground.gor_name, conviction_ground.status, conviction_ground.conviction_id = name, status, @conviction.id
-      conviction_ground.save!
+      conviction_ground
+      @conviction_ground.gor_name, @conviction_ground.status = name, status
+      @conviction_ground.save!
     end
   end
 end
