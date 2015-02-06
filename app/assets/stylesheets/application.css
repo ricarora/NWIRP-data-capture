@@ -51,3 +51,7 @@ a {
 input[type=checkbox] {
   background-color: #444;
 }
+
+.remove_field {
+  background-color: #ffcc00;
+}
