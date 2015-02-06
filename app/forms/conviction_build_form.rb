@@ -1,6 +1,10 @@
 class ConvictionBuildForm
   include ActiveModel::Model
-  attr_reader :ground_name
+
+  def initialize
+    @conviction_removability_grounds
+  end
+
   def persisted?
     false
   end
@@ -51,7 +55,7 @@ class ConvictionBuildForm
     #   ]
     # }
 
-    raise
+
     conviction.crime_name = params[:crime_name]
     conviction.rcw = params[:rcw]
     conviction.subsection = params[:subsection]
@@ -62,13 +66,11 @@ class ConvictionBuildForm
     conviction.ij_finding = params[:ij_finding]
     conviction.notes = params[:notes]
     conviction.client = Client.find(client_id)
-    #conviction_ground.gor_name = params[:gor_name]
-    #conviction_ground.status = params[:status]
-    #create_conviction_ground(params[:conviction_grounds])
+    grounds = params[:grounds]
+    create_conviction_ground(grounds)
     if valid?
       conviction.save!
-      raise
-      conviction_ground.save!
+      save_conviction_ground(grounds)
       true
     else
       false
@@ -78,12 +80,13 @@ class ConvictionBuildForm
   def create_conviction_ground(grounds)
     grounds.each do |name, status|
       conviction_ground.gor_name, conviction_ground.status = name, status
-      if valid?
-        conviction_ground.save!
-        true
-      else
-        false
-      end
+    end
+  end
+
+  def save_conviction_ground(grounds)
+    grounds.each do |name, status|
+      conviction_ground.gor_name, conviction_ground.status, conviction_ground.conviction_id = name, status, @conviction.id
+      conviction_ground.save!
     end
   end
 end
