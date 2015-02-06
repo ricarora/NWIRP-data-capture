@@ -38,7 +38,7 @@
 </table>
 
 <% if !@client.convictions.empty? %>
-  <h2>Client Convictions</h2>
+  <h3>Convictions</h3>
 <% end %>
 
 <% @client.convictions.each do |conviction| %>
@@ -89,4 +89,4 @@
 
 
 <%= link_to "Add Conviction", new_client_conviction_path(@client.id) %>
-<%= link_to 'Edit Client Information', edit_client_path(@client) %>
+<%= link_to "Edit Client Information", edit_client_path(@client), class: "button round" %>
