@@ -38,7 +38,7 @@ class ConvictionBuildForm
     @conviction_ground ||= ConvictionGround.new(conviction_id: @conviction.id)
   end
 
-  def submit(params)
+  def submit(params, client_id)
     # {
     #   crime_name: '',
     #   grounds: [ # one array member for each ground
@@ -61,7 +61,7 @@ class ConvictionBuildForm
     conviction.ij_decision_date = params[:ij_decision_date]
     conviction.ij_finding = params[:ij_finding]
     conviction.notes = params[:notes]
-    conviction.client = Client.find(41) #need to get this not hard coded
+    conviction.client = Client.find(client_id)
     #conviction_ground.gor_name = params[:gor_name]
     #conviction_ground.status = params[:status]
     #create_conviction_ground(params[:conviction_grounds])
