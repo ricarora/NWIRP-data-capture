@@ -46,3 +46,7 @@ a {
 .button:focus, .button:hover {
   background-color: #CC6633;
 }
+
+input[type=checkbox] {
+  background-color: #444;
+}
