@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
+//functionality to add new fields to relief sought in new client form
+
 function addReliefField(first) {
   var remove = first ? '</div>' : '<a href="#" class="remove_field">Remove field</a></div>';
   var emptyField = '<div><input id="client_build_form_relief_name" name="client_build_form[relief_name][]" type="text">';

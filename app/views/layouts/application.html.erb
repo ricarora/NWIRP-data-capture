@@ -6,7 +6,7 @@
     <title>NWIRPDataCapture</title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application" 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application" %>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
   </head>
@@ -22,7 +22,7 @@
             <li><%= link_to "Add Client", new_client_path %></li>
             <li><%= link_to "Make Query", "/" %></li>
           </ul>
-        </section>  
+        </section>
       </nav>
     </div>
     <div class="columns small-12">
