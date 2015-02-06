@@ -6,7 +6,7 @@ function addReliefField(first) {
   var remove = first ? '</div>' : '<a href="#" class="remove_field">Remove field</a></div>';
   var emptyField = '<div><input id="client_build_form_relief_name" name="client_build_form[relief_name][]" type="text">';
   emptyField = emptyField + remove;
-  $(".relief_field form").append(emptyField);
+  $(".relief_field").append(emptyField);
 }
 
 $(function() {
