@@ -14,8 +14,7 @@ class ConvictionsController < ApplicationController
 
   # GET /convictions/new
   def new
-    @conviction_form = ConvictionBuildForm.new
-    @removability_grounds = RemovabilityGround.all #this should be a select, eventually
+    @conviction = Conviction.new
   end
 
   # GET /convictions/1/edit
@@ -25,11 +24,12 @@ class ConvictionsController < ApplicationController
   # POST /convictions
   # POST /convictions.json
   def create
-    @removability_grounds = RemovabilityGround.all
-    @conviction_form = ConvictionBuildForm.new
+    @conviction = Conviction.new
+    @conviction.client_id = params[:client_id]
     respond_to do |format|
-      if @conviction_form.submit(params[:conviction_build_form], params[:client_id])
-        format.html { redirect_to client_path(@conviction_form.conviction.client_id), notice: 'Conviction was successfully created.' }
+      @conviction.attributes = conviction_params
+      if @conviction.save
+        format.html { redirect_to client_conviction_conviction_grounds_path(@conviction.client_id, @conviction.id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
         format.html { render :new }
@@ -70,6 +70,6 @@ class ConvictionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conviction_params
-      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :client_id, :notes)
+      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes)
     end
 end
