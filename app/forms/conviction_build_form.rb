@@ -1,6 +1,6 @@
 class ConvictionBuildForm
   include ActiveModel::Model
-
+  attr_reader :ground_name
   def persisted?
     false
   end
@@ -39,6 +39,18 @@ class ConvictionBuildForm
   end
 
   def submit(params)
+    # {
+    #   crime_name: '',
+    #   grounds: [ # one array member for each ground
+    #     name: [
+    #       'status'
+    #     ]
+    #     { name: '', status: ''},
+    #     { name: '', status: ''},
+    #     { name: '', status: ''}
+    #   ]
+    # }
+
     raise
     conviction.crime_name = params[:crime_name]
     conviction.rcw = params[:rcw]

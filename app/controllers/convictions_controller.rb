@@ -15,7 +15,7 @@ class ConvictionsController < ApplicationController
   # GET /convictions/new
   def new
     @conviction_form = ConvictionBuildForm.new
-    @removability_grounds = RemovabilityGround.all
+    @removability_grounds = RemovabilityGround.all #this should be a select, eventually
   end
 
   # GET /convictions/1/edit
