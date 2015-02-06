@@ -1,4 +1,4 @@
-<%= form_for(@client_form, url: clients_path) do |f| %>
+<%= form_for(@client_form, url: clients_path) do |f| %> 
   <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>

@@ -15,3 +15,18 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  color: #444;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+}
+
+h2 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;   
+}
