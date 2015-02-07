@@ -69,3 +69,10 @@ input[type="checkbox"] + .label-text:before {
 input[type="checkbox"]:checked + .label-text:before {
   content: "Yes"
 }
+
+.label-text {
+  font-weight: 700;
+  background-color: #444;
+  color: white;
+  padding: 5px;
+}
