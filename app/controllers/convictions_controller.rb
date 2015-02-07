@@ -10,7 +10,6 @@ class ConvictionsController < ApplicationController
 
   def new
     @conviction = Conviction.new
-    # @conviction.id = @conviction.set_number
     @conviction.conviction_grounds = RemovabilityGround.all.map do |rg|
       @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)
     end
