@@ -55,7 +55,7 @@ a {
 .remove_field {
   background-color: #ffcc00;
   float: right;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 input[type=checkbox] {
@@ -63,21 +63,15 @@ input[type=checkbox] {
 }
 
 input[type="checkbox"] + .label-text:before {
-  content: "No"
-}
-
-input[type="checkbox"]:checked + .label-text:before {
-  content: "Yes"
-}
-
-.label-text {
-  font-weight: 400;
+  content: "No";
   background-color: #444;
   color: white;
   padding: 5px;
 }
 
-.label-text:hover, .label-text:hover {
+input[type="checkbox"]:checked + .label-text:before {
+  content: "Yes";
   background-color: #ffcc00;
   color: #444;
+  padding: 5px;
 }
