@@ -69,22 +69,24 @@
   </tbody>
 </table>
 
+<div class="row collapse">
+      <% conviction.conviction_grounds.each do |ground| %>
 <table role="grid" summary="Grounds of removability tied to conviction" class="grounds-table">
-  <thead>
-    <tr>
-      <% @removabilitygrounds.each do |ground| %>
-      <th><%= ground.name %></th>
-      <% end %>
+
+      <thead>
+        <tr>
+      <th><%= ground.gor_name %></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <% conviction.conviction_grounds.each do |ground| %>
       <td><%= ground.status %></td>
-      <% end %>
     </tr>
   </tbody>
 </table>
+  <% end %>
+</div>
+
 <% end %>
 
 
