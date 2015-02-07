@@ -1,18 +1,13 @@
 class ConvictionGroundsController < ApplicationController
   before_action :set_conviction_ground, only: [:show, :edit, :update, :destroy]
 
-  # GET /conviction_grounds
-  # GET /conviction_grounds.json
   def index
     @conviction_grounds = ConvictionGround.all
   end
 
-  # GET /conviction_grounds/1
-  # GET /conviction_grounds/1.json
   def show
   end
 
-  # GET /conviction_grounds/new
   def new
     @conviction_ground = ConvictionGround.new
     @client_id = params[:client_id]
@@ -20,12 +15,9 @@ class ConvictionGroundsController < ApplicationController
     @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
   end
 
-  # GET /conviction_grounds/1/edit
   def edit
   end
 
-  # POST /conviction_grounds
-  # POST /conviction_grounds.json
   def create
     @conviction_ground = ConvictionGround.new(conviction_ground_params)
     @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
@@ -40,8 +32,6 @@ class ConvictionGroundsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /conviction_grounds/1
-  # PATCH/PUT /conviction_grounds/1.json
   def update
     respond_to do |format|
       if @conviction_ground.update(conviction_ground_params)
@@ -54,8 +44,6 @@ class ConvictionGroundsController < ApplicationController
     end
   end
 
-  # DELETE /conviction_grounds/1
-  # DELETE /conviction_grounds/1.json
   def destroy
     @conviction_ground.destroy
     respond_to do |format|
