@@ -12,7 +12,9 @@ class ConvictionGroundsController < ApplicationController
     @conviction_ground = ConvictionGround.new
     @client_id = params[:client_id]
     @conviction_id = params[:conviction_id]
-    @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
+    @conviction_grounds = RemovabilityGround.all.collect do |rg|
+      ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")
+    end
   end
 
   def edit
@@ -20,7 +22,6 @@ class ConvictionGroundsController < ApplicationController
 
   def create
     @conviction_ground = ConvictionGround.new(conviction_ground_params)
-    @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
     if @conviction_ground.save
       redirect_to @conviction_ground, notice: 'Conviction ground was successfully created.'
     else
