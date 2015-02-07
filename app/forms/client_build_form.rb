@@ -44,20 +44,18 @@ class ClientBuildForm
   end
 
   def objects_valid?
-    # client.valid?
+    # client.invalid?
     # client.assessment.valid?
     # client.client_reliefs.valid?
     # @relief_sought_array.each do |relief_sought|
     #   relief_sought.valid?
     # end
+    @client_relief_array.each do |client_relief|
+      if client_relief.invalid?
+        @errors[:client_relief] += [@client_relief.errors]
+      end
+    end
 
-    # if @client_relief.invalid?
-    #   if @errors[:client_relief]
-    #     @errors[:client_relief] += [@client_relief.errors]
-    #   else
-    #     @errors[:client_relief] = [@client_relief.errors]
-    #   end
-    # end
     true
   end
 
