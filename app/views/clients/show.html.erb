@@ -37,11 +37,12 @@
   </tbody>
 </table>
 
-<% if !@client.convictions.empty? %>
+<!-- <% if !@client.convictions.empty? %>
   <h3>Convictions</h3>
-<% end %>
+<% end %> -->
 
-<% @client.convictions.each do |conviction| %>
+<% @client.convictions.each_with_index do |conviction, index| %>
+<h4>Conviction#<%= index + 1 %></h4>
 <table role="grid" summary="Client conviction" class="conviction-table">
   <thead>
     <tr>
@@ -69,22 +70,24 @@
   </tbody>
 </table>
 
+<div class="row collapse">
+      <% conviction.conviction_grounds.each do |ground| %>
 <table role="grid" summary="Grounds of removability tied to conviction" class="grounds-table">
-  <thead>
-    <tr>
-      <% @removabilitygrounds.each do |ground| %>
-      <th><%= ground.name %></th>
-      <% end %>
+
+      <thead>
+        <tr>
+      <th><%= ground.gor_name %></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <% conviction.conviction_grounds.each do |ground| %>
       <td><%= ground.status %></td>
-      <% end %>
     </tr>
   </tbody>
 </table>
+  <% end %>
+</div>
+
 <% end %>
 
 
