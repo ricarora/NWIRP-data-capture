@@ -15,7 +15,8 @@ class ConvictionsController < ApplicationController
   # GET /convictions/new
   def new
     @conviction = Conviction.new
-    @conviction.conviction_grounds = RemovabilityGround.all.map {|rg| @conviction.conviction_grounds.build(gor_name: rg.name)}
+    # @conviction.id = @conviction.set_number
+    @conviction.conviction_grounds = RemovabilityGround.all.map {|rg| @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)}
   end
 
   # GET /convictions/1/edit
@@ -27,12 +28,11 @@ class ConvictionsController < ApplicationController
   def create
     @conviction = Conviction.new
     @conviction.client_id = params[:client_id]
-    @conviction.conviction_grounds = params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| ConvictionGround.new(cg_hash) }
-
+    params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status]) }
+    @conviction.attributes = conviction_params
     respond_to do |format|
-      @conviction.attributes = conviction_params
-      if persist!
-        format.html { redirect_to new_client_conviction_conviction_ground_path(@conviction.client_id, @conviction.id), notice: 'Conviction was successfully created.' }
+      if @conviction.save
+        format.html { redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
         format.html { render :new }
@@ -62,13 +62,6 @@ class ConvictionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to convictions_url, notice: 'Conviction was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  def persist!
-    @conviction.transaction do
-      @conviction.save
-      @conviction.conviction_grounds.map &:save
     end
   end
 
