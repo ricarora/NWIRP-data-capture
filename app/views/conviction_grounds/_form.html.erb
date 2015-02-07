@@ -1,29 +1,16 @@
-<%= form_for(@conviction_ground) do |f| %>
-  <% if @conviction_ground.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@conviction_ground.errors.count, "error") %> prohibited this conviction_ground from being saved:</h2>
+<%= form_for(@conviction_ground, url: client_conviction_conviction_grounds_path) do |f| %>
 
-      <ul>
-      <% @conviction_ground.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <%= @conviction_grounds.each do |cg| %>
+      <div class="field">
+        <%= f.label :gor_name, cg.gor_name %><br>
+        <%= f.text_field :gor_name %>
+      </div>
+      <div class="field">
+        <%= f.label :status %><br>
+        <%= f.select(:status, ConvictionGround::STATUS_OPTION, :include_blank => "Please Select")  %>
+      </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :gor_name %><br>
-    <%= f.text_field :gor_name %>
-  </div>
-  <div class="field">
-    <%= f.label :conviction_id %><br>
-    <%= f.number_field :conviction_id %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
 <% end %>

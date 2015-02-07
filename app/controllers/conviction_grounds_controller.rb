@@ -15,6 +15,9 @@ class ConvictionGroundsController < ApplicationController
   # GET /conviction_grounds/new
   def new
     @conviction_ground = ConvictionGround.new
+    @client_id = params[:client_id]
+    @conviction_id = params[:conviction_id]
+    @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
   end
 
   # GET /conviction_grounds/1/edit
@@ -25,7 +28,7 @@ class ConvictionGroundsController < ApplicationController
   # POST /conviction_grounds.json
   def create
     @conviction_ground = ConvictionGround.new(conviction_ground_params)
-
+    @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
     respond_to do |format|
       if @conviction_ground.save
         format.html { redirect_to @conviction_ground, notice: 'Conviction ground was successfully created.' }
