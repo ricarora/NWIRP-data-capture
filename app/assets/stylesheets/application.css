@@ -40,6 +40,13 @@ a {
   text-decoration: underline;
 }
 
+a:hover, a:focus {
+  text-decoration: none;
+  background-color: #444;
+  color: white;
+  padding: 2px;
+}
+
 .button {
   background-color: #444;
   float: right;
