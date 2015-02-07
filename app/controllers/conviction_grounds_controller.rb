@@ -21,35 +21,24 @@ class ConvictionGroundsController < ApplicationController
   def create
     @conviction_ground = ConvictionGround.new(conviction_ground_params)
     @conviction_grounds = RemovabilityGround.all.collect {|rg| ConvictionGround.new(gor_name: rg.name, conviction_id: @conviction_id, status: "")}
-    respond_to do |format|
-      if @conviction_ground.save
-        format.html { redirect_to @conviction_ground, notice: 'Conviction ground was successfully created.' }
-        format.json { render :show, status: :created, location: @conviction_ground }
-      else
-        format.html { render :new }
-        format.json { render json: @conviction_ground.errors, status: :unprocessable_entity }
-      end
+    if @conviction_ground.save
+      redirect_to @conviction_ground, notice: 'Conviction ground was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @conviction_ground.update(conviction_ground_params)
-        format.html { redirect_to @conviction_ground, notice: 'Conviction ground was successfully updated.' }
-        format.json { render :show, status: :ok, location: @conviction_ground }
-      else
-        format.html { render :edit }
-        format.json { render json: @conviction_ground.errors, status: :unprocessable_entity }
-      end
+    if @conviction_ground.update(conviction_ground_params)
+      redirect_to @conviction_ground, notice: 'Conviction ground was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @conviction_ground.destroy
-    respond_to do |format|
-      format.html { redirect_to conviction_grounds_url, notice: 'Conviction ground was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to conviction_grounds_url, notice: 'Conviction ground was successfully destroyed.'
   end
 
   private
@@ -58,7 +47,6 @@ class ConvictionGroundsController < ApplicationController
       @conviction_ground = ConvictionGround.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def conviction_ground_params
       params.require(:conviction_ground).permit(:gor_name, :conviction_id, :status)
     end
