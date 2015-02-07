@@ -37,11 +37,12 @@
   </tbody>
 </table>
 
-<% if !@client.convictions.empty? %>
+<!-- <% if !@client.convictions.empty? %>
   <h3>Convictions</h3>
-<% end %>
+<% end %> -->
 
-<% @client.convictions.each do |conviction| %>
+<% @client.convictions.each_with_index do |conviction, index| %>
+<h4>Conviction#<%= index + 1 %></h4>
 <table role="grid" summary="Client conviction" class="conviction-table">
   <thead>
     <tr>
