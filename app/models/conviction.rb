@@ -1,5 +1,4 @@
 class Conviction < ActiveRecord::Base
-  require 'SecureRandom'
   belongs_to :client
   has_many :removability_grounds, through: :conviction_grounds
   has_many :conviction_grounds, autosave: true
@@ -9,9 +8,6 @@ class Conviction < ActiveRecord::Base
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
-  # validates :id, uniqueness: true
-
-  # before_create :set_number
 
   accepts_nested_attributes_for :conviction_grounds
 
@@ -25,16 +21,5 @@ class Conviction < ActiveRecord::Base
     if ij_decision_date.present? && ij_decision_date > Date.today
       errors.add(:ij_decision_date, "can't be in the future")
     end
-  end
-
-  def set_number
-    while !self.id || Conviction.exists?(id: self.id.to_s)
-      self.id = create_number
-    end
-    self.id
-  end
-
-  def create_number
-    (SecureRandom.random_number(9000000) + 1000000).to_s
   end
 end

@@ -1,8 +1,8 @@
 class Client < ActiveRecord::Base
-  has_many :assessments
+  has_many :assessments, autosave: true
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
-  has_many :client_reliefs
+  has_many :client_reliefs, autosave: true
   validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
   validates_uniqueness_of :a_number
   # validates :gender, inclusion: { in: %w(Male Female Transgender),

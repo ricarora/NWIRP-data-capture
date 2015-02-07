@@ -20,60 +20,51 @@ class ClientBuildForm
     @client ||= Client.new
   end
 
-  def client_relief
-    @client_relief ||= ClientRelief.new(client_id: @client.id)
-  end
-
-  def assessment
-    @assessment ||= Assessment.new(client_id: @client.id)
-  end
-
   def submit(params)
+    @relief_sought_array = []
+    @client_relief_array = []
     client.last_name, client.first_name = params[:last_name], params[:first_name]
     client.nationality, client.ethnicity = params[:nationality], params[:ethnicity]
     client.gender = params[:gender]
     client.represented = params[:represented]
     client.drru_case = params[:drru_case]
     client.a_number = params[:a_number]
-    assessment.date = params[:date]
-
-    if valid?
-      client.save!
-      if !assessment.date.nil?
-        assessment.client = client
-        assessment.save!
-      end
-      check_relief_sought(params)
-      true
-    else
-      false
+    unless params[:date].blank?
+      assessment = client.assessments.build
+      assessment.date = params[:date]
     end
-  end
-
-  def check_relief_sought(params)
     params[:relief_name].each do |value|
       if value != ""
-        if ReliefSought.where(name: value).empty?
-          new_relief = ReliefSought.create(name: value)
-          add_client_relief(new_relief.name)
-        else
-          add_client_relief(ReliefSought.find(value).name)
-        end
+        relief_sought = ReliefSought.where(name: value).first_or_initialize
+        client_relief = client.client_reliefs.build(relief_name: relief_sought.name)
+        @relief_sought_array << relief_sought
+        @client_relief_array << client_relief
       end
     end
-    return true
   end
 
-  def add_client_relief(name)
-    @client_relief = ClientRelief.new(relief_name: name)
-    @client_relief.client = @client
-    @client_relief.save
-    if @client_relief.invalid?
-      if @errors[:client_relief]
-        @errors[:client_relief] += [@relief.errors]
-      else
-        @errors[:client_relief] = [@relief.errors]
-      end
+  def objects_valid?
+    # client.valid?
+    # client.assessment.valid?
+    # client.client_reliefs.valid?
+    # @relief_sought_array.each do |relief_sought|
+    #   relief_sought.valid?
+    # end
+
+    # if @client_relief.invalid?
+    #   if @errors[:client_relief]
+    #     @errors[:client_relief] += [@client_relief.errors]
+    #   else
+    #     @errors[:client_relief] = [@client_relief.errors]
+    #   end
+    # end
+    true
+  end
+
+  def save
+    client.save!
+    @relief_sought_array.each do |relief_sought|
+      relief_sought.save!
     end
   end
 end
