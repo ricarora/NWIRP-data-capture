@@ -1,82 +1,97 @@
-<%= form_tag clients_path do %>
-  <% if @client_form && @client_form.errors.any? %>
+<%= form_for(@client_form, url: clients_path) do |f| %>
+  <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
 
-      <% if !@client_form.errors[:client].nil? %>
-        <ul>
-        <% @client_form.errors[:client].messages.each do |key, message| %>
-          <li><%= key %><%= message[0] %></li>
-        <% end %>
-        </ul>
+      <ul>
+      <% @client_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
-
-      <% if !@client_form.errors[:client_relief].nil? %>
-          <%  @client_form.errors[:client_relief].each do |client_relief| %>
-        <ul>
-          <% client_relief.messages.each do |key, message| %>
-          <li><%= key %><%= message[0] %></li>
-          <% end %>
-        </ul>
-          <% end %>
-      <% end %>
-
-      <% if @client_form.errors[:client_assessment] && !@client_form.errors[:client_assessment].messages[:date].nil? %>
-        <ul>
-        <li>Date <%= @client_form.errors[:client_assessment].messages[:date][0] %></li>
-        </ul>
-      <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= label_tag "client_form[last_name]", "Last Name"%><br>
-    <%= text_field_tag "client_form[last_name]", @client_form && @client_form.client ? @client_form.client.last_name : nil, {placeholder: "Last Name"}  %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :last_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :last_name %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[first_name]", "First Name" %><br>
-    <%= text_field_tag "client_form[first_name]", @client_form && @client_form.client ? @client_form.client.first_name : nil, {placeholder: "First Name"} %>
+  <div class="field row">
+    <div class="small-3 columns" >
+      <%= f.label :first_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :first_name %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[a_number]", "A Number" %><br>
-    <%= text_field_tag "client_form[a_number]", @client_form && @client_form.client ? @client_form.client.a_number : nil, {placeholder: "A Number"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :a_number, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :a_number %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[nationality]", "Nationality" %><br>
-    <!-- <%= text_field_tag "client_form[nationality]", @client_form && @client_form.client ? @client_form.client.nationality : nil, {placeholder: "Nationality"} %> -->
-    <%= select_tag "client_form[nationality]", options_for_select(Client::NATIONALITY, "#{@client_form && @client_form.client ? @client_form.client.nationality : nil}"), { include_blank: "Please Select" } %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :nationality, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[ethnicity]", "Ethnicity" %><br>
-    <%= text_field_tag "client_form[ethnicity]", @client_form && @client_form.client ? @client_form.client.ethnicity : nil, {placeholder: "Ethnicity"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ethnicity, class: "right inline" %><br>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :ethnicity %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[gender]", "Gender" %><br>
-    <%= text_field_tag "client_form[gender]", @client_form && @client_form.client ? @client_form.client.gender : nil, {placeholder: "Male/Female"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :gender, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :gender, options_for_select(Client::GENDER), {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[relief_sought][]", "Relief Sought" %><br>
-    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][0] : nil, {placeholder: "Relief Sought"} %>
-    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][1] : nil, {placeholder: "Relief Sought"}  %>
-    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][2] : nil, {placeholder: "Relief Sought"}  %>
-    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][3] : nil, {placeholder: "Relief Sought"}  %>
-    <%= text_field_tag "client_form[relief_sought][]", @client_form && @client_form.attributes ? @client_form.attributes[:relief_sought][4] : nil, {placeholder: "Relief Sought"}  %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :represented, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <label><%= f.check_box :represented %><span class="label-text"></span></label>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[represented]", "Represented" %><br>
-    <%= hidden_field_tag "client_form[represented]", false %>
-    <%= check_box_tag "client_form[represented]", 'on', @client_form && @client_form.attributes[:represented] =='on' ? true : false %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :drru_case, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[drru_case]", "Drru Case" %><br>
-    <%= hidden_field_tag "client_form[drru_case]", false %>
-    <%= check_box_tag "client_form[drru_case]", "on", @client_form && @client_form.attributes[:drru_case] == 'on' ? true : false %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :relief_name, class: "right inline" %>
+    </div>
+    <div class="small-5 columns relief_field">
+    </div>
+      <a href="#" id="add_field">Add another field</a>
   </div>
-  <div class="field">
-    <%= label_tag "client_form[assessment]", "Assessment" %><br>
-    <%= date_field_tag "client_form[assessment]", @client_form && @client_form.attributes ? @client_form.attributes[:assessment] : nil, {placeholder: "mm/dd/yyyy"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :date, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.date_field :date %>
+    </div>
   </div>
   <div class="actions">
-    <%= submit_tag %>
+    <%= f.submit "Create Client", class: "button round center" %>
   </div>
 <% end %>

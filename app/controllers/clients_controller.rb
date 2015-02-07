@@ -14,7 +14,8 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    @client = Client.new
+    # @client = Client.new()
+    @client_form = ClientBuildForm.new
   end
 
   # GET /clients/1/edit
@@ -24,9 +25,8 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    @client_form = ClientBuildForm.new(params[:client_form])
-
-    if @client_form.save
+    @client_form = ClientBuildForm.new
+    if @client_form.submit(params[:client_build_form])
       redirect_to client_path(@client_form.client.id)
     else
       render :new
@@ -73,7 +73,7 @@ class ClientsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def client_params
-      params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :represented, :drru_case, :a_number)
-    end
+    # def client_params
+    #   params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :represented, :drru_case, :a_number)
+    # end
 end

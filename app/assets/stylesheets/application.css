@@ -15,3 +15,63 @@
  *= require_tree .
  *= require_self
  */
+
+/* GLOBAL CSS */
+
+body {
+  color: #444;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  color: #444;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  text-align: center;
+}
+
+h2 {
+  color: #444;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: underline;
+}
+
+.button {
+  background-color: #444;
+  float: right;
+}
+
+.button:focus, .button:hover {
+  color: #444;
+  background-color: #ffcc00;
+}
+
+/* New Client Form */
+
+.remove_field {
+  background-color: #ffcc00;
+  float: right;
+  margin-bottom: 25px;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type="checkbox"] + .label-text:before {
+  content: "No";
+  background-color: #444;
+  color: white;
+  padding: 5px;
+}
+
+input[type="checkbox"]:checked + .label-text:before {
+  content: "Yes";
+  background-color: #ffcc00;
+  color: #444;
+  padding: 5px;
+}

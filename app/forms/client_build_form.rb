@@ -1,72 +1,74 @@
 class ClientBuildForm
+  include ActiveModel::Model
 
-  attr_reader :attributes, :client, :errors
-
-  def initialize(attributes, client = nil)
-    @attributes = attributes
-    @client = client
-    @assessment = nil
-    @relief = nil
-    @errors = {}
+  def persisted?
+    false
   end
 
-  def create
-    @client = Client.new(first_name: @attributes[:first_name],
-                          last_name: @attributes[:last_name],
-                          nationality: @attributes[:nationality],
-                          ethnicity: @attributes[:ethnicity],
-                          gender: @attributes[:gender],
-                          represented: @attributes[:represented],
-                          drru_case: @attributes[:drru_case],
-                          a_number: @attributes[:a_number])
-    if !@attributes[:assessment].empty?
-      @assessment = Assessment.new(date: Date.parse(@attributes[:assessment]))
-      @assessment.client = @client
-    end
+  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
+  validates :gender, inclusion: { in: %w(Male Female),
+    message: "Only accepts Male or Female."}
+  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+  validates :nationality, :inclusion => {:in => Client::NATIONALITY}
+
+  delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
+            :represented, :drru_case, :a_number, to: :client
+  delegate :relief_name, to: :client_relief
+  delegate :date, to: :assessment
+
+  def client
+    @client ||= Client.new
   end
 
-  def save
-    create
-    if @client.valid?
-      if @assessment
-        if @assessment.valid?
-          # let us save client_relief here
-          @client.save
-          @assessment.save
-          create_client_relief
-        else
-          @assessment.save
-          @errors[:client_assessment] = @assessment.errors
-          return false
-        end
-      else
-        @client.save
-        create_client_relief
+  def client_relief
+    @client_relief ||= ClientRelief.new(client_id: @client.id)
+  end
+
+  def assessment
+    @assessment ||= Assessment.new(client_id: @client.id)
+  end
+
+  def submit(params)
+    client.last_name, client.first_name = params[:last_name], params[:first_name]
+    client.nationality, client.ethnicity = params[:nationality], params[:ethnicity]
+    client.gender = params[:gender]
+    client.represented = params[:represented]
+    client.drru_case = params[:drru_case]
+    client.a_number = params[:a_number]
+    assessment.date = params[:date]
+
+    if valid?
+      client.save!
+      if !assessment.date.nil?
+        assessment.client = client
+        assessment.save!
       end
+      check_relief_sought(params)
+      true
     else
-      @client.save
-      @errors[:client] = @client.errors
-      return false
+      false
     end
   end
 
-  def create_client_relief
-    @attributes[:relief_sought].each do |name|
-      if ReliefSought.where(name: name).empty?
-        new_relief = ReliefSought.create(name: name)
-        add_client_relief(new_relief.name)
-      else
-        add_client_relief(ReliefSought.find(name).name)
+  def check_relief_sought(params)
+    params[:relief_name].each do |value|
+      if value != ""
+        if ReliefSought.where(name: value).empty?
+          new_relief = ReliefSought.create(name: value)
+          add_client_relief(new_relief.name)
+        else
+          add_client_relief(ReliefSought.find(value).name)
+        end
       end
     end
     return true
   end
 
   def add_client_relief(name)
-    @relief = ClientRelief.new(relief_name: name)
-    @relief.client = @client
-    @relief.save
-    if @relief.invalid?
+    @client_relief = ClientRelief.new(relief_name: name)
+    @client_relief.client = @client
+    @client_relief.save
+    if @client_relief.invalid?
       if @errors[:client_relief]
         @errors[:client_relief] += [@relief.errors]
       else

@@ -5,9 +5,11 @@ class Client < ActiveRecord::Base
   has_many :client_reliefs
   validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
   validates_uniqueness_of :a_number
-  validates :gender, inclusion: { in: %w(Male Female),
-    message: "Only accepts Male or Female."}
+  # validates :gender, inclusion: { in: %w(Male Female Transgender),
+  #   message: "Only accepts Male, Female, or Transgender."}
   validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+
+  GENDER = ["Male", "Female", "Transgender"]
 
   NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
@@ -51,4 +53,9 @@ class Client < ActiveRecord::Base
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
   validates :nationality, inclusion: { in: NATIONALITY }
+
+  def full_name
+    self.first_name + self.last_name
+  end
+
 end
