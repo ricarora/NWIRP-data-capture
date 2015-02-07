@@ -11,7 +11,9 @@ class ConvictionsController < ApplicationController
   def new
     @conviction = Conviction.new
     # @conviction.id = @conviction.set_number
-    @conviction.conviction_grounds = RemovabilityGround.all.map {|rg| @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)}
+    @conviction.conviction_grounds = RemovabilityGround.all.map do |rg|
+      @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)
+    end
   end
 
   def edit
@@ -20,7 +22,9 @@ class ConvictionsController < ApplicationController
   def create
     @conviction = Conviction.new
     @conviction.client_id = params[:client_id]
-    params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status]) }
+    params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
+      @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
+    end
     @conviction.attributes = conviction_params
     if @conviction.save
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
@@ -43,7 +47,7 @@ class ConvictionsController < ApplicationController
   end
 
   private
-  
+
     def set_conviction
       @conviction = Conviction.find(params[:id])
     end
