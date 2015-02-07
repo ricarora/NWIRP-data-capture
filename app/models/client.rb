@@ -53,4 +53,9 @@ class Client < ActiveRecord::Base
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
   validates :nationality, inclusion: { in: NATIONALITY }
+
+  def full_name
+    self.first_name + self.last_name
+  end
+
 end
