@@ -25,12 +25,23 @@ class ConvictionsController < ApplicationController
   # POST /convictions
   # POST /convictions.json
   def create
-    raise
     @conviction = Conviction.new
     @conviction.client_id = params[:client_id]
+    conviction_grounds = params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| ConvictionGround.new(cg_hash) }
+
     respond_to do |format|
       @conviction.attributes = conviction_params
-      if @conviction.save
+      saved = false
+      # @conviction.transaction do
+      #   @conviction.save
+      #   raise
+      # end
+
+      conviction_grounds.each { |e| e.conviction = @conviction }
+      all_valid = @conviction.valid? && conviction_grounds.map(&:valid?).all?
+      
+      if all_valid
+
         format.html { redirect_to new_client_conviction_conviction_ground_path(@conviction.client_id, @conviction.id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
@@ -64,6 +75,14 @@ class ConvictionsController < ApplicationController
     end
   end
 
+  def persist!
+    @conviction.transaction do
+      raise
+      @conviction.save
+      @conviction.conviction_grounds.map &:save
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conviction
@@ -72,6 +91,6 @@ class ConvictionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conviction_params
-      params.require(:conviction).permit(:conviction_grounds [:gor_name, :status], :crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes)
+      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:gor_name, :status])
     end
 end

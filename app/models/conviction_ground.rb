@@ -5,6 +5,7 @@ class ConvictionGround < ActiveRecord::Base
     message: "Only accepts Yes, No or Finding Not Found."}
   validates :gor_name, :uniqueness => { scope: [:conviction_id]}
   validates :conviction_id, numericality: { only_integer: true }
+  validates :conviction, presence: true
 
   STATUS_OPTION = [["Yes", "Yes"], ["No", "No"], ["Finding Not Found", "Finding Not Found"]]
 end
