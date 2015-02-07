@@ -71,7 +71,7 @@ input[type="checkbox"]:checked + .label-text:before {
 }
 
 .label-text {
-  font-weight: 700;
+  font-weight: 400;
   background-color: #444;
   color: white;
   padding: 5px;
