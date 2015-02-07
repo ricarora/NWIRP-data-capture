@@ -27,21 +27,11 @@ class ConvictionsController < ApplicationController
   def create
     @conviction = Conviction.new
     @conviction.client_id = params[:client_id]
-    conviction_grounds = params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| ConvictionGround.new(cg_hash) }
+    @conviction.conviction_grounds = params[:conviction][:conviction_grounds_attributes].map { |key, cg_hash| ConvictionGround.new(cg_hash) }
 
     respond_to do |format|
       @conviction.attributes = conviction_params
-      saved = false
-      # @conviction.transaction do
-      #   @conviction.save
-      #   raise
-      # end
-
-      conviction_grounds.each { |e| e.conviction = @conviction }
-      all_valid = @conviction.valid? && conviction_grounds.map(&:valid?).all?
-      
-      if all_valid
-
+      if persist!
         format.html { redirect_to new_client_conviction_conviction_ground_path(@conviction.client_id, @conviction.id), notice: 'Conviction was successfully created.' }
         format.json { render :show, status: :created, location: @conviction }
       else
@@ -77,7 +67,6 @@ class ConvictionsController < ApplicationController
 
   def persist!
     @conviction.transaction do
-      raise
       @conviction.save
       @conviction.conviction_grounds.map &:save
     end
