@@ -11,9 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :crime_name %><br>
-    <%= f.text_field :crime_name %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :crime_name, class: "right inline" %><br>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :crime_name %>
+    </div>
   </div>
   <div class="field">
     <%= f.label :rcw %><br>
