@@ -44,6 +44,8 @@ h2 {
   background-color: #444;
   float: right;
   color: white;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .button:focus, .button:hover {
