@@ -17,7 +17,7 @@ class ClientsController < ApplicationController
 
   def create
     @client_form = ClientBuildForm.new
-    if @client_form.submit(params[:client_build_form]) && @client_form.objects_valid? && @client_form.save
+    if @client_form.submit(params[:client_build_form]) && @client_form.all_valid? && @client_form.save
       redirect_to client_path(@client_form.client)
     else
       render :new

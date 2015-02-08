@@ -20,6 +20,10 @@ class ClientBuildForm
     @client ||= Client.new
   end
 
+  def assessment
+    @assessment ||= client.assessments.build
+  end
+
   def submit(params)
     @relief_sought_array = []
     @client_relief_array = []
@@ -30,33 +34,53 @@ class ClientBuildForm
     client.drru_case = params[:drru_case]
     client.a_number = params[:a_number]
     unless params[:date].blank?
-      assessment = client.assessments.build
+      assessment.client = client
       assessment.date = params[:date]
     end
     params[:relief_name].each do |value|
-      if value != ""
+      unless value.empty?
         relief_sought = ReliefSought.where(name: value).first_or_initialize
         client_relief = client.client_reliefs.build(relief_name: relief_sought.name)
         @relief_sought_array << relief_sought
         @client_relief_array << client_relief
       end
     end
+    true
   end
 
-  def objects_valid?
-    # client.invalid?
-    # client.assessment.valid?
-    # client.client_reliefs.valid?
-    # @relief_sought_array.each do |relief_sought|
-    #   relief_sought.valid?
-    # end
-    @client_relief_array.each do |client_relief|
-      if client_relief.invalid?
-        @errors[:client_relief] += [@client_relief.errors]
+  def client_relief_valid?
+    if @client_relief_array.empty?
+      true
+    else
+      @client_relief_array.each do |client_relief|
+        if client_relief.valid?
+          true
+        else
+          @errors[:client_relief] += [@client_relief.errors]
+        end
       end
     end
+  end
 
+  def relief_sought_valid?
+    unless @relief_sought_array.empty?
+      @relief_sought_array.each do |relief_sought|
+        relief_sought.valid?
+      end
+    end
     true
+  end
+
+  def assessment_valid?
+    if assessment.date.blank?
+      true
+    else
+      assessment.valid?
+    end
+  end
+
+  def all_valid?
+    client.valid? && relief_sought_valid? && client_relief_valid? && assessment_valid?
   end
 
   def save
