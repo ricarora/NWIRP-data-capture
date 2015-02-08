@@ -2,7 +2,6 @@
   <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
-
       <ul>
       <% @client_form.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -40,7 +39,8 @@
       <%= f.label :nationality, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
@@ -56,7 +56,8 @@
       <%= f.label :gender, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :gender, options_for_select(Client::GENDER), {include_blank: "Please select"} %>
+      <%= f.select :gender, options_for_select(Client::GENDER),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
@@ -92,6 +93,6 @@
     </div>
   </div>
   <div class="actions">
-    <%= f.submit "Create Client", class: "button round center" %>
+    <%= f.submit "Create Client", class: "button round" %>
   </div>
 <% end %>
