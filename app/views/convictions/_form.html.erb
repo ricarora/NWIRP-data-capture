@@ -1,10 +1,10 @@
-<%= form_for(@conviction_form, url: client_convictions_path) do |f| %>
-  <% if @conviction_form.errors.any? %>
+<%= form_for(@conviction, url: client_convictions_path) do |f| %>
+  <% if @conviction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@conviction_form.errors.count, "error") %> prohibited this conviction from being saved:</h2>
+      <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
 
       <ul>
-      <% @conviction_form.errors.full_messages.each do |message| %>
+      <% @conviction.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :sentence %><br>
-    <%= f.number_field :sentence %>
+    <%= f.number_field :sentence, min: 0 %>
   </div>
   <div class="field">
     <%= f.label :ij_name %><br>
@@ -47,16 +47,20 @@
     <%= f.label :ij_finding %><br>
     <%= f.text_field :ij_finding %>
   </div>
-  <p>Grounds of Removability:</p>
-  <% @removability_grounds.each do |ground| %>
+  <%= f.fields_for :conviction_grounds do |builder| %>
   <div class="field">
-    <%= f.label ground.name %>
-    <%= text_field_tag "conviction_build_form[grounds][#{ground.name}]" %>
+    <%= builder.label :gor_name, builder.object.gor_name %><br>
+    <%= builder.hidden_field :gor_name, value: builder.object.gor_name %>
+    <%= %>
+  </div>
+  <div class="field">
+    <%= builder.select(:status, ConvictionGround::STATUS_OPTION, :include_blank => "Please Select")  %>
   </div>
   <% end %>
+
   <div class="field">
     <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+    <%= f.text_area :notes, row: 3 %>
   </div>
   <div class="actions">
     <%= f.submit %>
