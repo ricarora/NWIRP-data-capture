@@ -2,7 +2,6 @@
   <% if @client_form.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
-
       <ul>
       <% @client_form.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,7 +12,7 @@
 
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :last_name, class: "right inline" %>
+      <%= f.label :last_name, "Last Name", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :last_name %>
@@ -21,7 +20,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns" >
-      <%= f.label :first_name, class: "right inline" %>
+      <%= f.label :first_name, "First Name", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :first_name %>
@@ -29,7 +28,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :a_number, class: "right inline" %>
+      <%= f.label :a_number, "A Number", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :a_number %>
@@ -40,7 +39,8 @@
       <%= f.label :nationality, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :nationality, options_for_select(Client::NATIONALITY), {include_blank: "Please select"} %>
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
@@ -56,7 +56,8 @@
       <%= f.label :gender, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :gender, options_for_select(Client::GENDER), {include_blank: "Please select"} %>
+      <%= f.select :gender, options_for_select(Client::GENDER),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
@@ -69,7 +70,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :drru_case, class: "right inline" %>
+      <%= f.label :drru_case, "Drru Case", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
@@ -77,21 +78,21 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :relief_name, class: "right inline" %>
+      <%= f.label :relief_name, "Relief Sought", class: "right inline" %>
     </div>
-    <div class="small-5 columns relief_field">
+    <div class="small-6 columns relief_field">
     </div>
-      <a href="#" id="add_field">Add another field</a>
+      <a href="#" id="add_field">Add another Relief Sought</a>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :date, class: "right inline" %>
+      <%= f.label :date, "Assessment Date", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.date_field :date %>
     </div>
   </div>
   <div class="actions">
-    <%= f.submit "Create Client", class: "button round center" %>
+    <%= f.submit "Create Client", class: "button round" %>
   </div>
 <% end %>

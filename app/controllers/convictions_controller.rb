@@ -15,6 +15,7 @@ class ConvictionsController < ApplicationController
   # GET /convictions/new
   def new
     @conviction = Conviction.new
+    @client = Client.find(params[:client_id])
     # @conviction.id = @conviction.set_number
     @conviction.conviction_grounds = RemovabilityGround.all.map {|rg| @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)}
   end

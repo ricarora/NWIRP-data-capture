@@ -6,15 +6,15 @@
   <thead>
     <tr>
       <th>A#</th>
-      <th>Last name</th>
-      <th>First name</th>
+      <th>Last Name</th>
+      <th>First Name</th>
       <th>Nationality</th>
       <th>Ethnicity</th>
       <th>Gender</th>
-      <th>Relief sought</th>
+      <th>Relief Sought</th>
       <th>Represented</th>
       <th>Drru Case</th>
-      <th>Assessment</th>
+      <th>Assessment Date</th>
     </tr>
   </thead>
   <tbody>
@@ -25,35 +25,35 @@
       <td><%= @client.nationality %></td>
       <td><%= @client.ethnicity %></td>
       <td><%= @client.gender %></td>
-      <% @client.client_reliefs.each do |relief| %>
-      <td><%= relief.relief_name %></td>
-      <% end %>
+      <td>
+        <% @client.client_reliefs.each do |relief| %>
+        <div><%= relief.relief_name %></div>
+        <% end %>
+      </td>
       <td><%= translate(@client.represented.class) %></td>
       <td><%= translate(@client.drru_case.class) %></td>
-      <% @client.assessments.each do |assessment| %>
-      <td><%= assessment.date %></td>
-      <% end %>
+      <td>
+        <% @client.assessments.each do |assessment| %>
+        <div><%= assessment.date %></div>
+        <% end %>
+      </td>
     </tr>
   </tbody>
 </table>
-
-<!-- <% if !@client.convictions.empty? %>
-  <h3>Convictions</h3>
-<% end %> -->
 
 <% @client.convictions.each_with_index do |conviction, index| %>
 <h4>Conviction#<%= index + 1 %></h4>
 <table role="grid" summary="Client conviction" class="conviction-table">
   <thead>
     <tr>
-      <th>Crime name</th>
+      <th>Crime Name</th>
       <th>RCW</th>
-      <th>Sub-section</th>
+      <th>Subsection</th>
       <th>Sentence(in days)</th>
-      <th>IJ name</th>
-      <th>NTA charges</th>
-      <th>IJ decision Date</th>
-      <th>IJ finding</th>
+      <th>Immigration Judge(IJ) Name</th>
+      <th>NTA Charges</th>
+      <th>IJ Decision Date</th>
+      <th>IJ Finding</th>
     </tr>
   </thead>
   <tbody>
@@ -87,9 +87,8 @@
 </table>
   <% end %>
 </div>
-
 <% end %>
 
-
-<%= link_to "Add Conviction", new_client_conviction_path(@client.id) %>
 <%= link_to "Edit Client Information", edit_client_path(@client), class: "button round" %>
+
+<%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button round" %>
