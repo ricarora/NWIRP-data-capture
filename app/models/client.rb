@@ -3,15 +3,11 @@ class Client < ActiveRecord::Base
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
   has_many :client_reliefs, autosave: true
-  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
   validates_uniqueness_of :a_number
-  # validates :gender, inclusion: { in: %w(Male Female Transgender),
-  #   message: "Only accepts Male, Female, or Transgender."}
-  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
 
   GENDER = ["Male", "Female", "Transgender"]
 
-  NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
+  NATIONALITY = [ "Unknown", "Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
                 "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi",
                 "Barbadian", "Barbudans", "Batswana", "Belarusian", "Belgian",
@@ -50,9 +46,7 @@ class Client < ActiveRecord::Base
                 "Tanzanian", "Thai", "Togolese", "Tongan", "Trinidadian",
                 "Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan",
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
-                "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
-
-  validates :nationality, inclusion: { in: NATIONALITY }
+                "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean"]
 
   def full_name
     self.first_name + self.last_name
