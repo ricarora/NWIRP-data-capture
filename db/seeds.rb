@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-reliefs = ["10 YR", "AAOS", "AAOS 209C WAIVER", "AOS", "AOS 212H WAIVER",
+relief_names = ["10 YR", "AAOS", "AAOS 209C WAIVER", "AOS", "AOS 212H WAIVER",
   "AOS 245I", "ASY", "CAA", "CAT", "LPR", "NACARA", "RAOS", "RAOS 209C WAIVER",
   "SVISA", "TVISA", "UVISA", "VAWA CANCELLATION", "VAWA SELF PETITION", "WOR"]
 
-reliefs.each do |relief_name|
-  ReliefSought.create(name: relief_name)
+relief_names.each do |relief_name|
+  ReliefSought.where(name: relief_name).first_or_create
 end
