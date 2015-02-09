@@ -4,7 +4,7 @@ class ConvictionGround < ActiveRecord::Base
   validates :status, inclusion: { in: ["Yes", "No", "Finding Not Found"],
     message: "Only accepts Yes, No or Finding Not Found."}
   validates :gor_name, :uniqueness => { scope: :conviction_id}
-  # validates :conviction, presence: true
+  #validates :conviction, presence: true
 
   STATUS_OPTION = [["Yes", "Yes"], ["No", "No"], ["Finding Not Found", "Finding Not Found"]]
 end

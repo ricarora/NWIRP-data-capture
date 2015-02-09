@@ -72,15 +72,11 @@ class ClientBuildForm
   end
 
   def assessment_valid?
-    if assessment.date.blank?
-      true
-    else
-      assessment.valid?
-    end
+    assessment.date.blank? ? true : assessment.valid?
   end
 
   def all_valid?
-    client.valid? && relief_sought_valid? && client_relief_valid? && assessment_valid?
+    valid?
   end
 
   def save
