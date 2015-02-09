@@ -6,8 +6,8 @@ class ClientBuildForm
   end
 
   validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
-  validates :gender, inclusion: { in: %w(Male Female),
-    message: "Only accepts Male or Female."}
+  validates :gender, inclusion: { in: %w(Male Female Transgender),
+    message: "Only accepts Male, Female, or Transgender."}
   validates :represented, :drru_case, :inclusion => {:in => [true, false]}
   validates :nationality, :inclusion => {:in => Client::NATIONALITY}
 
