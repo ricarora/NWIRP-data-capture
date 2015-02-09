@@ -4,6 +4,10 @@ class Client < ActiveRecord::Base
   has_many :relief_soughts, through: :client_reliefs
   has_many :client_reliefs, autosave: true
   validates_uniqueness_of :a_number
+  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
+  validates :gender, inclusion: { in: %w(Male Female),
+    message: "Only accepts Male or Female."}
+  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
 
   GENDER = ["Male", "Female", "Transgender"]
 
@@ -47,6 +51,8 @@ class Client < ActiveRecord::Base
                 "Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan",
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean"]
+
+  validates :nationality, :inclusion => {:in => Client::NATIONALITY}
 
   def full_name
     self.first_name + self.last_name
