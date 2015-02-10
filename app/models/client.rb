@@ -3,7 +3,7 @@ class Client < ActiveRecord::Base
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
   has_many :client_reliefs, autosave: true
-  validates_uniqueness_of :a_number
+  #validates_uniqueness_of :a_number
   validates :last_name, :a_number, :assessments, presence: true
   validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
     message: "Only allows numbers in this format: XXX-XXX-XXX." }
