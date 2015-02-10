@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails'
 end
 gem 'bcrypt', '~> 3.1.7'
+gem 'attr_encryptor', '~> 2.0.0'
 group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
