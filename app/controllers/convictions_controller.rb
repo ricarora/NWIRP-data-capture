@@ -3,8 +3,6 @@ class ConvictionsController < ApplicationController
 
   def index
     @convictions = Conviction.all
-    
-
   end
 
   def show
