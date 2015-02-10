@@ -36,4 +36,16 @@ class Conviction < ActiveRecord::Base
       errors.add(:ij_decision_date, "can't be in the future")
     end
   end
+
+  def self.all_crime_names
+    Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:empty?)
+  end
+
+  def self.all_subsections
+    Conviction.select(:subsection).map(&:subsection).uniq.reject(&:empty?)
+  end
+
+  def self.all_nta_charges
+    Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
+  end
 end
