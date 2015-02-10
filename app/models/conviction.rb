@@ -40,6 +40,7 @@ class Conviction < ActiveRecord::Base
 
   ransacker :title_diddly do |parent|
     Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
+  end
 
   def self.all_crime_names
     Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:empty?)
@@ -56,6 +57,5 @@ class Conviction < ActiveRecord::Base
   def convert_to_days(sentence, sentence_unit)
     raise
     (year * 365) + (month * 30) + day
-
   end
 end
