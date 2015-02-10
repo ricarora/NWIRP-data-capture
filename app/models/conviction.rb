@@ -10,6 +10,7 @@ class Conviction < ActiveRecord::Base
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
   accepts_nested_attributes_for :conviction_grounds
+  attr_accessor :sentence_unit
 
   IJ_NAME = ["Odell", "Scala", "Fitting"]
 
@@ -35,5 +36,22 @@ class Conviction < ActiveRecord::Base
     if ij_decision_date.present? && ij_decision_date > Date.today
       errors.add(:ij_decision_date, "can't be in the future")
     end
+  end
+
+  def self.all_crime_names
+    Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:empty?)
+  end
+
+  def self.all_subsections
+    Conviction.select(:subsection).map(&:subsection).uniq.reject(&:empty?)
+  end
+
+  def self.all_nta_charges
+    Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
+  end
+
+  def convert_to_days(sentence, sentence_unit)
+    raise
+    (year * 365) + (month * 30) + day
   end
 end

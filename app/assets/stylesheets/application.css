@@ -92,3 +92,8 @@ input[type="checkbox"]:checked + .label-text:before {
   color: #444;
   padding: 5px;
 }
+
+.required {
+  font-weight: 900;
+  color: #3375cc;
+}

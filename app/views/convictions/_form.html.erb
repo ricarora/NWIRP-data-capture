@@ -1,3 +1,4 @@
+
 <%= form_for(@conviction, url: client_convictions_path) do |f| %>
   <% if @conviction.errors.any? %>
     <div id="error_explanation">
@@ -10,42 +11,45 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :crime_name, "Crime Name", class: "right inline" %>
+      <%= f.label :crime_name, "CRIME NAME*", class: "right inline required" %>
     </div>
-    <div class="small-9 columns">
-      <%= f.text_field :crime_name %>
+    <div class="small-6 columns">
+      <%= f.select :crime_name, options_for_select(Conviction.all_crime_names,
+      params[:conviction] ? params[:conviction][:crime_name] : nil),
+      {include_blank: "Please select"}, class: "crime_name_group" %>
+    </div>
+    <a href="#" id="add_crime_name">Add another crime name</a>
+    <div class="small-9 columns crime_name_field">
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :rcw, "RCW", class: "right inline" %>
+      <%= f.label :subsection, "SUBSECTION", class: "right inline" %>
     </div>
-    <div class="small-9 columns">
-      <%= f.text_field :rcw %>
+    <div class="small-6 columns">
+      <%= f.select :subsection, options_for_select(Conviction.all_subsections,
+      params[:conviction] ? params[:conviction][:subsection] : nil),
+      {include_blank: "Please select"}, class: "subsection_group" %>
     </div>
-  </div>
-  <div class="field row">
-    <div class="small-3 columns">
-      <%= f.label :subsection, class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
-      <%= f.text_field :subsection %>
+    <a href="#" id="add_subsection">Add another subsection</a>
+    <div class="small-9 columns subsection_field">
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :sentence, class: "right inline" %>
+      <%= f.label :sentence, "SENTENCE", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.number_field :sentence, min: 0 %>
+      <%= f.number_field :sentence %>
+      <%= f.select :sentence_unit, options_for_select(["Year(s)", "Month(s)","Day(s)"]),
+      {include_blank: "Please select"}%>
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :state_committed %>
+      <%= f.label :state_committed, "STATE CRIME COMMITTED", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
@@ -55,7 +59,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :ij_name, "Immigration Judge (IJ) Name", class: "right inline" %>
+      <%= f.label :ij_name, "IMMIGRATION JUDGE (IJ)", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :ij_name, options_for_select(Conviction::IJ_NAME,
@@ -65,15 +69,20 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :nta_charges, "NTA Charges", class: "right inline" %>
+      <%= f.label :nta_charges, "NTA CHARGES", class: "right inline" %>
     </div>
-    <div class="small-9 columns">
-      <%= f.text_field :nta_charges %>
+    <div class="small-6 columns">
+      <%= f.select :nta_charges, options_for_select(Conviction.all_nta_charges,
+      params[:conviction] ? params[:conviction][:nta_charges] : nil),
+      {include_blank: "Please select"}, class: "nta_charges_group" %>
+    </div>
+    <a href="#" id="add_nta_charges">Add another subsection</a>
+    <div class="small-9 columns nta_charges_field">
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :ij_decision_date, "IJ Decision Date", class: "right inline" %>
+      <%= f.label :ij_decision_date, "IJ DECISION DATE", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.date_field :ij_decision_date %>
@@ -81,7 +90,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :ij_finding, "IJ Finding", class: "right inline" %>
+      <%= f.label :ij_finding, "IJ FINDING", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :ij_finding %>
@@ -101,7 +110,7 @@
 
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :notes, "Additional Notes", class: "right inline" %>
+      <%= f.label :notes, "ADDITIONAL NOTES", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_area :notes, row: 3 %>

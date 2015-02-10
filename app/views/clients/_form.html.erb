@@ -9,10 +9,17 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :last_name, "Last Name", class: "right inline" %>
+      <%= f.label :a_number, "A#*", class: "right inline required" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :last_name %>
@@ -20,7 +27,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns" >
-      <%= f.label :first_name, "First Name", class: "right inline" %>
+      <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.text_field :first_name %>
@@ -28,15 +35,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :a_number, "A Number", class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
-      <%= f.text_field :a_number %>
-    </div>
-  </div>
-  <div class="field row">
-    <div class="small-3 columns">
-      <%= f.label :nationality, class: "right inline" %>
+      <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :nationality, options_for_select(Client::NATIONALITY,
@@ -46,15 +45,17 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :ethnicity, class: "right inline" %><br>
+      <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.text_field :ethnicity %>
+      <%= f.select :ethnicity, options_for_select(Client::ETHNICITY,
+      params[:client_build_form] ? params[:client_build_form][:ethnicity] : nil),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :gender, class: "right inline" %>
+      <%= f.label :gender, "GENDER", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :gender, options_for_select(Client::GENDER,
@@ -64,7 +65,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :represented, class: "right inline" %>
+      <%= f.label :represented, "REPRESENTED", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :represented, options_for_select(Client::REPRESENTED,
@@ -74,7 +75,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :drru_case, "Drru Case", class: "right inline" %>
+      <%= f.label :drru_case, "DRRU CASE", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
@@ -82,7 +83,8 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :relief_name, "Relief Sought", class: "right inline" %>
+      <%= f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+      <%#= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
     </div>
     <div class="small-6 columns relief_field">
     </div>
@@ -90,7 +92,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :date, "Assessment Date", class: "right inline" %>
+      <%= f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
       <%= f.date_field :date %>
