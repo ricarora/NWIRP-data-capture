@@ -59,7 +59,7 @@
     </div>
     <div class="small-9 columns">
       <%= f.select :gender, options_for_select(Client::GENDER,
-      params[:client_build_form] ? params[:client_build_form][:gender] : nil), 
+      params[:client_build_form] ? params[:client_build_form][:gender] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -73,7 +73,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :drru_case, class: "right inline" %>
+      <%= f.label :drru_case, class: "right inline" %>.html_safe
     </div>
     <div class="small-9 columns">
       <label><%= f.check_box :drru_case %><span class="label-text"></span></label>

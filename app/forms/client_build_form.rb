@@ -81,8 +81,8 @@ class ClientBuildForm
 
   def save
     client.save!
-    @relief_sought_array.each do |relief_sought|
-      relief_sought.save!
-    end
+    # @relief_sought_array.each do |relief_sought|
+    #   relief_sought.save!
+    # end
   end
 end
