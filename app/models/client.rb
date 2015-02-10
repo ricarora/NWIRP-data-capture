@@ -67,7 +67,7 @@ class Client < ActiveRecord::Base
   validates :ethnicity, inclusion: {in: Client::ETHNICITY, allow_blank: true}
 
   def full_name
-    self.first_name + self.last_name
+    self.first_name + ' ' + self.last_name
   end
 
 end

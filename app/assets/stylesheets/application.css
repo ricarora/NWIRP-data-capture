@@ -36,18 +36,35 @@ h2 {
   font-weight: 700;
 }
 
-a {
-  text-decoration: underline;
+.top-bar-section ul li a {
+  text-decoration: none;
 }
 
 .button {
   background-color: #444;
   float: right;
+  color: white;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .button:focus, .button:hover {
   color: #444;
   background-color: #ffcc00;
+}
+
+a.button {
+  color: white;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  background-color: #444;
+  color: white;
 }
 
 /* New Client Form */

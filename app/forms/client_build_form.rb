@@ -16,7 +16,6 @@ class ClientBuildForm
   validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
   validates :ethnicity, :inclusion => {in: Client::ETHNICITY, allow_blank: true}
 
-
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
   delegate :relief_name, to: :client_relief

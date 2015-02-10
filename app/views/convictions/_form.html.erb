@@ -11,62 +11,103 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :crime_name %><br>
-    <%= f.text_field :crime_name %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :crime_name, "Crime Name", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :crime_name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :rcw %><br>
-    <%= f.text_field :rcw %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :rcw, "RCW", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :rcw %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :subsection %><br>
-    <%= f.text_field :subsection %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :subsection, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :subsection %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :sentence %><br>
-    <%= f.number_field :sentence, min: 0 %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :sentence, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.number_field :sentence, min: 0 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :state_committed %><br>
-    <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
-    params[:conviction] ? params[:conviction][:state_committed] : nil),
-    {include_blank: "Please select"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :state_committed %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
+      params[:conviction] ? params[:conviction][:state_committed] : nil),
+      {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ij_name %><br>
-    <%= f.select :ij_name, options_for_select(Conviction::IJ_NAME,
-    params[:conviction] ? params[:conviction][:ij_name] : nil),
-    {include_blank: "Please select"} %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ij_name, "Immigration Judge (IJ) Name", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :ij_name, options_for_select(Conviction::IJ_NAME,
+      params[:conviction] ? params[:conviction][:ij_name] : nil),
+      {include_blank: "Please select"} %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :nta_charges %><br>
-    <%= f.text_field :nta_charges %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :nta_charges, "NTA Charges", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :nta_charges %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ij_decision_date %><br>
-    <%= f.date_field :ij_decision_date %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ij_decision_date, "IJ Decision Date", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.date_field :ij_decision_date %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ij_finding %><br>
-    <%= f.text_field :ij_finding %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ij_finding, "IJ Finding", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :ij_finding %>
+    </div>
   </div>
   <%= f.fields_for :conviction_grounds do |builder| %>
-  <div class="field">
-    <%= builder.label :gor_name, builder.object.gor_name %><br>
-    <%= builder.hidden_field :gor_name, value: builder.object.gor_name %>
-    <%= %>
-  </div>
-  <div class="field">
-    <%= builder.select(:status, ConvictionGround::STATUS_OPTION, :include_blank => "Please Select")  %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= builder.label :gor_name, builder.object.gor_name, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= builder.hidden_field :gor_name, value: builder.object.gor_name %>
+      <%= builder.select(:status, ConvictionGround::STATUS_OPTION, :include_blank => "Please Select")  %>
+    </div>
   </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes, row: 3 %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :notes, "Additional Notes", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_area :notes, row: 3 %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Conviction", class: "button round center" %>
   </div>
 <% end %>
