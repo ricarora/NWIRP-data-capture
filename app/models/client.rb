@@ -14,7 +14,7 @@ class Client < ActiveRecord::Base
     message: "Only accespts Yes, No, or Unknown."}
 
 
-  GENDER = ["Male", "Female", "Transgender"]
+  GENDER = ["Male", "Female", "Other", "Unknown"]
 
   REPRESENTED = ["Yes", "No", "Unkown"]
 
