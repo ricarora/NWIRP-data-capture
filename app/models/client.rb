@@ -16,6 +16,8 @@ class Client < ActiveRecord::Base
 
   GENDER = ["Male", "Female", "Transgender"]
 
+  REPRESENTED = ["Yes", "No", "Unkown"]
+
   NATIONALITY = [ "Unknown", "Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
                 "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi",

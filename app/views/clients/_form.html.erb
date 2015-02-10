@@ -68,12 +68,14 @@
       <%= f.label :represented, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <label><%= f.check_box :represented %><span class="label-text"></span></label>
+      <%= f.select :represented, options_for_select(Client::REPRESENTED,
+      params[:client_build_form] ? params[:client_build_form][:represented] : nil),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :drru_case, class: "right inline" %>.html_safe
+      <%= f.label :drru_case, class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
