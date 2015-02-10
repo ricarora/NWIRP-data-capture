@@ -2,9 +2,13 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
+    # @search = Client.search(params[:q])
+    # @clients = @search.result
+    # @search.build_condition if @search.conditions.empty?
     @search = Client.search(params[:q])
-    @clients = @search.result
-    @search.build_condition if @search.conditions.empty?
+    @client  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
   end
 
   def show
@@ -43,6 +47,15 @@ class ClientsController < ApplicationController
     # using search from ransack gem. This might change depending on the search
     index
     render :index
+  end
+
+  def advanced_search
+    @search = Client.search(params[:q])
+    @search.build_grouping unless @search.groupings.any?
+    @convictions  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
+
   end
 
   private
