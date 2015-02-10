@@ -2,7 +2,7 @@ module ClientsHelper
 
   def model_fields
     # which fields to display and sort by
-    [:id, :first_name, :last_name, :email]
+    [:id, :first_name, :last_name]
   end
 
   def results_limit

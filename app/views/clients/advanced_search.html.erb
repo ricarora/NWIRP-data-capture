@@ -16,6 +16,14 @@
     <%= button_to_add_fields "Add Sort", f, :sort %>
   </fieldset>
 
+  <fieldset>
+    <legend>Condition Groups</legend>
+    <%= f.grouping_fields do |g| %>
+      <%= render 'grouping_fields', f: g %>
+    <% end %>
+    
+  </fieldset>
+
   <%= label_tag :distinct, 'Return distinct records?' %>
   <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
   <%= f.submit %>

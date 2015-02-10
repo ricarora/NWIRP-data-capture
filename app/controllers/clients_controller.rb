@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
     # @clients = @search.result
     # @search.build_condition if @search.conditions.empty?
     @search = Client.search(params[:q])
-    @client  = params[:distinct].to_i.zero? ?
+    @clients  = params[:distinct].to_i.zero? ?
       @search.result :
       @search.result(distinct: true)
   end
@@ -52,7 +52,7 @@ class ClientsController < ApplicationController
   def advanced_search
     @search = Client.search(params[:q])
     @search.build_grouping unless @search.groupings.any?
-    @convictions  = params[:distinct].to_i.zero? ?
+    @clients  = params[:distinct].to_i.zero? ?
       @search.result :
       @search.result(distinct: true)
 
