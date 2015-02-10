@@ -45,10 +45,12 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %><br>
+      <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.text_field :ethnicity %>
+      <%= f.select :ethnicity, options_for_select(Client::ETHNICITY,
+      params[:client_build_form] ? params[:client_build_form][:ethnicity] : nil),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
