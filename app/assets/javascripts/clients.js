@@ -6,7 +6,7 @@
 
 function addReliefField(first) {
   var remove = first ? '</div>' : '<a href="#" class="remove_field">Remove field</a></div>';
-  var emptyField = '<div><input id="client_build_form_relief_name" name="client_build_form[relief_name][]" type="text">';
+  var emptyField = '<div>    <select id="client_build_form_relief_name" name="client_build_form[relief_name][]"><option value>Please select</option><option value="212C; WAIVER IN RMV PROCEED. PERMITTED BY CASE LAW">212C; WAIVER IN RMV PROCEED. PERMITTED BY CASE LAW</option><option value="245 - ADJUSTMENT OF STATUS">245 - ADJUSTMENT OF STATUS</option><option value="ASYLUM">ASYLUM</option><option value="ASYLUM -WITHHOLDING">ASYLUM -WITHHOLDING</option><option value="CHILD">CHILD</option><option value="CITIZENSHIP">CITIZENSHIP</option><option value="COERCIVE POPULATION CONTROL">COERCIVE POPULATION CONTROL</option><option value="DACA">DACA</option><option value="DAPA">DAPA</option></select>';
   emptyField = emptyField + remove;
   $(".relief_field").append(emptyField);
 }

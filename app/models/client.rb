@@ -75,5 +75,4 @@ class Client < ActiveRecord::Base
       Arel::Nodes::InfixOperation.new('||', parent.table[:first_name], ' '),
       parent.table[:last_name])
   end
-
 end

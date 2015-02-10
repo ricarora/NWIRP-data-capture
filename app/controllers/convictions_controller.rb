@@ -10,6 +10,7 @@ class ConvictionsController < ApplicationController
 
   def new
     @conviction = Conviction.new
+    @client = Client.find(params[:client_id])
     @conviction.conviction_grounds = RemovabilityGround.all.map do |rg|
       @conviction.conviction_grounds.build(gor_name: rg.name, conviction_id: @conviction.id)
     end
@@ -25,10 +26,21 @@ class ConvictionsController < ApplicationController
       @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
     end
     @conviction.attributes = conviction_params
+    @conviction.sentence = convert_to_days(conviction_params[:sentence].to_i, params[:conviction][:sentence_unit])
     if @conviction.save
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
     else
       render :new
+    end
+  end
+
+  def convert_to_days(sentence, sentence_unit)
+    if sentence_unit == "Year(s)"
+      sentence * 365
+    elsif sentence_unit == "Month(s)"
+      sentence * 30
+    else
+      sentence
     end
   end
 
