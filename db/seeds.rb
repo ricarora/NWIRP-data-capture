@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-relief_names = ["212C; WAIVER IN RMV PROCEED. PERMITTED BY CASE LAW",
+reliefs_sought = ["212C; WAIVER IN RMV PROCEED. PERMITTED BY CASE LAW",
   "245 - ADJUSTMENT OF STATUS", "ASYLUM", "ASYLUM -WITHHOLDING", "CHILD",
   "CITIZENSHIP", "COERCIVE POPULATION CONTROL", "DACA", "DAPA",
   "EOIR 40 FOR NACARA ELIGIBLES IN REMOVAL PROCS", "EOIR42A", "EOIR42B",
@@ -23,6 +23,13 @@ relief_names = ["212C; WAIVER IN RMV PROCEED. PERMITTED BY CASE LAW",
   "WAIVER OF DEPORTABILITY- FULL PARDON 241 (A)(2)(A) 38","WAIVER OF INADMISSIBILITY OF A REFUGEE",
   "WAIVER OF PRIOR CRIM. CONDUCT (ADMISSION-ADJUST)", "WAIVER OF PRIOR VISA FR"]
 
-relief_names.each do |relief_name|
-  ReliefSought.where(name: relief_name).first_or_create
+reliefs_sought.each do |relief|
+  ReliefSought.where(name: relief).first_or_create
+end
+
+grounds_of_removabilities = ["AGGRAVATED FELONY", "CIMT?", "PSC - ASYLUM?",
+  "PSC - WITHHOLDING?", "VIOLENT/DANGEROUS", "FIREARM OFFENSE?"]
+
+grounds_of_removabilities.each do |ground|
+  RemovabilityGround.where(name: ground).first_or_create
 end

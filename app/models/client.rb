@@ -18,7 +18,7 @@ class Client < ActiveRecord::Base
 
   REPRESENTED = ["Yes", "No", "Unkown"]
 
-  NATIONALITY = [ "Unknown", "Afghan", "Albanian", "Algerian", "American", "Andorran",
+  NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
                 "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi",
                 "Barbadian", "Barbudans", "Batswana", "Belarusian", "Belgian",
@@ -57,7 +57,7 @@ class Client < ActiveRecord::Base
                 "Tanzanian", "Thai", "Togolese", "Tongan", "Trinidadian",
                 "Tobagonian", "Tunisian", "Turkish", "Tuvaluan", "Ugandan",
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
-                "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean"]
+                "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
   ETHNICITY = ["Native American or Alaska Native", "Asian – not Pacific Islander",
               "Black – African or African-American", "White or Caucasian",
