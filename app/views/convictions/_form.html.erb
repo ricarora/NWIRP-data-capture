@@ -10,10 +10,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :crime_name, "CRIME NAME", class: "right inline" %>
+      <%= f.label :crime_name, "CRIME NAME*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :crime_name, options_for_select(Conviction.all_crime_names,
@@ -49,7 +48,7 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
-      <%= f.label :state_committed, "STATE WHERE CRIME COMMITTED", class: "right inline" %>
+      <%= f.label :state_committed, "STATE CRIME COMMITTED", class: "right inline" %>
     </div>
     <div class="small-9 columns">
       <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
