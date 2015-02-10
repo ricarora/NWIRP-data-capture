@@ -30,7 +30,7 @@
         <div><%= relief.relief_name %></div>
         <% end %>
       </td>
-      <td><%= translate(@client.represented.class) %></td>
+      <td><%= @client.represented %></td>
       <td><%= translate(@client.drru_case.class) %></td>
       <td>
         <% @client.assessments.each do |assessment| %>
