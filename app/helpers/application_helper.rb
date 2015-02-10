@@ -32,4 +32,8 @@ module ApplicationHelper
     end
     content_tag :button, name, :class => 'add_fields', 'data-field-type' => type, 'data-content' => "#{fields}"
   end
+
+  def button_to_nest_fields(name, type)
+    content_tag :button, name, :class => 'nest_fields', 'data-field-type' => type
+  end
 end
