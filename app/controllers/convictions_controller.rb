@@ -3,6 +3,12 @@ class ConvictionsController < ApplicationController
 
   def index
     @convictions = Conviction.all
+    @search = Client.search(params[:q])
+    @client  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
+
+    respond_with @convictions
   end
 
   def show
@@ -43,6 +49,16 @@ class ConvictionsController < ApplicationController
   def destroy
     @conviction.destroy
     redirect_to convictions_url, notice: 'Conviction was successfully destroyed.'
+  end
+
+  def advanced_search
+    @search = Client.search(params[:q])
+    @search.build_grouping unless @search.groupings.any?
+    @convictions  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
+
+    respond_with @convictions
   end
 
   private
