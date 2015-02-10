@@ -171,7 +171,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.1.8)
-  ransack
+  ransack (= 1.6.3)
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

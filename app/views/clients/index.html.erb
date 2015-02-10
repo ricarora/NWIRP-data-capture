@@ -4,7 +4,7 @@
     <%= f.condition_fields do |c| %>
       <div class="field">
         <%= c.attribute_fields do |a| %>
-          <%= a.attribute_select %>
+          <%= a.attribute_select associations: [:convictions]%>
         <% end %>
         <%= c.predicate_select %>
         <%= c.value_fields do |v| %>

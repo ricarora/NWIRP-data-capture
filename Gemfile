@@ -29,7 +29,7 @@ group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
 
-gem 'ransack'
+gem 'ransack', '1.6.3'
 # Use unicorn as the app server
 # gem 'unicorn'
 
