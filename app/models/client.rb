@@ -8,10 +8,10 @@ class Client < ActiveRecord::Base
   validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
     message: "Only allows numbers in this format: XXX-XXX-XXX." }
   validates :gender, inclusion: { in: %w(Male Female Other Unknown),
-    message: "Only accepts Male, Female, Other, or Unknown.", :allow_blank => true}
-  validates :drru_case, :inclusion => {:in => [true, false], :allow_blank => true}
+    message: "Only accepts Male, Female, Other, or Unknown.", allow_blank: true}
+  validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
   validates :represented, inclusion: { in: %w(Yes No Unknown),
-    message: "Only accepts Yes, No, or Unknown.", :allow_blank => true}
+    message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
 
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
@@ -63,8 +63,8 @@ class Client < ActiveRecord::Base
               "Black – African or African-American", "White or Caucasian",
               "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
 
-  validates :nationality, :inclusion => {:in => Client::NATIONALITY, allow_blank: true}
-  validates :nationality, :inclusion => {:in => Client::ETHNICITY, allow_blank: true}
+  validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
+  validates :ethnicity, inclusion: {in: Client::ETHNICITY, allow_blank: true}
 
   def full_name
     self.first_name + self.last_name

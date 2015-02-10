@@ -28,8 +28,16 @@
     <%= f.number_field :sentence, min: 0 %>
   </div>
   <div class="field">
+    <%= f.label :state_committed %><br>
+    <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
+    params[:conviction] ? params[:conviction][:state_committed] : nil),
+    {include_blank: "Please select"} %>
+  </div>
+  <div class="field">
     <%= f.label :ij_name %><br>
-    <%= f.text_field :ij_name %>
+    <%= f.select :ij_name, options_for_select(Conviction::IJ_NAME,
+    params[:conviction] ? params[:conviction][:ij_name] : nil),
+    {include_blank: "Please select"} %>
   </div>
   <div class="field">
     <%= f.label :nta_charges %><br>

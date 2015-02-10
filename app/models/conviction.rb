@@ -2,12 +2,28 @@ class Conviction < ActiveRecord::Base
   belongs_to :client
   has_many :removability_grounds, through: :conviction_grounds
   has_many :conviction_grounds, autosave: true
-  validates :crime_name, :sentence, presence: true
+  validates :crime_name, presence: true
   validates :sentence, numericality: { only_integer: true }
+  validates :rcw, format: { with: /9a..{2}..{3}/,
+    message: "Only allows this format: 9a.XX.XXX.", allow_blank: true }
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
   accepts_nested_attributes_for :conviction_grounds
+
+  IJ_NAME = ["Odell", "Scala", "Fitting"]
+
+  STATE_COMMITTED = ["Washington", "Alabama", "Alaska", "Arizona", "Arkansas", "California",
+    "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
+    "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+    "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+    "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+    "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
+    "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+    "Texas", "Utah", "Vermont", "Virginia", "West Virginia", "Wisconsin", "Wyoming"]
+
+  validates :ij_name, :inclusion => {:in => Conviction::IJ_NAME, allow_blank: true}
+  validates :state_committed, :inclusion => {:in => Conviction::STATE_COMMITTED, allow_blank: true}
 
   def ij_decision_date_is_date?
     if ij_decision_date.present? && !ij_decision_date.respond_to?(:strftime)
