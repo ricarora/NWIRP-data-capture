@@ -2,7 +2,9 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.all
+    @search = Client.search(params[:q])
+    @clients = @search.result
+    @search.build_condition if @search.conditions.empty?
   end
 
   def show
@@ -35,6 +37,12 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
+  end
+
+  def search
+    # using search from ransack gem. This might change depending on the search
+    index
+    render :index
   end
 
   private

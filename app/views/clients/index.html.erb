@@ -1,3 +1,19 @@
+<%= search_form_for @search, url: search_clients_path,
+                        html: { method: :post } do |f| %>
+  <!-- @search, url: search_products_path, method: :post -->
+    <%= f.condition_fields do |c| %>
+      <div class="field">
+        <%= c.attribute_fields do |a| %>
+          <%= a.attribute_select %>
+        <% end %>
+        <%= c.predicate_select %>
+        <%= c.value_fields do |v| %>
+          <%= v.text_field :value %>
+        <% end  %>
+      </div>
+    <% end %>
+    <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
 <h1>Listing clients</h1>
 
 <table>

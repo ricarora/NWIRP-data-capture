@@ -28,6 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
+
+gem 'ransack'
 # Use unicorn as the app server
 # gem 'unicorn'
 
