@@ -31,7 +31,7 @@ class ClientBuildForm
 
   def submit(params)
     @client_relief_array = []
-    client.last_name, client.first_name = params[:last_name], params[:first_name]
+    client.last_name, client.first_name = params[:last_name].capitalize, params[:first_name].capitalize
     client.nationality, client.ethnicity = params[:nationality], params[:ethnicity]
     client.gender = params[:gender]
     client.represented = params[:represented]

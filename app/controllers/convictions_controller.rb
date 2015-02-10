@@ -26,6 +26,7 @@ class ConvictionsController < ApplicationController
       @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
     end
     @conviction.attributes = conviction_params
+    @conviction.crime_name = conviction_params[:crime_name].capitalize
     if @conviction.save
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
     else
