@@ -40,9 +40,6 @@ class ClientBuildForm
     client.a_number = params[:a_number]
     assessment.date = params[:date]
     assessment.client = client
-    # client.assessments.each do |assessment|
-    #   assessment = assessment
-    # end
     params[:relief_name].each do |value|
       unless value.empty?
         client_relief = client.client_reliefs.build(relief_name: value)
@@ -51,31 +48,6 @@ class ClientBuildForm
     end
     true
   end
-
-  # def client_relief_valid?
-  #   # unless @client_relief_array.empty?
-  #   #   @client_relief_array.each do |relief|
-  #   #     relief.valid? ? true : false
-  #   #   end
-  #   #   true
-  #   # end
-  #   if @client_relief_array.empty?
-  #     true
-  #   else
-  #     @client_relief_array.each do |client_relief|
-  #       if client_relief.valid?
-  #         true
-  #       else
-  #         @errors[:client_relief] += [@client_relief.errors]
-  #       end
-  #     end
-  #   end
-  # end
-  #
-  # def assessment_valid?
-  #   raise
-  #   assessment.valid?
-  # end
 
   def all_valid?
     valid?
