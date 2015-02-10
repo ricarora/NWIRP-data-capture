@@ -10,6 +10,7 @@ class Conviction < ActiveRecord::Base
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
   accepts_nested_attributes_for :conviction_grounds
+  attr_accessor :sentence_unit
 
   IJ_NAME = ["Odell", "Scala", "Fitting"]
 
@@ -47,5 +48,10 @@ class Conviction < ActiveRecord::Base
 
   def self.all_nta_charges
     Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
+  end
+
+  def convert_to_days(sentence, sentence_unit)
+    raise
+    (year * 365) + (month * 30) + day
   end
 end
