@@ -12,6 +12,7 @@ class Client < ActiveRecord::Base
   validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
   validates :represented, inclusion: { in: %w(Yes No Unknown),
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
+  attr_encrypted :a_number, :key => 'a secret key'
 
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
