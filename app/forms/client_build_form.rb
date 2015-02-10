@@ -5,11 +5,16 @@ class ClientBuildForm
     false
   end
 
-  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
-  validates :gender, inclusion: { in: %w(Male Female Transgender),
-    message: "Only accepts Male, Female, or Transgender."}
-  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
-  validates :nationality, :inclusion => {:in => Client::NATIONALITY}
+  validates :last_name, :a_number, :assessment, presence: true
+  validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
+    message: "Only allows numbers in this format: XXX-XXX-XXX." }
+  validates :gender, inclusion: { in: %w(Male Female Other Unknown),
+    message: "Only accepts Male, Female, Other, or Unknown.", allow_blank: true}
+  validates :represented, inclusion: { in: %w(Yes No Unknown),
+    message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
+  validates :drru_case, :inclusion => {in: [true, false], allow_blank: true}
+  validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
+  validates :ethnicity, :inclusion => {in: Client::ETHNICITY, allow_blank: true}
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
@@ -20,15 +25,12 @@ class ClientBuildForm
     @client ||= Client.new
   end
 
-  def client_relief
-    @client_relief ||= ClientRelief.new(client_id: @client.id)
-  end
-
   def assessment
-    @assessment ||= Assessment.new(client_id: @client.id)
+    @assessment ||= client.assessments.build
   end
 
   def submit(params)
+    @client_relief_array = []
     client.last_name, client.first_name = params[:last_name], params[:first_name]
     client.nationality, client.ethnicity = params[:nationality], params[:ethnicity]
     client.gender = params[:gender]
@@ -36,44 +38,21 @@ class ClientBuildForm
     client.drru_case = params[:drru_case]
     client.a_number = params[:a_number]
     assessment.date = params[:date]
-
-    if valid?
-      client.save!
-      if !assessment.date.nil?
-        assessment.client = client
-        assessment.save!
-      end
-      check_relief_sought(params)
-      true
-    else
-      false
-    end
-  end
-
-  def check_relief_sought(params)
+    assessment.client = client
     params[:relief_name].each do |value|
-      if value != ""
-        if ReliefSought.where(name: value).empty?
-          new_relief = ReliefSought.create(name: value)
-          add_client_relief(new_relief.name)
-        else
-          add_client_relief(ReliefSought.find(value).name)
-        end
+      unless value.empty?
+        client_relief = client.client_reliefs.build(relief_name: value)
+        @client_relief_array << client_relief
       end
     end
-    return true
+    true
   end
 
-  def add_client_relief(name)
-    @client_relief = ClientRelief.new(relief_name: name)
-    @client_relief.client = @client
-    @client_relief.save
-    if @client_relief.invalid?
-      if @errors[:client_relief]
-        @errors[:client_relief] += [@relief.errors]
-      else
-        @errors[:client_relief] = [@relief.errors]
-      end
-    end
+  def all_valid?
+    valid?
+  end
+
+  def save
+    client.save!
   end
 end

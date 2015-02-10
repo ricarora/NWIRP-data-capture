@@ -1,15 +1,22 @@
 class Client < ActiveRecord::Base
-  has_many :assessments
+  has_many :assessments, autosave: true
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
-  has_many :client_reliefs
-  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
+  has_many :client_reliefs, autosave: true
   validates_uniqueness_of :a_number
-  # validates :gender, inclusion: { in: %w(Male Female Transgender),
-  #   message: "Only accepts Male, Female, or Transgender."}
-  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+  validates :last_name, :a_number, :assessments, presence: true
+  validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
+    message: "Only allows numbers in this format: XXX-XXX-XXX." }
+  validates :gender, inclusion: { in: %w(Male Female Other Unknown),
+    message: "Only accepts Male, Female, Other, or Unknown.", allow_blank: true}
+  validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
+  validates :represented, inclusion: { in: %w(Yes No Unknown),
+    message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
 
-  GENDER = ["Male", "Female", "Transgender"]
+
+  GENDER = ["Male", "Female", "Other", "Unknown"]
+
+  REPRESENTED = ["Yes", "No", "Unkown"]
 
   NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
@@ -52,7 +59,12 @@ class Client < ActiveRecord::Base
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
-  validates :nationality, inclusion: { in: NATIONALITY }
+  ETHNICITY = ["Native American or Alaska Native", "Asian – not Pacific Islander",
+              "Black – African or African-American", "White or Caucasian",
+              "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
+
+  validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
+  validates :ethnicity, inclusion: {in: Client::ETHNICITY, allow_blank: true}
 
   def full_name
     self.first_name + ' ' + self.last_name

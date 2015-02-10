@@ -39,7 +39,8 @@
       <%= f.label :nationality, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :nationality, options_for_select(Client::NATIONALITY),
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY,
+      params[:client_build_form] ? params[:client_build_form][:nationality] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -56,7 +57,8 @@
       <%= f.label :gender, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.select :gender, options_for_select(Client::GENDER),
+      <%= f.select :gender, options_for_select(Client::GENDER,
+      params[:client_build_form] ? params[:client_build_form][:gender] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -65,7 +67,9 @@
       <%= f.label :represented, class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <label><%= f.check_box :represented %><span class="label-text"></span></label>
+      <%= f.select :represented, options_for_select(Client::REPRESENTED,
+      params[:client_build_form] ? params[:client_build_form][:represented] : nil),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">

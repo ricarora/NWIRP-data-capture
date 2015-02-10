@@ -45,10 +45,22 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
+      <%= f.label :state_committed %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :state_committed, options_for_select(Conviction::STATE_COMMITTED,
+      params[:conviction] ? params[:conviction][:state_committed] : nil),
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
       <%= f.label :ij_name, "Immigration Judge (IJ) Name", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <%= f.text_field :ij_name %>
+      <%= f.select :ij_name, options_for_select(Conviction::IJ_NAME,
+      params[:conviction] ? params[:conviction][:ij_name] : nil),
+      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
