@@ -5,11 +5,17 @@ class ClientBuildForm
     false
   end
 
-  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
-  validates :gender, inclusion: { in: %w(Male Female Transgender),
-    message: "Only accepts Male, Female, or Transgender."}
-  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+  validates :last_name, :a_number, :assessment, presence: true
+  validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
+    message: "Only allows numbers in this format: XXX-XXX-XXX." }
+  validates :gender, inclusion: { in: %w(Male Female Other Unknown),
+    message: "Only accepts Male, Female, Other, or Unknown."}
+  validates :represented, inclusion: { in: %w(Yes No Unknown),
+    message: "Only accespts Yes, No, or Unknown."}
+  validates :drru_case, :inclusion => {:in => [true, false]}
   validates :nationality, :inclusion => {:in => Client::NATIONALITY}
+  validates :nationality, :inclusion => {:in => Client::ETHNICITY}
+
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client

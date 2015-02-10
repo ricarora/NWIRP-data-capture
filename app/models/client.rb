@@ -4,10 +4,15 @@ class Client < ActiveRecord::Base
   has_many :relief_soughts, through: :client_reliefs
   has_many :client_reliefs, autosave: true
   validates_uniqueness_of :a_number
-  validates :first_name, :last_name, :gender, :a_number, :nationality, presence: true
-  validates :gender, inclusion: { in: %w(Male Female),
-    message: "Only accepts Male or Female."}
-  validates :represented, :drru_case, :inclusion => {:in => [true, false]}
+  validates :last_name, :a_number, :assessment, presence: true
+  validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
+    message: "Only allows numbers in this format: XXX-XXX-XXX." }
+  validates :gender, inclusion: { in: %w(Male Female Other Unknown),
+    message: "Only accepts Male, Female, Other, or Unknown."}
+  validates :drru_case, :inclusion => {:in => [true, false]}
+  validates :represented, inclusion: { in: %w(Yes No Unknown),
+    message: "Only accespts Yes, No, or Unknown."}
+
 
   GENDER = ["Male", "Female", "Transgender"]
 
@@ -52,7 +57,12 @@ class Client < ActiveRecord::Base
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean"]
 
+  ETHNICITY = ["Native American or Alaska Native", "Asian – not Pacific Islander",
+              "Black – African or African-American", "White or Caucasian",
+              "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
+
   validates :nationality, :inclusion => {:in => Client::NATIONALITY}
+  validates :nationality, :inclusion => {:in => Client::ETHNICITY}
 
   def full_name
     self.first_name + self.last_name
