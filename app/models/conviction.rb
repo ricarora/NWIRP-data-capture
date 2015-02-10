@@ -36,4 +36,8 @@ class Conviction < ActiveRecord::Base
       errors.add(:ij_decision_date, "can't be in the future")
     end
   end
+
+  ransacker :title_diddly do |parent|
+    Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
+  end
 end
