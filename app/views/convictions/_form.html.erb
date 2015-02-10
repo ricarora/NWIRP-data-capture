@@ -15,10 +15,13 @@
     <div class="small-3 columns">
       <%= f.label :crime_name, "CRIME NAME*", class: "right inline required" %>
     </div>
-    <div class="small-9 columns">
+    <div class="small-6 columns">
       <%= f.select :crime_name, options_for_select(Conviction.all_crime_names,
       params[:conviction] ? params[:conviction][:crime_name] : nil),
-      {include_blank: "Please select"} %>
+      {include_blank: "Please select"}, class: "crime_name_group" %>
+    </div>
+    <a href="#" id="add_crime_name">Add another crime name</a>
+    <div class="small-9 columns crime_name_field">
     </div>
   </div>
   <div class="field row">
@@ -33,10 +36,13 @@
     <div class="small-3 columns">
       <%= f.label :subsection, "SUBSECTION", class: "right inline" %>
     </div>
-    <div class="small-9 columns">
+    <div class="small-6 columns">
       <%= f.select :subsection, options_for_select(Conviction.all_subsections,
       params[:conviction] ? params[:conviction][:subsection] : nil),
-      {include_blank: "Please select"} %>
+      {include_blank: "Please select"}, class: "subsection_group" %>
+    </div>
+    <a href="#" id="add_subsection">Add another subsection</a>
+    <div class="small-9 columns subsection_field">
     </div>
   </div>
   <div class="field row">
@@ -73,10 +79,13 @@
     <div class="small-3 columns">
       <%= f.label :nta_charges, "NTA CHARGES", class: "right inline" %>
     </div>
-    <div class="small-9 columns">
+    <div class="small-6 columns">
       <%= f.select :nta_charges, options_for_select(Conviction.all_nta_charges,
       params[:conviction] ? params[:conviction][:nta_charges] : nil),
-      {include_blank: "Please select"} %>
+      {include_blank: "Please select"}, class: "nta_charges_group" %>
+    </div>
+    <a href="#" id="add_nta_charges">Add another subsection</a>
+    <div class="small-9 columns nta_charges_field">
     </div>
   </div>
   <div class="field row">
