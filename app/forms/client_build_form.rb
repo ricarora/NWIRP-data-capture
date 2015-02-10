@@ -40,9 +40,12 @@ class ClientBuildForm
     client.a_number = params[:a_number]
     assessment.date = params[:date]
     assessment.client = client
+    # client.assessments.each do |assessment|
+    #   assessment = assessment
+    # end
     params[:relief_name].each do |value|
       unless value.empty?
-        client_relief = client.client_reliefs.build(relief_name: relief_sought.name)
+        client_relief = client.client_reliefs.build(relief_name: value)
         @client_relief_array << client_relief
       end
     end
@@ -75,7 +78,6 @@ class ClientBuildForm
   # end
 
   def all_valid?
-    raise
     valid?
   end
 
