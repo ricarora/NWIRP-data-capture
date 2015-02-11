@@ -16,6 +16,7 @@ class ClientsController < ApplicationController
   end
 
   def edit
+    @client_form = ClientBuildForm.new
   end
 
   def create
