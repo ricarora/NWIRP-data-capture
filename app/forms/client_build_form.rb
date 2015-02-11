@@ -5,7 +5,7 @@ class ClientBuildForm
   def initialize(client = nil)
     @client = client
     if @client
-      @assessments = client.assessments
+      @assessments = @client.assessments
       @date = @assessments.map { |assessment| assessment.date }[0]
       @relief_name = @client.client_reliefs.map {|relief| relief.relief_name }
       @a_number = @client.a_number
