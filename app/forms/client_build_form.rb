@@ -1,10 +1,14 @@
 class ClientBuildForm
   include ActiveModel::Model
-  attr_accessor :client
+  attr_accessor :client, :date, :relief_name
 
   def initialize(client = nil)
     @client = client
-    @assessment = client.assessments if @client
+    if @client
+      @assessments = client.assessments
+      @date = @assessments.map { |assessment| assessment.date }[0]
+      @relief_name = @client.relief_soughts.map {|relief| relief.name }
+    end
   end
 
   def persisted?
@@ -20,7 +24,7 @@ class ClientBuildForm
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validates :drru_case, :inclusion => {in: [true, false], allow_blank: true}
   validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
-  # validate :validate_a_number_uniqueness
+  validate :validate_a_number_uniqueness
   validate :validate_ethnicity
 
   def validate_ethnicity
