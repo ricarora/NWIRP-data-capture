@@ -19,7 +19,7 @@ class ConvictionsController < ApplicationController
   def edit
     @client = Client.find(params[:client_id])
     @conviction = Conviction.find(params[:id])
-    
+
   end
 
   def create
@@ -49,7 +49,7 @@ class ConvictionsController < ApplicationController
 
   def update
     if @conviction.update(conviction_params)
-      redirect_to @conviction, notice: 'Conviction was successfully updated.'
+      redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully updated.'
     else
       render :edit
     end
