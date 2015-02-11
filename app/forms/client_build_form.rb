@@ -1,5 +1,11 @@
 class ClientBuildForm
   include ActiveModel::Model
+  attr_accessor :client
+
+  def initialize(client = nil)
+    @client = client
+    @assessment = client.assessments if @client
+  end
 
   def persisted?
     false
@@ -25,11 +31,11 @@ class ClientBuildForm
     end
   end
 
-  # def validate_a_number_uniqueness
-  #   if Client.all.where(a_number: self.a_number)
-  #     errors.add(:a_number, "A# already exists")
-  #   end
-  # end
+  def validate_a_number_uniqueness
+    if Client.all.where(a_number: @client.a_number) != []
+      errors.add(:a_number, "A# already exists")
+    end
+  end
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
@@ -45,7 +51,6 @@ class ClientBuildForm
   end
 
   def submit(params)
-
     @client_relief_array = []
     client.last_name, client.first_name = params[:last_name].capitalize, params[:first_name].capitalize
     client.nationality = params[:nationality]

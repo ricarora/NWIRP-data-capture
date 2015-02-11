@@ -13,11 +13,11 @@ class Client < ActiveRecord::Base
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   # validate :validate_a_number_uniqueness
 
-  # def validate_a_number_uniqueness
-  #   if Client.all.where(a_number: self.a_number)
-  #     errors.add(:a_number, "A# already exists")
-  #   end
-  # end
+  def validate_a_number_uniqueness
+    if Client.all.where(a_number: self.a_number) != []
+      errors.add(:a_number, "A# already exists")
+    end
+  end
 
   attr_encrypted :a_number, :key => 'a secret key'
 
