@@ -2,7 +2,10 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.all
+    @search = Client.search(params[:q])
+    @clients  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
   end
 
   def show
@@ -35,6 +38,21 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
+  end
+
+  def search
+    # using search from ransack gem. This might change depending on the search
+    index
+    render :index
+  end
+
+  def advanced_search
+    @search = Client.search(params[:q])
+    @search.build_grouping unless @search.groupings.any?
+    @clients  = params[:distinct].to_i.zero? ?
+      @search.result :
+      @search.result(distinct: true)
+
   end
 
   private
