@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150210055239) do
     t.string   "last_name"
     t.string   "first_name"
     t.string   "nationality"
-    t.string   "ethnicity"
+    t.string   "ethnicity", array: true, default: []
     t.string   "gender"
     t.string   "represented"
     t.boolean  "drru_case"
