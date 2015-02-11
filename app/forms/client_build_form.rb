@@ -7,7 +7,7 @@ class ClientBuildForm
     if @client
       @assessments = client.assessments
       @date = @assessments.map { |assessment| assessment.date }[0]
-      @relief_name = @client.relief_soughts.map {|relief| relief.name }
+      @relief_name = @client.client_reliefs.map {|relief| relief.relief_name }
     end
   end
 
