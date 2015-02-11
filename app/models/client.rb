@@ -13,6 +13,8 @@ class Client < ActiveRecord::Base
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validate :validate_a_number_uniqueness
 
+  accepts_nested_attributes_for :client_reliefs, :assessments
+
   def validate_a_number_uniqueness
     Client.all.each do |client|
       if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
