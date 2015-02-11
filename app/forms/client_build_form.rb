@@ -20,19 +20,16 @@ class ClientBuildForm
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validates :drru_case, :inclusion => {in: [true, false], allow_blank: true}
   validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
-  validate :validate_a_number_uniqueness
+  # validate :validate_a_number_uniqueness
   validate :validate_ethnicity
 
   def validate_ethnicity
-    if !ethnicity.is_a?(Array) #|| ethnicity.detect { |e| !["Native American or Alaska Native", "Asian – not Pacific Islander", "Black – African or African-American", "White or Caucasian", "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"].include?(e) }
-      errors.add(:ethnicity, :invalid)
+    ethnicity.each do |selection|
+      if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
+        errors.add(:ethnicity, :invalid)
+      end
     end
   end
-  #validates :ethnicity, :inclusion => {in: [Client::ETHNICITY], allow_blank: true}
-  # validates :ethnicity, inclusion: {in: %w("Native American or Alaska Native",
-  #   "Asian – not Pacific Islander","Black – African or African-American",
-  #   "White or Caucasian","Pacific Islander", "Hispanic or Latino", "Other",
-  #   "Unknown"), allow_blank: true}
 
   def validate_a_number_uniqueness
     if Client.all.where(a_number: @client.a_number) != []

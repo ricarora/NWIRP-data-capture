@@ -23,7 +23,7 @@
       <td><%= @client.last_name %></td>
       <td><%= @client.first_name %></td>
       <td><%= @client.nationality %></td>
-      <td><%= @client.ethnicity %></td>
+      <td><%= @client.ethnicity.join("<br>").html_safe %></td>
       <td><%= @client.gender %></td>
       <td>
         <% @client.client_reliefs.each do |relief| %>
