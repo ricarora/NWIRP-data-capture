@@ -4,6 +4,7 @@ class ClientBuildForm
 
   def initialize(client = nil)
     @client = client
+    @assessment = client.assessments[0]
   end
 
   def persisted?
