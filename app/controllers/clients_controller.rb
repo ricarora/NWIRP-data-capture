@@ -12,7 +12,8 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client_form = ClientBuildForm.new
+    @client = Client.new
+    @client.assessments.build(client_id: @client.id)
   end
 
   def edit
@@ -61,5 +62,9 @@ class ClientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def client_params
+      params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :relief_sought, :represented, :drru_case, :a_number, :assessments_attributes => [:id, :date], :client_reliefs => [:id, :relief_name])
     end
 end
