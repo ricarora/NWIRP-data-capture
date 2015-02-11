@@ -11,11 +11,13 @@ class Client < ActiveRecord::Base
   validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
   validates :represented, inclusion: { in: %w(Yes No Unknown),
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
-  # validate :validate_a_number_uniqueness
+  validate :validate_a_number_uniqueness
 
   def validate_a_number_uniqueness
-    if Client.all.where(a_number: self.a_number) != []
-      errors.add(:a_number, "A# already exists")
+    Client.all.each do |client|
+      if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
+        errors.add(:a_number, "A# already exists")
+      end
     end
   end
 
