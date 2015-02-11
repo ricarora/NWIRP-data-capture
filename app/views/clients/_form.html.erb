@@ -1,9 +1,9 @@
-<%= form_for(@client_form, url: clients_path) do |f| %>
-  <% if @client_form.errors.any? %>
+<%= form_for(@client, url: clients_path) do |f| %>
+  <% if @client.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
       <ul>
-      <% @client_form.errors.full_messages.each do |message| %>
+      <% @client.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -39,7 +39,7 @@
     </div>
     <div class="small-9 columns">
       <%= f.select :nationality, options_for_select(Client::NATIONALITY,
-      params[:client_build_form] ? params[:client_build_form][:nationality] : nil),
+      params[:client] ? params[:client][:nationality] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -49,7 +49,7 @@
     </div>
     <div class="small-9 columns">
       <%= f.select :ethnicity, options_for_select(Client::ETHNICITY,
-      params[:client_build_form] ? params[:client_build_form][:ethnicity] : nil),
+      params[:client] ? params[:client][:ethnicity] : nil),
       {}, {multiple: true, class: "multiple-selections"} %>
     </div>
   </div>
@@ -59,7 +59,7 @@
     </div>
     <div class="small-9 columns">
       <%= f.select :gender, options_for_select(Client::GENDER,
-      params[:client_build_form] ? params[:client_build_form][:gender] : nil),
+      params[:client] ? params[:client][:gender] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -69,7 +69,7 @@
     </div>
     <div class="small-9 columns">
       <%= f.select :represented, options_for_select(Client::REPRESENTED,
-      params[:client_build_form] ? params[:client_build_form][:represented] : nil),
+      params[:client] ? params[:client][:represented] : nil),
       {include_blank: "Please select"} %>
     </div>
   </div>
@@ -90,14 +90,16 @@
     </div>
       <a href="#" id="add_field">Add another Relief Sought</a>
   </div>
-  <div class="field row">
-    <div class="small-3 columns">
-      <%= f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+  <%= f.fields_for :assessments do |builder| %>
+    <div class="field row">
+      <div class="small-3 columns">
+        <%= builder.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+      </div>
+      <div class="small-9 columns">
+        <%= builder.date_field :date %>
+      </div>
     </div>
-    <div class="small-9 columns">
-      <%= f.date_field :date %>
-    </div>
-  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit "Create Client", class: "button round" %>
   </div>
