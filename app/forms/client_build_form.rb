@@ -14,6 +14,7 @@ class ClientBuildForm
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validates :drru_case, :inclusion => {in: [true, false], allow_blank: true}
   validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
+  validate :validate_a_number_uniqueness
   validate :validate_ethnicity
 
   def validate_ethnicity
@@ -26,6 +27,12 @@ class ClientBuildForm
   #   "Asian – not Pacific Islander","Black – African or African-American",
   #   "White or Caucasian","Pacific Islander", "Hispanic or Latino", "Other",
   #   "Unknown"), allow_blank: true}
+
+  def validate_a_number_uniqueness
+    if Client.all.where(a_number: self.a_number)
+      errors.add(:a_number, "A# already exists")
+    end
+  end
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client

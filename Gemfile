@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-
 gem 'rails', '4.1.8'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
@@ -25,9 +23,12 @@ group :development, :test do
   gem 'rspec-rails'
 end
 gem 'bcrypt', '~> 3.1.7'
+gem 'attr_encryptor', '~> 2.0.0'
 group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
+
+gem 'ransack', '1.6.3'
 # Use unicorn as the app server
 # gem 'unicorn'
 

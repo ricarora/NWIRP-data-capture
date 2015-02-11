@@ -3,7 +3,6 @@ class Client < ActiveRecord::Base
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
   has_many :client_reliefs, autosave: true
-  validates_uniqueness_of :a_number
   validates :last_name, :a_number, :assessments, presence: true
   validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
     message: "Only allows numbers in this format: XXX-XXX-XXX." }
@@ -12,6 +11,15 @@ class Client < ActiveRecord::Base
   validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
   validates :represented, inclusion: { in: %w(Yes No Unknown),
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
+  validate :validate_a_number_uniqueness
+
+  def validate_a_number_uniqueness
+    if Client.all.where(a_number: self.a_number)
+      errors.add(:a_number, "A# already exists")
+    end
+  end
+
+  attr_encrypted :a_number, :key => 'a secret key'
 
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
@@ -72,5 +80,11 @@ class Client < ActiveRecord::Base
 
   def full_name
     self.first_name + ' ' + self.last_name
+  end
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new('||',
+      Arel::Nodes::InfixOperation.new('||', parent.table[:first_name], ' '),
+      parent.table[:last_name])
   end
 end
