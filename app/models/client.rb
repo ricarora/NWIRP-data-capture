@@ -14,8 +14,10 @@ class Client < ActiveRecord::Base
   validate :validate_a_number_uniqueness
 
   def validate_a_number_uniqueness
-    if Client.all.where(a_number: self.a_number) != []
-      errors.add(:a_number, "A# already exists")
+    Client.all.each do |client|
+      if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
+        errors.add(:a_number, "A# already exists")
+      end
     end
   end
 

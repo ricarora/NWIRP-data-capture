@@ -30,9 +30,9 @@
         <td><%= conviction.ij_finding %></td>
         <td><%= conviction.client_id %></td>
         <td><%= conviction.notes %></td>
-        <td><%= link_to 'Show', conviction %></td>
-        <td><%= link_to 'Edit', edit_conviction_path(conviction) %></td>
-        <td><%= link_to 'Destroy', conviction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', client_conviction(conviction.client.id, conviction) %></td>
+        <td><%= link_to 'Edit', edit_client_conviction_path(conviction.client.id, conviction) %></td>
+        <td><%= link_to 'Destroy', client_conviction(conviction.client.id, conviction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -37,10 +37,13 @@ class ClientBuildForm
   end
 
   def validate_a_number_uniqueness
-    if Client.all.where(a_number: @client.a_number) != []
-      errors.add(:a_number, "A# already exists")
+    Client.all.each do |client|
+      if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
+        errors.add(:a_number, "A# already exists")
+      end
     end
   end
+
 
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
