@@ -4,7 +4,7 @@ class ClientBuildForm
 
   def initialize(client = nil)
     @client = client
-    @assessment = client.assessments[0]
+    @assessment = client.assessments if @client
   end
 
   def persisted?
@@ -35,7 +35,7 @@ class ClientBuildForm
   #   "Unknown"), allow_blank: true}
 
   def validate_a_number_uniqueness
-    if Client.all.where(a_number: self.a_number)
+    if Client.all.where(a_number: @client.a_number) != []
       errors.add(:a_number, "A# already exists")
     end
   end
@@ -54,7 +54,6 @@ class ClientBuildForm
   end
 
   def submit(params)
-
     @client_relief_array = []
     client.last_name, client.first_name = params[:last_name].capitalize, params[:first_name].capitalize
     client.nationality = params[:nationality]
@@ -65,7 +64,6 @@ class ClientBuildForm
     client.a_number = params[:a_number]
     assessment.date = params[:date]
     assessment.client = client
-    raise
     params[:relief_name].uniq.each do |value|
       unless value.empty?
         client_relief = client.client_reliefs.build(relief_name: value)
