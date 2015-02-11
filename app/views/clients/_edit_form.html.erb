@@ -1,0 +1,104 @@
+<%= form_for(@client_form, url: clients_path) do |f| %>
+  <% if @client_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client_form.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <ul>
+      <% @client_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :a_number, "A#*", class: "right inline required" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns" >
+      <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :first_name %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :nationality, options_for_select(Client::NATIONALITY,
+      params[:client_build_form] ? params[:client_build_form][:nationality] : nil),
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :ethnicity, options_for_select(Client::ETHNICITY,
+      params[:client_build_form] ? params[:client_build_form][:ethnicity] : nil),
+      {}, {multiple: true, class: "multiple-selections"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :gender, "GENDER", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :gender, options_for_select(Client::GENDER,
+      params[:client_build_form] ? params[:client_build_form][:gender] : nil),
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :represented, "REPRESENTED", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :represented, options_for_select(Client::REPRESENTED,
+      params[:client_build_form] ? params[:client_build_form][:represented] : nil),
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :drru_case, "DRRU CASE", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+      <%#= f.text_field(:relief_name, :name => "client_build_form[relief_name][]") %>
+    </div>
+    <div class="small-6 columns relief_field">
+    </div>
+      <a href="#" id="add_field">Add another Relief Sought</a>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.date_field :date %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create Client", class: "button round" %>
+  </div>
+<% end %>
