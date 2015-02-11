@@ -59,7 +59,8 @@ class ClientBuildForm
     client.a_number = params[:a_number]
     assessment.date = params[:date]
     assessment.client = client
-    params[:relief_name].each do |value|
+    raise
+    params[:relief_name].uniq.each do |value|
       unless value.empty?
         client_relief = client.client_reliefs.build(relief_name: value)
         @client_relief_array << client_relief
