@@ -25,6 +25,15 @@ class Client < ActiveRecord::Base
 
   attr_encrypted :a_number, :key => 'a secret key'
 
+  before_save :last_name_cap, :first_name_cap
+
+  def last_name_cap
+    last_name.capitalize
+  end
+
+  def first_name_cap
+    first_name.capitalize
+  end
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
