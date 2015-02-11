@@ -16,7 +16,8 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @client_form = ClientBuildForm.new
+    client = Client.find(params[:id])
+    @client_form = ClientBuildForm.new(client)
   end
 
   def create

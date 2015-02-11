@@ -1,5 +1,10 @@
 class ClientBuildForm
   include ActiveModel::Model
+  attr_accessor :client
+
+  def initialize(client = nil)
+    @client = client
+  end
 
   def persisted?
     false
