@@ -21,7 +21,14 @@ class ClientBuildForm
   validates :drru_case, :inclusion => {in: [true, false], allow_blank: true}
   validates :nationality, :inclusion => {in: Client::NATIONALITY, allow_blank: true}
   validates :ethnicity, :inclusion => {in: Client::ETHNICITY, allow_blank: true}
+  validate :validate_a_number_uniqueness
 
+  def validate_a_number_uniqueness
+    if Client.all.where(a_number: self.a_number)
+      errors.add(:a_number, "A# already exists")
+    end
+  end
+  
   delegate :first_name, :last_name, :nationality, :ethnicity, :gender,
             :represented, :drru_case, :a_number, to: :client
   delegate :relief_name, to: :client_relief
