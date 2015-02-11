@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210055239) do
+ActiveRecord::Schema.define(version: 20150210225548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 20150210055239) do
     t.string   "a_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_a_number"
+    t.string   "encrypted_a_number_salt"
+    t.string   "encrypted_a_number_iv"
   end
 
   create_table "conviction_grounds", force: true do |t|
