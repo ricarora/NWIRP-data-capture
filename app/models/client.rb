@@ -11,13 +11,13 @@ class Client < ActiveRecord::Base
   validates :drru_case, inclusion: {in: [true, false], allow_blank: true}
   validates :represented, inclusion: { in: %w(Yes No Unknown),
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
-  validate :validate_a_number_uniqueness
+  # validate :validate_a_number_uniqueness
 
-  def validate_a_number_uniqueness
-    if Client.all.where(a_number: self.a_number)
-      errors.add(:a_number, "A# already exists")
-    end
-  end
+  # def validate_a_number_uniqueness
+  #   if Client.all.where(a_number: self.a_number)
+  #     errors.add(:a_number, "A# already exists")
+  #   end
+  # end
 
   attr_encrypted :a_number, :key => 'a secret key'
 
@@ -72,11 +72,15 @@ class Client < ActiveRecord::Base
               "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
 
   validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
-  #validates :ethnicity, :inclusion => {in: [Client::ETHNICITY], allow_blank: true}
-  # validates :ethnicity, inclusion: {in: %w("Native American or Alaska Native",
-  #   "Asian – not Pacific Islander","Black – African or African-American",
-  #   "White or Caucasian","Pacific Islander", "Hispanic or Latino", "Other",
-  #   "Unknown"), allow_blank: true}
+  validate :validate_ethnicity
+
+  def validate_ethnicity
+    ethnicity.each do |selection|
+      if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
+        errors.add(:ethnicity, :invalid)
+      end
+    end
+  end
 
   def full_name
     self.first_name + ' ' + self.last_name
