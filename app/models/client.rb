@@ -72,7 +72,11 @@ class Client < ActiveRecord::Base
               "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
 
   validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
-  validates :ethnicity, inclusion: {in: Client::ETHNICITY, allow_blank: true}
+  #validates :ethnicity, :inclusion => {in: [Client::ETHNICITY], allow_blank: true}
+  # validates :ethnicity, inclusion: {in: %w("Native American or Alaska Native",
+  #   "Asian – not Pacific Islander","Black – African or African-American",
+  #   "White or Caucasian","Pacific Islander", "Hispanic or Latino", "Other",
+  #   "Unknown"), allow_blank: true}
 
   def full_name
     self.first_name + ' ' + self.last_name

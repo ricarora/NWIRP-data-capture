@@ -5,11 +5,13 @@ $(function() {
     event.preventDefault();
     $(".crime_name_field").append(crimeNameInput);
     $(".crime_name_group").prop('disabled', true);
+    $("#add_crime_name").hide();
   });
 
   $(".crime_name_field").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
     $(".crime_name_group").prop('disabled', false);
+    $("#add_crime_name").show();
   });
 });
 
@@ -20,11 +22,13 @@ $(function() {
     event.preventDefault();
     $(".subsection_field").append(subsectionInput);
     $(".subsection_group").prop('disabled', true);
+    $("#add_subsection").hide();
   });
 
   $(".subsection_field").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
     $(".subsection_group").prop('disabled', false);
+    $("#add_subsection").show();
   });
 });
 
@@ -35,10 +39,12 @@ $(function() {
     event.preventDefault();
     $(".nta_charges_field").append(ntaChargesInput);
     $(".nta_charges_group").prop('disabled', true);
+    $("#add_nta_charges").hide();
   });
 
   $(".nta_charges_field").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
     $(".nta_charges_group").prop('disabled', false);
+    $("#add_nta_charges").show();
   });
 });
