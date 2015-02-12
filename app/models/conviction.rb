@@ -53,9 +53,4 @@ class Conviction < ActiveRecord::Base
   def self.all_nta_charges
     Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
   end
-
-  def convert_to_days(sentence, sentence_unit)
-    raise
-    (year * 365) + (month * 30) + day
-  end
 end
