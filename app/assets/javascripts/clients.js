@@ -5,7 +5,7 @@
 //functionality to add new fields to relief sought in new client form
 
 var relief_num = 0;
-
+var assessment_num = 0;
 function addReliefField(first) {
   var max_relief_field = 10;
   if (relief_num < max_relief_field) {
@@ -17,6 +17,18 @@ function addReliefField(first) {
   }
 }
 
+function addAssessmentField(first) {
+  var max_assessment_field = 5;
+  if (assessment_num < max_assessment_field) {
+    assessment_num += 1;
+    var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
+    var emptyField = "<div><input id='client_assessments_attributes_0_date' name='client[assessments_attributes]['" + (assessment_num - 1) + "][date]' type='date'>";
+    emptyField = emptyField + remove;
+    $(".assessment_field").append(emptyField);
+  }
+}
+
+
 $(function() {
   addReliefField(true);
   $("#add_field").click(function(event) {
@@ -26,6 +38,17 @@ $(function() {
   });
 
   $(".relief_field").on("click",".remove_field", function(event){ //user click on remove text
+    event.preventDefault(); $(this).parent('div').remove();
+  });
+
+  addAssessmentField(true);
+  $("#add_assessment_field").click(function(event) {
+    event.preventDefault();
+    //find a way to get each of these name values different for params
+    addAssessmentField(false);
+  });
+
+  $(".assessment_field").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
   });
 
