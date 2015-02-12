@@ -23,9 +23,15 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client_form = ClientBuildForm.new
-    if @client_form.submit(params[:client_build_form]) && @client_form.all_valid? && @client_form.save
-      redirect_to client_path(@client_form.client)
+    @client = Client.new
+    raise
+    params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
+      @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
+    end
+    @conviction.attributes = conviction_params
+    @conviction.sentence = convert_to_days(conviction_params[:sentence].to_i, params[:conviction][:sentence_unit])
+    if @conviction.save
+      redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
     else
       render :new
     end
@@ -66,6 +72,6 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-      params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :relief_sought, :represented, :drru_case, :a_number, :assessments_attributes => [:id, :date], :client_reliefs => [:id, :relief_name])
+      params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :relief_sought, :represented, :drru_case, :a_number, :assessments_attributes => [:id, :date], :client_reliefs_attributes => [:id, :relief_name])
     end
 end
