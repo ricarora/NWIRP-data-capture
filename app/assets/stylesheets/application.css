@@ -101,3 +101,8 @@ input[type="checkbox"]:checked + .label-text:before {
 .multiple-selections {
   height: 130px;
 }
+
+/* Show Page */
+table {
+  width: 100%;
+}
