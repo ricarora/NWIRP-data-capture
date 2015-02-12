@@ -17,7 +17,7 @@ class Client < ActiveRecord::Base
 
   def validate_a_number_uniqueness
     Client.all.each do |client|
-      if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
+      if client.a_number == self.a_number
         errors.add(:a_number, "A# already exists")
       end
     end
@@ -25,12 +25,12 @@ class Client < ActiveRecord::Base
 
   attr_encrypted :a_number, :key => 'a secret key'
 
-  before_save :name_cap
-
-  def name_cap
-    last_name = last_name.capitalize
-    first_name = first_name.capitalize
-  end
+  # before_save :name_cap
+  #
+  # def name_cap
+  #   last_name = last_name.capitalize
+  #   first_name = first_name.capitalize
+  # end
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
