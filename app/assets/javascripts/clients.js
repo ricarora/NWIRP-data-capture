@@ -15,12 +15,13 @@ function IndexNumber(class_name, field_type) {
 
 
 
-function SelectOptionsGenerator(Array) {
-  string = "<option value>Please select</option>"
-  for(i=0; i < Array.length; i++ ) {
-    string = string + "<option value=" + Array[i].name + ">" + Array[i].name + "</option>"
+function SelectOptionsGenerator(arr) {
+  str = "<option value>Please select</option>";
+  debugger
+  for(i=0; i < arr.length; i++ ) {
+    str = str + "<option value=" + arr[i].name + ">" + arr[i].name + "</option>"
   }
-  return string
+  return str
 }
 
 
@@ -34,7 +35,7 @@ function addAssessmentField(first) {
 
 
 $(function() {
-
+  debugger
   var ArrayOfReliefObjects = $("#relief_sought_options").data('url');
 
   function addReliefField(first) {

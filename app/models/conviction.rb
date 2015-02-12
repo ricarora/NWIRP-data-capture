@@ -45,10 +45,10 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.all_subsections
-    Conviction.select(:subsection).map(&:subsection).uniq.reject(&:empty?)
+    Conviction.select(:subsection).map(&:subsection).uniq#.reject {|subsection| subsection == ""}
   end
 
   def self.all_nta_charges
-    Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
+    Conviction.select(:nta_charges).map(&:nta_charges).uniq#.reject {|nta_charge| nta_charge == ""}
   end
 end
