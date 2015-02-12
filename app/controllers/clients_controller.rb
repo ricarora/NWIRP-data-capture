@@ -35,6 +35,7 @@ class ClientsController < ApplicationController
       end
     end
     @client.attributes = client_params
+    @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
