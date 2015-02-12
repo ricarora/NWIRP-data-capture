@@ -37,7 +37,7 @@ class Client < ActiveRecord::Base
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
-  REPRESENTED = ["Yes", "No", "Unkown"]
+  REPRESENTED = ["Yes", "No", "Unknown"]
 
   NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
@@ -88,7 +88,7 @@ class Client < ActiveRecord::Base
   validate :validate_ethnicity
 
   def validate_ethnicity
-    if ethnicity
+    if ethnicity != nil
       ethnicity.each do |selection|
         if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
           errors.add(:ethnicity, :invalid)
