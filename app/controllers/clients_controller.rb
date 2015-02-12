@@ -12,7 +12,9 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client_form = ClientBuildForm.new
+    @client = Client.new
+    @client.assessments.build(client_id: @client.id)
+    @client.client_reliefs.build(client_id: @client.id)
   end
 
   def edit
@@ -21,9 +23,20 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client_form = ClientBuildForm.new
-    if @client_form.submit(params[:client_build_form]) && @client_form.all_valid? && @client_form.save
-      redirect_to client_path(@client_form.client)
+    @client = Client.new
+    params[:client][:client_reliefs_attributes].map do |key, cr_hash|
+      if !cr_hash[:relief_name].empty?
+        @client.client_reliefs(relief_name: cr_hash[:relief_name])
+      end
+    end
+    params[:client][:assessments_attributes].map do |key, ass_hash|
+      if !ass_hash[:date].empty?
+        @client.assessments(date: ass_hash[:date])
+      end
+    end
+    @client.attributes = client_params
+    if @client.save
+      redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
       render :new
     end
@@ -61,5 +74,9 @@ class ClientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def client_params
+      params.require(:client).permit(:last_name, :first_name, :nationality, :ethnicity, :gender, :relief_sought, :represented, :drru_case, :a_number, :assessments_attributes => [:id, :date], :client_reliefs_attributes => [:id, :relief_name])
     end
 end

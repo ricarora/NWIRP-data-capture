@@ -81,6 +81,7 @@
       <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
     </div>
   </div>
+
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
@@ -95,7 +96,7 @@
       <%= f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= f.date_field :date %>
+      <%= f.date_field :assessment, :date %>
     </div>
   </div>
   <div class="actions">

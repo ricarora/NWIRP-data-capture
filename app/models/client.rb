@@ -13,6 +13,8 @@ class Client < ActiveRecord::Base
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validate :validate_a_number_uniqueness
 
+  accepts_nested_attributes_for :client_reliefs, :assessments
+
   def validate_a_number_uniqueness
     Client.all.each do |client|
       if client.a_number == self.a_number  #Client.all.where(a_number: self.a_number) #!= []
@@ -23,10 +25,16 @@ class Client < ActiveRecord::Base
 
   attr_encrypted :a_number, :key => 'a secret key'
 
+  before_save :name_cap
+
+  def name_cap
+    last_name = last_name.capitalize
+    first_name = first_name.capitalize
+  end
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
-  REPRESENTED = ["Yes", "No", "Unkown"]
+  REPRESENTED = ["Yes", "No", "Unknown"]
 
   NATIONALITY = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                 "Angolan", "Antiguans", "Argentinean", "Armenian", "Australian",
@@ -77,9 +85,11 @@ class Client < ActiveRecord::Base
   validate :validate_ethnicity
 
   def validate_ethnicity
-    ethnicity.each do |selection|
-      if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
-        errors.add(:ethnicity, :invalid)
+    if ethnicity != nil
+      ethnicity.each do |selection|
+        if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
+          errors.add(:ethnicity, :invalid)
+        end
       end
     end
   end

@@ -1,10 +1,15 @@
 class ClientBuildForm
   include ActiveModel::Model
-  attr_accessor :client
+  attr_accessor :client, :date, :relief_name, :a_number
 
   def initialize(client = nil)
     @client = client
-    @assessment = client.assessments if @client
+    if @client
+      @assessments = @client.assessments
+      @date = @assessments.map { |assessment| assessment.date }[0]
+      @relief_name = @client.client_reliefs.map {|relief| relief.relief_name }
+      @a_number = @client.a_number
+    end
   end
 
   def persisted?
