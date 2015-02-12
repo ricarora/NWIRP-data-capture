@@ -22,7 +22,7 @@ function addAssessmentField(first) {
   if (assessment_num < max_assessment_field) {
     assessment_num += 1;
     var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
-    var emptyField = "<div><input id='client_assessments_attributes_0_date' name='client[assessments_attributes]['" + (assessment_num - 1) + "][date]' type='date'>";
+    var emptyField = "<div><input id='client_assessments_attributes_0_date' name=client[assessments_attributes][" + (assessment_num - 1) + "][date] type='date'>";
     emptyField = emptyField + remove;
     $(".assessment_field").append(emptyField);
   }
