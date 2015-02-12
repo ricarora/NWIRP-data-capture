@@ -24,14 +24,19 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    raise
-    params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
-      @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
+    params[:client][:client_reliefs_attributes].map do |key, cr_hash|
+      if !cr_hash[:relief_name].empty?
+        @client.client_reliefs(relief_name: cr_hash[:relief_name])
+      end
     end
-    @conviction.attributes = conviction_params
-    @conviction.sentence = convert_to_days(conviction_params[:sentence].to_i, params[:conviction][:sentence_unit])
-    if @conviction.save
-      redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
+    params[:client][:assessments_attributes].map do |key, ass_hash|
+      if !ass_hash[:date].empty?
+        @client.assessments(date: ass_hash[:date])
+      end
+    end
+    @client.attributes = client_params
+    if @client.save
+      redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
       render :new
     end
