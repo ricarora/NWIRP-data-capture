@@ -24,6 +24,7 @@ class ConvictionsController < ApplicationController
 
   def create
     @conviction = Conviction.new
+    @client = Client.find(params[:client_id])
     @conviction.client_id = params[:client_id]
     params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
       @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
