@@ -28,8 +28,10 @@ class Client < ActiveRecord::Base
   before_save :name_cap
 
   def name_cap
-    last_name = last_name.capitalize
-    first_name = first_name.capitalize
+    self.last_name = self.last_name.capitalize
+    if self.first_name != nil
+      self.first_name = self.first_name.capitalize
+    end
   end
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
