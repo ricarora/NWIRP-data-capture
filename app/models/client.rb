@@ -25,12 +25,14 @@ class Client < ActiveRecord::Base
 
   attr_encrypted :a_number, :key => 'a secret key'
 
-  # before_save :name_cap
-  #
-  # def name_cap
-  #   last_name = last_name.capitalize
-  #   first_name = first_name.capitalize
-  # end
+  before_save :name_cap
+
+  def name_cap
+    self.last_name = self.last_name.capitalize
+    if self.first_name != nil
+      self.first_name = self.first_name.capitalize
+    end
+  end
 
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
@@ -85,7 +87,7 @@ class Client < ActiveRecord::Base
   validate :validate_ethnicity
 
   def validate_ethnicity
-    if ethnicity != nil
+    if ethnicity != []
       ethnicity.each do |selection|
         if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
           errors.add(:ethnicity, :invalid)
