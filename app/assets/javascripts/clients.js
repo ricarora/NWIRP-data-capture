@@ -24,6 +24,13 @@ function SelectOptionsGenerator(arr) {
   return str
 }
 
+function addReliefField(first, dropDownOptions) {
+  //adding an empty field to relief field in client form. Also, add a remove link with it.
+  var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
+  var emptyField = "<div> <select data-index="+ IndexNumber("relief_field", "select") +" class='client_client_reliefs_attributes_0_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_field", "select") + "][relief_name]>" + dropDownOptions + "</select>";
+  emptyField = emptyField + remove;
+  $(".relief_field").append(emptyField);
+}
 
 function addAssessmentField(first) {
   //adding an empty field to relief field in client form. Also, add a remove link with it.
@@ -37,21 +44,13 @@ function addAssessmentField(first) {
 $(function() {
   debugger
   var ArrayOfReliefObjects = $("#relief_sought_options").data('url');
+  var dropDownOptionsForRelief = SelectOptionsGenerator(ArrayOfReliefObjects)
 
-  function addReliefField(first) {
-    //adding an empty field to relief field in client form. Also, add a remove link with it.
-    var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
-    var emptyField = "<div> <select data-index="+ IndexNumber("relief_field", "select") +" class='client_client_reliefs_attributes_0_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_field", "select") + "][relief_name]>" + SelectOptionsGenerator(ArrayOfReliefObjects) + "</select>";
-    emptyField = emptyField + remove;
-    $(".relief_field").append(emptyField);
-  }
-
-
-  addReliefField(true);
+  addReliefField(true, dropDownOptionsForRelief);
   $("#add_field").click(function(event) {
     event.preventDefault();
     //find a way to get each of these name values different for params
-    addReliefField(false);
+    addReliefField(false, dropDownOptionsForRelief);
   });
 
   $(".relief_field").on("click",".remove_field", function(event){ //user click on remove text
