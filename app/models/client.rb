@@ -87,7 +87,7 @@ class Client < ActiveRecord::Base
   validate :validate_ethnicity
 
   def validate_ethnicity
-    if ethnicity != nil
+    if ethnicity != []
       ethnicity.each do |selection|
         if !ethnicity.is_a?(Array) || !Client::ETHNICITY.include?(selection)
           errors.add(:ethnicity, :invalid)
