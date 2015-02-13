@@ -14,25 +14,24 @@ class ClientsController < ApplicationController
   def new
     @client = Client.new
     @client.assessments.build(client_id: @client.id)
+    #@client.assessments.build(client_id: @client.id, date: Date.today)
+    #@client.assessments.build(client_id: @client.id)
     @client.client_reliefs.build(client_id: @client.id)
   end
 
   def edit
     client = Client.find(params[:id])
-    @client_form = ClientBuildForm.new(client)
   end
 
   def create
     @client = Client.new
     params[:client][:client_reliefs_attributes].map do |key, cr_hash|
       if !cr_hash[:relief_name].empty?
-        @client.client_reliefs(relief_name: cr_hash[:relief_name])
+        @client.client_reliefs.build(relief_name: cr_hash[:relief_name])
       end
     end
     params[:client][:assessments_attributes].map do |key, ass_hash|
-      if !ass_hash[:date].empty?
-        @client.assessments(date: ass_hash[:date])
-      end
+      @client.assessments.build(date: ass_hash[:date])
     end
     @client.attributes = client_params
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)

@@ -31,12 +31,15 @@ function addReliefField(first, dropDownOptions) {
   $(".relief_field").append(emptyField);
 }
 
-function addAssessmentField(first) {
+function addAssessmentField() {
   //adding an empty field to relief field in client form. Also, add a remove link with it.
-  var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
-  var emptyField = "<div><input data-index=" + IndexNumber("assessment_field", "input") + " id='client_assessments_attributes_0_date' name=client[assessments_attributes][" + IndexNumber("assessment_field", "input") + "][date] type='date'>";
+  var remove = "<a href='#' class='remove_field'>Remove field</a></div>";
+  var emptyField = "<div><input data-index=" + IndexNumber("assessment_field", "input")
+  + " id='client_assessments_attributes_0_date' name=client[assessments_attributes]["
+  + IndexNumber("assessment_field", "input")
+  + "][date] type='date'>";
   emptyField = emptyField + remove;
-  $(".assessment_field").append(emptyField);
+  $(".assessment_fields").append(emptyField);
 }
 
 
@@ -55,14 +58,12 @@ $(function() {
     event.preventDefault(); $(this).parent('div').remove();
   });
 
-  addAssessmentField(true);
   $("#add_assessment_field").click(function(event) {
     event.preventDefault();
-    //find a way to get each of these name values different for params
-    addAssessmentField(false);
+    addAssessmentField();
   });
 
-  $(".assessment_field").on("click",".remove_field", function(event){ //user click on remove text
+  $(".assessment_fields").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
   });
 

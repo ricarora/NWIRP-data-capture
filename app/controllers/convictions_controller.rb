@@ -39,12 +39,15 @@ class ConvictionsController < ApplicationController
   end
 
   def convert_to_days(sentence, sentence_unit)
-    if sentence_unit == "Year(s)"
-      sentence * 365
-    elsif sentence_unit == "Month(s)"
-      sentence * 30
-    else
-      sentence
+    case sentence_unit
+      when "Sentence Unknown"
+        sentence == ""
+      when "Year(s)"
+        sentence * 365
+      when "Month(s)"
+        sentence * 30
+      else
+        sentence
     end
   end
 
@@ -68,6 +71,6 @@ class ConvictionsController < ApplicationController
     end
 
     def conviction_params
-      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:id, :gor_name, :status])
+      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :state_committed, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:id, :gor_name, :status])
     end
 end

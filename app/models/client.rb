@@ -16,7 +16,7 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :client_reliefs, :assessments
 
   def validate_a_number_uniqueness
-    Client.all.each do |client|
+    Client.all.reject {|client| client.id == self.id}.each do |client|
       if client.a_number == self.a_number
         errors.add(:a_number, "A# already exists")
       end
@@ -79,9 +79,9 @@ class Client < ActiveRecord::Base
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
-  ETHNICITY = ["Native American or Alaska Native", "Asian – not Pacific Islander",
-              "Black – African or African-American", "White or Caucasian",
-              "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
+  ETHNICITY = ["Asian – not Pacific Islander", "Black – African or African-American",
+              "Hispanic or Latino", "Native American or Alaska Native",
+              "Pacific Islander", "White or Caucasian", "Other", "Unknown"]
 
   validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
   validate :validate_ethnicity

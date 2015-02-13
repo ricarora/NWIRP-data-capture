@@ -1,32 +1,60 @@
 require 'rails_helper'
 
 RSpec.describe Conviction, :type => :model do
-  let(:conviction) { FactoryGirl.create(:conviction) }
-  context "must have a crime_name" do
-    subject { FactoryGirl.build(:conviction, crime_name: nil)}
-    it { should_not be_valid }
-  end
+  describe "validations" do
+    let(:conviction) { Conviction.create(crime_name: "Assault 3", client_id: 4)}
 
-  context "must have a sentence" do
-    subject { FactoryGirl.build(:conviction, sentence: nil)}
-    it { should_not be_valid }
-  end
-
-  context "sentence can not be a string" do
-    subject { FactoryGirl.build(:conviction, sentence: "ten")}
-    it { should_not be_valid }
-    it "must be an integer" do
-      expect((conviction).valid?).to eq true
+    context "crime_name" do
+      it "must have a crime_name" do
+        expect(conviction.valid?).to eq true
+        conviction.crime_name = nil
+        expect(conviction.valid?).to eq false
+      end
     end
-  end
 
-  context "ij decision date must be a date object" do
-    subject { FactoryGirl.build(:conviction, ij_decision_date: "Jan 4")}
-    it { should_not be_valid }
-  end
+    context "crime sentence" do
+      it "cannot be a string" do
+        conviction.sentence = "ten days"
+        expect(conviction.valid?).to eq false
+      end
 
-  context "ij decision date must be a date on or before today" do
-    subject { FactoryGirl.build(:conviction, ij_decision_date: Date.today + 1)}
-    it { should_not be_valid }
+      it "must be an integer" do
+        conviction.sentence = 10
+        expect(conviction.valid?).to eq true
+      end
+    end
+
+    context "Immigration Judge (IJ) decision date" do
+      it "must be date object" do
+        conviction.ij_decision_date = "Not a date"
+        expect(conviction.ij_decision_date).to eq nil
+
+        conviction.ij_decision_date = Date.today
+        expect(conviction.ij_decision_date).to eq Date.today
+        expect(conviction.save).to eq true
+        expect(conviction.valid?).to eq true
+      end
+
+      it "must be a date on or before today" do
+        conviction.ij_decision_date = Date.today + 1
+        expect(conviction.save).to eq false
+        expect(conviction.valid?).to eq false
+
+        conviction.ij_decision_date = Date.today
+        expect(conviction.save).to eq true
+        expect(conviction.valid?).to eq true
+      end
+    end
+
+    context "client_id" do
+      it "conviction must be associated with client" do
+        expect(conviction.save).to eq true
+      end
+
+      # it "is not valid without client association" do
+      #   invalid_conviction = Conviction.new(crime_name: "Assault")
+      #   expect(invalid_conviction.valid?).to eq false
+      # end
+    end
   end
 end
