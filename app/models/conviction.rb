@@ -6,6 +6,7 @@ class Conviction < ActiveRecord::Base
   validates :sentence, numericality: { only_integer: true, allow_blank: true }
   validates :rcw, format: { with: /9a..{2}..{3}/,
     message: "Only allows this format: 9a.XX.XXX.", allow_blank: true }
+  validates :dv_on_roc, inclusion: {in: [true, false], allow_blank: true}
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
