@@ -61,6 +61,8 @@
         <th>Subsection</th>
         <th>Sentence(in days)</th>
         <th>Immigration Judge(IJ) Name</th>
+        <th>State Crime Committed</th>
+        <th>RCW</th>
         <th>NTA Charges</th>
         <th>IJ Decision Date</th>
         <th>IJ Finding</th>
@@ -72,6 +74,8 @@
         <td><%= conviction.subsection %></td>
         <td><%= conviction.sentence %></td>
         <td><%= conviction.ij_name %></td>
+        <td><%= conviction.state_committed %></td>
+        <td><%= conviction.rcw %>
         <td><%= conviction.nta_charges %></td>
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
         <td><%= conviction.ij_finding %></td>
