@@ -14,8 +14,8 @@ class ClientsController < ApplicationController
   def new
     @client = Client.new
     @client.assessments.build(client_id: @client.id)
-    @client.assessments.build(client_id: @client.id, date: Date.today)
-    @client.assessments.build(client_id: @client.id)
+    #@client.assessments.build(client_id: @client.id, date: Date.today)
+    #@client.assessments.build(client_id: @client.id)
     @client.client_reliefs.build(client_id: @client.id)
   end
 
