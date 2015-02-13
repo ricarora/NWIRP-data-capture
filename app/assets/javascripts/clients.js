@@ -5,15 +5,13 @@
 function IndexNumber(class_name, field_type) {
   // checking if data-index exist for an empty field, if it does it increments the last data-index by 1
   // if there is no data-index, it sets it to zero
-  $data = $("." + class_name + " " + "div" + " " + field_type + ":last").data()
+  $data = $("." + class_name + " " + field_type + ":last").data()
   if ( $data != null || undefined) {
     return $data.index + 1
   } else {
     return 0
   }
 }
-
-
 
 function SelectOptionsGenerator(arr) {
   str = "<option value>Please select</option>";
@@ -28,7 +26,7 @@ function addReliefField(first, dropDownOptions) {
   var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
   var emptyField = "<div> <select data-index=" + IndexNumber("relief_fields", "select") + " class='client_client_reliefs_attributes_" + IndexNumber("relief_fields", "select") + "_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_fields", "select") + "][relief_name]>" + dropDownOptions + "</select>";
   emptyField = emptyField + remove;
-  $(".relief_field").append(emptyField);
+  $(".relief_fields").append(emptyField);
 }
 
 function addAssessmentField() {
@@ -49,13 +47,14 @@ $(function() {
   var dropDownOptionsForRelief = SelectOptionsGenerator(ArrayOfReliefObjects)
 
   addReliefField(true, dropDownOptionsForRelief);
-  $("#add_field").click(function(event) {
+  $("#add_field").on('click', function(event) {
+    console.log("lolclick: ", event);
     event.preventDefault();
     //find a way to get each of these name values different for params
     addReliefField(false, dropDownOptionsForRelief);
   });
 
-  $(".relief_field").on("click",".remove_field", function(event){ //user click on remove text
+  $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
   });
 
