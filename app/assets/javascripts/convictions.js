@@ -1,8 +1,15 @@
 //add crime name
+
+//function toggle create/select
+//know what the select element is - selector for grabbing existing element, what the create element is [html input], id for input so remove later
+
+
+
 $(function() {
   var crimeNameInput = '<div><input id="newCrime" name="conviction[crime_name]" type="text"><a href="#" class="remove_field">Remove field</a></div>';
   $("#add_crime_name").click(function(event) {
     event.preventDefault();
+    console.log(event);
     $(".crime_name_field").append(crimeNameInput);
     $(".crime_name_group").prop('disabled', true);
     $("#add_crime_name").hide();

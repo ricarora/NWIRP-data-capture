@@ -4,8 +4,6 @@ class Conviction < ActiveRecord::Base
   has_many :conviction_grounds, autosave: true
   validates :crime_name, presence: true
   validates :sentence, numericality: { only_integer: true }
-  validates :rcw, format: { with: /9a..{2}..{3}/,
-    message: "Only allows this format: 9a.XX.XXX.", allow_blank: true }
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
@@ -47,15 +45,10 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.all_subsections
-    Conviction.select(:subsection).map(&:subsection).uniq.reject(&:empty?)
+    Conviction.select(:subsection).map(&:subsection).uniq#.reject {|subsection| subsection == ""}
   end
 
   def self.all_nta_charges
-    Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:empty?)
-  end
-
-  def convert_to_days(sentence, sentence_unit)
-    raise
-    (year * 365) + (month * 30) + day
+    Conviction.select(:nta_charges).map(&:nta_charges).uniq#.reject {|nta_charge| nta_charge == ""}
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211002016) do
+ActiveRecord::Schema.define(version: 20150212220852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,13 +56,12 @@ ActiveRecord::Schema.define(version: 20150211002016) do
 
   create_table "convictions", force: true do |t|
     t.string   "crime_name"
-    t.string   "rcw"
     t.string   "subsection"
     t.integer  "sentence"
     t.string   "ij_name"
     t.string   "nta_charges"
     t.date     "ij_decision_date"
-    t.string   "ij_finding"
+    t.text     "ij_finding"
     t.integer  "client_id"
     t.text     "notes"
     t.datetime "created_at"
