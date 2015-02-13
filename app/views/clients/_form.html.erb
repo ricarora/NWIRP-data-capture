@@ -64,7 +64,7 @@
   <div class="small-3 columns">
     <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
   </div>
-  <div class="small-6 columns relief_field">
+  <div class="small-6 columns relief_fields">
   </div>
   <a href="#" id="add_field">Add another Relief Sought</a>
 </div>
@@ -86,20 +86,6 @@
     <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
   </div>
 </div>
-
-
-<%= f.fields_for :client_reliefs do |builder| %>
- <div class="field row">
-   <div class="small-3 columns">
-     <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
-   </div>
-   <div class="small-6 columns relief_fields">
-
-   </div>
-   <a href="#" id="add_field">Add another Relief Sought</a>
- </div>
- <% end %>
-
 
 <div class="assessment_fields">
 <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
