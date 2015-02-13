@@ -41,6 +41,10 @@ h2 {
 }
 
 .button {
+  float: right;
+}
+/*
+.button {
   background-color: #444;
   float: right;
   color: white;
@@ -51,7 +55,7 @@ h2 {
 .button:focus, .button:hover {
   color: #444;
   background-color: #ffcc00;
-}
+}*/
 
 a.button {
   color: white;
