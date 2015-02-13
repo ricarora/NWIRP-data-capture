@@ -7,7 +7,11 @@ class Conviction < ActiveRecord::Base
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
            :ij_decision_date_cannot_be_in_the_future
-  accepts_nested_attributes_for :conviction_grounds
+  accepts_nested_attributes_for :conviction_grounds,
+      :reject_if => proc {|attributes|
+        attributes.all? {|k,v| v.blank?}
+      }
+      
   attr_accessor :sentence_unit
 
   IJ_NAME = ["Odell", "Scala", "Fitting"]
