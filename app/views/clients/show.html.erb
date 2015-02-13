@@ -73,7 +73,7 @@
         <td><%= conviction.sentence %></td>
         <td><%= conviction.ij_name %></td>
         <td><%= conviction.nta_charges %></td>
-        <td><%= conviction.ij_decision_date %></td>
+        <td><%= (conviction.ij_decision_date).strftime("%D")  %></td>
         <td><%= conviction.ij_finding %></td>
       </tr>
     </tbody>
