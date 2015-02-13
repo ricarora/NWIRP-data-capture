@@ -16,7 +16,7 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :client_reliefs, :assessments
 
   def validate_a_number_uniqueness
-    Client.all.each do |client|
+    Client.all.reject {|client| client.id == self.id}.each do |client|
       if client.a_number == self.a_number
         errors.add(:a_number, "A# already exists")
       end
