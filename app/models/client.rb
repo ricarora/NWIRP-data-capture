@@ -13,7 +13,10 @@ class Client < ActiveRecord::Base
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validate :validate_a_number_uniqueness
 
-  accepts_nested_attributes_for :client_reliefs, :assessments
+  accepts_nested_attributes_for :client_reliefs, :assessments,
+      :reject_if => proc {|attributes|
+        attributes.all? {|k,v| v.blank?}
+      }
 
   def validate_a_number_uniqueness
     Client.all.reject {|client| client.id == self.id}.each do |client|

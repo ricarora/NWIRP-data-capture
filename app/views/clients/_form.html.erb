@@ -86,6 +86,20 @@
     <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
   </div>
 </div>
+
+<div class="relief_fields">
+<%= f.fields_for :client_reliefs do |builder| %>
+<div class="field row">
+  <div class="small-3 columns">
+    <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+  </div>
+  <div class="small-6 columns">
+  </div>
+  <a href="#" id="add_field">Add another Relief Sought</a>
+</div>
+<% end %>
+</div>
+
 <div class="assessment_fields">
 <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
 <div class="field row">
@@ -93,7 +107,7 @@
       <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= assessment_f.date_field :date %>
+      <%= assessment_f.date_field :date, data: {index: 0} %>
     </div>
 </div>
 <% end %>
