@@ -99,7 +99,7 @@ input[type="checkbox"]:checked + .label-text:before {
 }
 
 .multiple-selections {
-  height: 130px;
+  height: 75px;
 }
 
 /* Show Page */

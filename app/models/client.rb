@@ -79,9 +79,9 @@ class Client < ActiveRecord::Base
                 "Ukrainian", "Uruguayan", "Uzbekistani", "Venezuelan",
                 "Vietnamese", "Welsh", "Yemenite", "Zambian", "Zimbabwean", "Unknown"]
 
-  ETHNICITY = ["Native American or Alaska Native", "Asian – not Pacific Islander",
-              "Black – African or African-American", "White or Caucasian",
-              "Pacific Islander", "Hispanic or Latino", "Other", "Unknown"]
+  ETHNICITY = ["Asian – not Pacific Islander", "Black – African or African-American",
+              "Hispanic or Latino", "Native American or Alaska Native",
+              "Pacific Islander", "White or Caucasian", "Other", "Unknown"]
 
   validates :nationality, inclusion: {in: Client::NATIONALITY, allow_blank: true}
   validate :validate_ethnicity
