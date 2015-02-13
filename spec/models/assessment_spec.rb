@@ -1,38 +1,53 @@
 require 'rails_helper'
 
 RSpec.describe Assessment, :type => :model do
-  it "must have a date" do
-    expect(Assessment.create(date: nil, client_id: 4).valid?).to eq false
-  end
+  describe "validations" do
+    let(:assessment) { Assessment.create(date: Date.today, client_id: 4) }
+    context "date" do
+      it "must have a value" do
+        assessment.date = nil
+        expect(assessment.valid?).to eq false
+      end
 
-  it "must have a client_id" do
-    expect(Assessment.create(date: Date.parse("2015-01-27"), client_id: nil).valid?).to eq false
-  end
+      it "must be a date object" do
+        assessment.date = "Jan 4"
+        expect(assessment.valid?).to eq false
+      end
 
-  it "client_id must be an integer" do
-    expect(Assessment.create(date: Date.today, client_id: "two").valid?).to eq false
-  end
+      it "cannot be in the future" do
+        assessment.date = Date.today + 1
+        expect(assessment.valid?).to eq false
+      end
+    end
 
-  it "date must be date object" do
-    expect(Assessment.create(date: "Jan 4", client_id: 4).valid?).to eq false
-  end
+    context "client association" do
+      it "must be associated with a client" do
+        assessment.client_id = nil
+        expect(assessment.valid?).to eq false
+      end
+    end
 
-  it "date can not be in the future" do
-    expect(Assessment.create(date: Date.today + 1, client_id: 2).valid?).to eq false
-  end
+    # context "date and client association combination" do
+    #   it "must be unique" do
+    #     expect(assessment.valid?).to eq true
+    #     invalid_assessment = Assessment.new(date: Date.today, client_id: 4)
+    #     expect(invalid_assessment.valid?).to eq false
+    #   end
+    # end
 
-  it "has unique pair of date and client_id" do
-    expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
-    expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq false
-  end
+  # it "has unique pair of date and client_id" do
+  #   expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
+  #   expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq false
+  # end
 
-  it "has unique pair of date and client_id" do
-    expect(Assessment.create(date: Date.today - 1, client_id: 2).valid?).to eq true
-    expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
-  end
-
-  it "has unique pair of date and client_id" do
-    expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
-    expect(Assessment.create(date: Date.today, client_id: 3).valid?).to eq true
+  # it "has unique pair of date and client_id" do
+  #   expect(Assessment.create(date: Date.today - 1, client_id: 2).valid?).to eq true
+  #   expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
+  # end
+  #
+  # it "has unique pair of date and client_id" do
+  #   expect(Assessment.create(date: Date.today, client_id: 2).valid?).to eq true
+  #   expect(Assessment.create(date: Date.today, client_id: 3).valid?).to eq true
+  # end
   end
 end
