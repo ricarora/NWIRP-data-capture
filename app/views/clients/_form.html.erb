@@ -95,7 +95,7 @@
       <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= assessment_f.date_field :date %>
+      <%= assessment_f.date_field :date, data: {index: 0} %>
     </div>
 </div>
 <% end %>

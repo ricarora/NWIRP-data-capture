@@ -5,7 +5,7 @@
 function IndexNumber(class_name, field_type) {
   // checking if data-index exist for an empty field, if it does it increments the last data-index by 1
   // if there is no data-index, it sets it to zero
-  $data = $("." + class_name + " " + field_type + ":last").data()
+  $data = $("." + class_name + " " + "div" + " " + field_type + ":last").data()
   if ( $data != null || undefined) {
     return $data.index + 1
   } else {
@@ -34,9 +34,10 @@ function addReliefField(first, dropDownOptions) {
 function addAssessmentField() {
   //adding an empty field to relief field in client form. Also, add a remove link with it.
   var remove = "<a href='#' class='remove_field'>Remove field</a></div>";
-  var emptyField = "<div><input data-index=" + IndexNumber("assessment_field", "input")
-  + " id='client_assessments_attributes_0_date' name=client[assessments_attributes]["
-  + IndexNumber("assessment_field", "input")
+  var emptyField = "<div><input data-index=" + IndexNumber("assessment_fields", "input")
+  + " id='client_assessments_attributes_" + IndexNumber("assessment_fields", "input")
+  + "_date' name=client[assessments_attributes]["
+  + IndexNumber("assessment_fields", "input")
   + "][date] type='date'>";
   emptyField = emptyField + remove;
   $(".assessment_fields").append(emptyField);
