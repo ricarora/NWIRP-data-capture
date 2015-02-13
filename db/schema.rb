@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20150213201443) do
   end
 
   create_table "client_reliefs", force: true do |t|
-    t.string   "relief_name"
+    t.integer  "reliefsought_id"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150213201443) do
 
   create_table "convictions", force: true do |t|
     t.string   "crime_name"
+    t.string   "rcw"
     t.string   "subsection"
     t.integer  "sentence"
     t.string   "ij_name"
@@ -67,17 +68,14 @@ ActiveRecord::Schema.define(version: 20150213201443) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state_committed"
-    t.string   "rcw"
     t.boolean  "dv_on_roc"
   end
 
-  create_table "relief_soughts", id: false, force: true do |t|
-    t.string   "name",       null: false
+  create_table "relief_soughts", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "relief_soughts", ["name"], name: "index_relief_soughts_on_name", unique: true, using: :btree
 
   create_table "removability_grounds", id: false, force: true do |t|
     t.string   "name",       null: false
