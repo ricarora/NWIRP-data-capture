@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20150212220852) do
 
   create_table "convictions", force: true do |t|
     t.string   "crime_name"
-    t.string   "rcw"
     t.string   "subsection"
     t.integer  "sentence"
     t.string   "ij_name"

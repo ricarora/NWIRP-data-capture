@@ -11,8 +11,8 @@ RSpec.describe ClientRelief, :type => :model do
       end
     end
 
-    context "relief_name and client_id combination must be unique" do
-      # it "client_id and relief_name must be unique combination" do
+    context "relief_name and client_id combination" do
+      # it "must be unique" do
       #   expect(ClientRelief.create(relief_name: "10 yr COR", client_id: client.id).valid?).to eq true
       #expect(ClientRelief.create(relief_name: "10 yr COR", client_id: client.id).valid?).to eq false
       # end
