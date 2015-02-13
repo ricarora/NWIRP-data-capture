@@ -9,6 +9,7 @@
   </ul>
 </div>
 <% end %>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :a_number, "A#*", class: "right inline required" %>
@@ -17,6 +18,7 @@
     <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
   </div>
 </div>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
@@ -25,6 +27,7 @@
     <%= f.text_field :last_name %>
   </div>
 </div>
+
 <div class="field row">
   <div class="small-3 columns" >
     <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
@@ -33,6 +36,7 @@
     <%= f.text_field :first_name %>
   </div>
 </div>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
@@ -42,6 +46,7 @@
     {include_blank: "Please select"} %>
   </div>
 </div>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
@@ -51,6 +56,7 @@
     {}, {multiple: true, class: "multiple-selections"} %>
   </div>
 </div>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :gender, "GENDER", class: "right inline" %>
@@ -59,6 +65,7 @@
     <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
   </div>
 </div>
+
 <%= f.fields_for :client_reliefs do |builder| %>
 <div class="field row">
   <div class="small-3 columns">
@@ -69,6 +76,7 @@
   <a href="#" id="add_field">Add another Relief Sought</a>
 </div>
 <% end %>
+
 <div class="field row">
   <div class="small-3 columns">
     <%= f.label :represented, "REPRESENTED", class: "right inline" %>
