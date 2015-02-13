@@ -28,7 +28,7 @@ function addReliefField(first, dropDownOptions) {
   var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
   var emptyField = "<div> <select data-index=" + IndexNumber("relief_fields", "select") + " class='client_client_reliefs_attributes_" + IndexNumber("relief_fields", "select") + "_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_fields", "select") + "][relief_name]>" + dropDownOptions + "</select>";
   emptyField = emptyField + remove;
-  $(".relief_field").append(emptyField);
+  $(".relief_fields").append(emptyField);
 }
 
 function addAssessmentField() {
@@ -55,7 +55,7 @@ $(function() {
     addReliefField(false, dropDownOptionsForRelief);
   });
 
-  $(".relief_field").on("click",".remove_field", function(event){ //user click on remove text
+  $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
     event.preventDefault(); $(this).parent('div').remove();
   });
 
