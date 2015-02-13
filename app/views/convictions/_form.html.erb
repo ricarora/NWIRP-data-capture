@@ -2,7 +2,6 @@
   <% if @conviction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
-
       <ul>
       <% @conviction.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -24,6 +23,23 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
+      <%= f.label :state_committed, "STATE CRIME COMMITTED", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :state_committed, Conviction::STATE_COMMITTED,
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :rcw, "RCW", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :rcw, placeholder: "9a.XX.XXX" %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
       <%= f.label :subsection, "SUBSECTION", class: "right inline" %>
     </div>
     <div class="small-6 columns">
@@ -36,20 +52,19 @@
   </div>
   <div class="field row">
     <div class="small-3 columns">
+      <%= f.label :dv_on_roc, "DV ON ROC", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <label><%= f.check_box :dv_on_roc %><span class="label-text"></span></label>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
       <%= f.label :sentence, "SENTENCE", class: "right inline" %>
     </div>
     <div class="small-9 columns sentence">
       <%= f.number_field :sentence, min: 0 %>
       <%= f.select :sentence_unit, ["Sentence Unknown", "Day(s)", "Month(s)", "Year(s)"] %>
-    </div>
-  </div>
-  <div class="field row">
-    <div class="small-3 columns">
-      <%= f.label :state_committed, "STATE CRIME COMMITTED", class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
-      <%= f.select :state_committed, Conviction::STATE_COMMITTED,
-      {include_blank: "Please select"} %>
     </div>
   </div>
   <div class="field row">
@@ -99,7 +114,6 @@
     </div>
   </div>
   <% end %>
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :notes, "ADDITIONAL NOTES", class: "right inline" %>
