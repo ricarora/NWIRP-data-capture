@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150213201443) do
 
   create_table "convictions", force: true do |t|
     t.string   "crime_name"
+    t.string   "rcw"
     t.string   "subsection"
     t.integer  "sentence"
     t.string   "ij_name"
@@ -67,7 +68,6 @@ ActiveRecord::Schema.define(version: 20150213201443) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state_committed"
-    t.string   "rcw"
     t.boolean  "dv_on_roc"
   end
 
