@@ -40,10 +40,9 @@
     <div class="small-3 columns">
       <%= f.label :sentence, "SENTENCE", class: "right inline" %>
     </div>
-    <div class="small-9 columns">
-      <%= f.number_field :sentence %>
-      <%= f.select :sentence_unit, options_for_select(["Year(s)", "Month(s)","Day(s)"]),
-      {include_blank: "Please select"}%>
+    <div class="small-9 columns sentence">
+      <%= f.number_field :sentence, min: 0 %>
+      <%= f.select :sentence_unit, options_for_select(["Day(s)", "Month(s)", "Year(s)"]) %>
     </div>
   </div>
   <div class="field row">
