@@ -71,6 +71,6 @@ class ConvictionsController < ApplicationController
     end
 
     def conviction_params
-      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:id, :gor_name, :status])
+      params.require(:conviction).permit(:crime_name, :rcw, :subsection, :sentence, :state_committed, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:id, :gor_name, :status])
     end
 end
