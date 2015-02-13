@@ -39,15 +39,16 @@ class ConvictionsController < ApplicationController
   end
 
   def convert_to_days(sentence, sentence_unit)
-      if sentence_unit == "Sentence Unknown"
-        sentence == ""
-      elsif sentence_unit == "Year(s)"
-        sentence * 365
-      elsif sentence_unit == "Month(s)"
-        sentence * 30
-      else
-        sentence
-      end
+    case sentence_unit
+    when "Sentence Unknown"
+      sentence == ""
+    when "Year(s)"
+      sentence * 365
+    when "Month(s)"
+      sentence * 30
+    else
+      sentence
+    end
   end
 
   def update
