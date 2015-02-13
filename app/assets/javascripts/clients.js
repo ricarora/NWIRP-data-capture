@@ -17,7 +17,6 @@ function IndexNumber(class_name, field_type) {
 
 function SelectOptionsGenerator(arr) {
   str = "<option value>Please select</option>";
-  debugger
   for(i=0; i < arr.length; i++ ) {
     str = str + "<option value=" + arr[i].name + ">" + arr[i].name + "</option>"
   }
@@ -42,7 +41,6 @@ function addAssessmentField(first) {
 
 
 $(function() {
-  debugger
   var ArrayOfReliefObjects = $("#relief_sought_options").data('url');
   var dropDownOptionsForRelief = SelectOptionsGenerator(ArrayOfReliefObjects)
 
