@@ -30,7 +30,7 @@
         <th>Relief Sought</th>
         <th>Represented</th>
         <th>Drru Case</th>
-        <th>Assessment Date</th>
+        <th>Assessment Date(s)</th>
       </tr>
     </thead>
     <tbody>
@@ -58,12 +58,12 @@
     <thead>
       <tr>
         <th>Crime Name</th>
-        <th>Subsection</th>
-        <th>DV on ROC</th>
-        <th>Sentence(in days)</th>
-        <th>Immigration Judge(IJ) Name</th>
         <th>State Crime Committed</th>
         <th>RCW</th>
+        <th>Subsection</th>
+        <th>DV on ROC</th>
+        <th>Sentence(IN DAYS)</th>
+        <th>Immigration Judge(IJ) Name</th>
         <th>NTA Charges</th>
         <th>IJ Decision Date</th>
         <th>IJ Finding</th>
@@ -72,12 +72,12 @@
     <tbody>
       <tr>
         <td><%= conviction.crime_name %></td>
+        <td><%= conviction.state_committed %></td>
+        <td><%= conviction.rcw %></td>
         <td><%= conviction.subsection %></td>
         <td><%= conviction.dv_on_roc %></td>
         <td><%= conviction.sentence %></td>
         <td><%= conviction.ij_name %></td>
-        <td><%= conviction.state_committed %></td>
-        <td><%= conviction.rcw %>
         <td><%= conviction.nta_charges %></td>
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
         <td><%= conviction.ij_finding %></td>
