@@ -51,7 +51,7 @@
     </tbody>
   </table>
 </div>
-<div>
+<div class="panel">
   <% @client.convictions.each_with_index do |conviction, index| %>
   <h4>Conviction <%= index + 1 %></h4>
   <table role="grid" summary="Client conviction" class="conviction-table">
@@ -73,7 +73,7 @@
         <td><%= conviction.sentence %></td>
         <td><%= conviction.ij_name %></td>
         <td><%= conviction.nta_charges %></td>
-        <td><%= conviction.ij_decision_date %></td>
+        <td><%= (conviction.ij_decision_date).strftime("%D")  %></td>
         <td><%= conviction.ij_finding %></td>
       </tr>
     </tbody>

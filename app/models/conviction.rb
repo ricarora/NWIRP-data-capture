@@ -41,14 +41,14 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.all_crime_names
-    Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:empty?)
+    Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:blank?)
   end
 
   def self.all_subsections
-    Conviction.select(:subsection).map(&:subsection).uniq#.reject {|subsection| subsection == ""}
+    Conviction.select(:subsection).map(&:subsection).uniq.reject(&:blank?)
   end
 
   def self.all_nta_charges
-    Conviction.select(:nta_charges).map(&:nta_charges).uniq#.reject {|nta_charge| nta_charge == ""}
+    Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:blank?)
   end
 end
