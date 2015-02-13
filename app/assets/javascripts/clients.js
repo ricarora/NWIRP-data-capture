@@ -26,7 +26,7 @@ function SelectOptionsGenerator(arr) {
 function addReliefField(first, dropDownOptions) {
   //adding an empty field to relief field in client form. Also, add a remove link with it.
   var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
-  var emptyField = "<div> <select data-index="+ IndexNumber("relief_field", "select") +" class='client_client_reliefs_attributes_0_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_field", "select") + "][relief_name]>" + dropDownOptions + "</select>";
+  var emptyField = "<div> <select data-index=" + IndexNumber("relief_fields", "select") + " class='client_client_reliefs_attributes_" + IndexNumber("relief_fields", "select") + "_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_fields", "select") + "][relief_name]>" + dropDownOptions + "</select>";
   emptyField = emptyField + remove;
   $(".relief_field").append(emptyField);
 }
