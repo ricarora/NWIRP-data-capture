@@ -6,6 +6,8 @@ function IndexNumber(class_name, field_type) {
   // checking if data-index exist for an empty field, if it does it increments the last data-index by 1
   // if there is no data-index, it sets it to zero
   $data = $("." + class_name + " " + field_type + ":last").data()
+  // $data = $("." + class_name + " " + "div" + " " + field_type + ":last").data()
+  // commented out works with assessment after Matt's changes
   if ( $data != null || undefined) {
     return $data.index + 1
   } else {

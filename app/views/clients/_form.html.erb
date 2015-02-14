@@ -66,14 +66,22 @@
   </div>
 </div>
 
+<% first_relief = true %>
+<% first_link = true %>
 <%= f.fields_for :client_reliefs do |builder| %>
 <div class="field row">
+  <% if first_relief
+          first_relief = false %>
   <div class="small-3 columns">
     <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
   </div>
-  <div class="small-6 columns relief_fields">
+  <% end %> <!-- first relief -->
+  <div data-reliefs="<%= builder.object.relief_name %>" class="small-6 columns relief_fields">
   </div>
+  <% if first_link
+        first_link = false %>
   <a href="#" id="add_field">Add another Relief Sought</a>
+  <% end %>
 </div>
 <% end %>
 
