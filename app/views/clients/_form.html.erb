@@ -65,7 +65,8 @@
     <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
   </div>
 </div>
-
+<!-- FAILED SUBMIT CLIENT: params[:client][:client_reliefs_attributes][1]
+UPDATING CLIENT: @client.client_reliefs-->
 <% first_relief = true %>
 <% first_link = true %>
 <%= f.fields_for :client_reliefs do |builder| %>
@@ -115,7 +116,6 @@
 </div>
 <% end %>
 </div>
-
 
 <div class="actions">
   <%= f.submit class: "button round" %>

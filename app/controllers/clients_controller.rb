@@ -25,15 +25,15 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    p @client
-    params[:client][:client_reliefs_attributes].map do |key, cr_hash|
-      if !cr_hash[:relief_name].empty?
-        @client.client_reliefs(relief_name: cr_hash[:relief_name])
-      end
-    end
-    params[:client][:assessments_attributes].map do |key, ass_hash|
-      @client.assessments(date: ass_hash[:date])
-    end
+    # p @client
+    # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
+    #   if !cr_hash[:relief_name].empty?
+    #     @client.client_reliefs(relief_name: cr_hash[:relief_name])
+    #   end
+    # end
+    # params[:client][:assessments_attributes].map do |key, ass_hash|
+    #   @client.assessments(date: ass_hash[:date])
+    # end
     @client.attributes = client_params
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
