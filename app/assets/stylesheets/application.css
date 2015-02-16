@@ -39,7 +39,8 @@ h2 {
 .top-bar-section ul li a {
   text-decoration: none;
 }
-/* BUTTON */
+
+/* button */
 
 .button {
   color: white;
@@ -61,6 +62,8 @@ h2 {
   border-width: 2px;
 }
 
+/* link */
+
 a {
   color: #444;
   text-decoration: underline;
@@ -70,9 +73,10 @@ a:hover, a:focus {
   text-decoration: none;
   background-color: #444;
   color: white;
+  padding: 3px;
 }
 
-/* New Client Form */
+/* FORMS */
 
 .remove_field {
   background-color: #ffcc00;
@@ -111,7 +115,8 @@ input[type="checkbox"]:checked + .label-text:before {
   display: inline-block;
 }
 
-/* Show Page */
+/* SHOW */
+
 table {
   width: 100%;
 }
