@@ -9,7 +9,7 @@
     <%= render 'attribute_fields', f: a %>
   <% end %>
 
-  <%= f.predicate_select  compounds: false, only: %i(cont not_cont eq not_eq lt lteq gt gteq blank null) %>
+  <%= f.predicate_select  compounds: false, only: %i(cont not_cont eq not_eq lt lteq gt gteq true false blank null) %>
 
   <%= f.value_fields do |v| %>
     <%= render 'value_fields', f: v %>
