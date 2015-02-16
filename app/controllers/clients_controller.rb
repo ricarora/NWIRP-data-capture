@@ -25,6 +25,8 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
+    @client.assessments.build
+    @client.client_reliefs.build
     # p @client
     # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
     #   if !cr_hash[:relief_name].empty?
