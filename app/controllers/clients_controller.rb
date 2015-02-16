@@ -12,13 +12,11 @@ class ClientsController < ApplicationController
   end
 
   def new
-
-    @client = Client.new
-    @client.assessments.build(client_id: @client.id)
-    #@client.assessments.build(client_id: @client.id, date: Date.today)
-    #@client.assessments.build(client_id: @client.id)
-    @client.client_reliefs.build(client_id: @client.id)
-    # raise
+    unless @client
+      @client = Client.new
+      @client.assessments.build
+      @client.client_reliefs.build
+    end
   end
 
   def edit
@@ -26,8 +24,8 @@ class ClientsController < ApplicationController
   end
 
   def create
-    # raise
     @client = Client.new
+    p @client
     params[:client][:client_reliefs_attributes].map do |key, cr_hash|
       if !cr_hash[:relief_name].empty?
         @client.client_reliefs(relief_name: cr_hash[:relief_name])
