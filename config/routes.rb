@@ -12,5 +12,4 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  patch 'clients/:id', to: 'clients#update'
 end
