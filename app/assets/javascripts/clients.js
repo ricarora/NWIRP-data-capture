@@ -23,12 +23,30 @@ function SelectOptionsGenerator(arr) {
   return str
 }
 
+function selectRelief() {
+  debugger
+  var reliefs = $(".relief_fields")
+  for(i=0; i < reliefs.length; i++) {
+    //var options = $(".client_client_reliefs_attributes_0_relief_name")
+    //reliefs[i]
+    var optionarray = $(".client_client_reliefs_attributes_0_relief_name")[i].options
+    for(i=0; i < optionarray.length; i++ ) {
+      var selected = $(".relief_fields").data("reliefs")
+
+    }
+    //need to find the option where the value matches
+    //throw in selected in that option
+  }
+}
+
+
 function addReliefField(first, dropDownOptions) {
   //adding an empty field to relief field in client form. Also, add a remove link with it.
   var remove = first ? "</div>" : "<a href='#' class='remove_field'>Remove field</a></div>";
   var emptyField = "<div> <select data-index=" + IndexNumber("relief_fields", "select") + " class='client_client_reliefs_attributes_" + IndexNumber("relief_fields", "select") + "_relief_name' name=client[client_reliefs_attributes][" + IndexNumber("relief_fields", "select") + "][relief_name]>" + dropDownOptions + "</select>";
   emptyField = emptyField + remove;
   $(".relief_fields").append(emptyField);
+  selectRelief()
 }
 
 function addAssessmentField() {
