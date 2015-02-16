@@ -105,6 +105,16 @@
       </tr>
     </tbody>
   </table>
+  <% if !conviction.notes.blank? %>
+    <table>
+      <tr>
+        <th>ADDITIONAL NOTES</th>
+      </tr>
+      <tr>
+        <td><%= conviction.notes %></td>
+      </tr>
+    <% end %>
+  </table>
   <%#= link_to "Edit Conviction", edit_client_conviction_path(conviction) %>
 </div>
 <% end %>
