@@ -25,8 +25,12 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    @client.assessments.build
-    @client.client_reliefs.build
+    unless !params[:client][:assessments_attributes] == nil
+      @client.assessments.build
+    end
+    unless params[:client][:client_reliefs_attributes]
+      @client.client_reliefs.build
+    end
     # p @client
     # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
     #   if !cr_hash[:relief_name].empty?
@@ -46,7 +50,7 @@ class ClientsController < ApplicationController
   end
 
   def update
-    if @client.update(client_params)
+    if @client.update(client_params) && @client.ethnicity.update(params[:client][:ethnicity].reject(&:empty?))
       redirect_to @client, notice: 'Client was successfully updated.'
     else
       render :edit
