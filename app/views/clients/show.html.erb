@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h2>CLIENT: <%= @client.full_name %></h2>
-<div>
+<div class="panel">
   <table role="grid" summary="General information on client.">
     <thead>
       <tr>
@@ -50,11 +50,10 @@
       </tr>
     </tbody>
   </table>
+  <%= link_to "EDIT CLIENT", edit_client_path(@client) %>
 </div>
 
-<div>
-<%= link_to "Edit Client", edit_client_path(@client) %>
-</div>
+
 
   <% @client.convictions.each_with_index do |conviction, index| %>
 <div class="panel">
@@ -115,10 +114,10 @@
       </tr>
     <% end %>
   </table>
-  <%#= link_to "Edit Conviction", edit_client_conviction_path(conviction) %>
+  <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction) %>
 </div>
 <% end %>
 
 
 
-<%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button round" %>
+<%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button" %>

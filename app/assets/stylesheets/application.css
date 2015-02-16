@@ -39,29 +39,30 @@ h2 {
 .top-bar-section ul li a {
   text-decoration: none;
 }
+/* BUTTON */
 
 .button {
-  float: right;
-}
-/*
-.button {
+  color: white;
   background-color: #444;
   float: right;
-  color: white;
   margin-left: 2px;
   margin-right: 2px;
+  border: white;
+  border-style: solid;
+  border-width: 2px;
 }
 
 .button:focus, .button:hover {
+  background-color: white;
+  /*background-color: #ffcc00;*/
   color: #444;
-  background-color: #ffcc00;
-}*/
-
-a.button {
-  color: white;
+  border: #444;
+  border-style: solid;
+  border-width: 2px;
 }
 
 a {
+  color: #444;
   text-decoration: underline;
 }
 
