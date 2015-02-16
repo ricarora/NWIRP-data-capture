@@ -51,6 +51,11 @@
     </tbody>
   </table>
 </div>
+
+<div>
+<%= link_to "Edit Client", edit_client_path(@client) %>
+</div>
+
   <% @client.convictions.each_with_index do |conviction, index| %>
 <div class="panel">
   <h4>Conviction <%= index + 1 %></h4>
@@ -100,10 +105,10 @@
       </tr>
     </tbody>
   </table>
+  <%#= link_to "Edit Conviction", edit_client_conviction_path(conviction) %>
 </div>
-  <% end %>
+<% end %>
 
 
-<%= link_to "Edit Client Information", edit_client_path(@client), class: "button round" %>
 
 <%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button round" %>
