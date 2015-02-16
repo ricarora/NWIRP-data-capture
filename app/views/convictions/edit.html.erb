@@ -1,6 +1,7 @@
-<h1>Editing conviction</h1>
+<%= link_to "Client: #{@client.full_name}", client_path(params[:id]) %>
+<h2>Edit Conviction</h2>
 
-<%= render 'edit_form' %>
+<%= render 'form' %>
 
 <%= link_to 'Show', client_convictions_path %> |
 <%= link_to 'Back', client_convictions_path %>
