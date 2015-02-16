@@ -24,13 +24,17 @@ class ClientsController < ApplicationController
   end
 
   def create
+
     @client = Client.new
     unless params[:client][:assessments_attributes]["0"]["date"] != ""
       @client.assessments.build
     end
-    unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
-      @client.client_reliefs.build
+    params[:client][:client_reliefs_attributes].each do |relief|
+      unless relief[1]["relief_name"] != ""
+        @client.client_reliefs.build
+      end
     end
+    #unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
     # p @client
     # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
     #   if !cr_hash[:relief_name].empty?
