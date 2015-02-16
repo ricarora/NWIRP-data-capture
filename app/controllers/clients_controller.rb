@@ -25,10 +25,10 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    unless !params[:client][:assessments_attributes][1] == nil
+    unless params[:client][:assessments_attributes]["0"]["date"] != ""
       @client.assessments.build
     end
-    unless !params[:client][:client_reliefs_attributes] == nil
+    unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
       @client.client_reliefs.build
     end
     # p @client
