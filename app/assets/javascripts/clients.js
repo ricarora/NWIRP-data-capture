@@ -25,16 +25,18 @@ function SelectOptionsGenerator(arr) {
 
 function selectRelief() {
   var reliefs = $(".relief_fields")
+  debugger
   for(i=0; i < reliefs.length; i++) {
     //var options = $(".client_client_reliefs_attributes_0_relief_name")
     //reliefs[i]
     var optionarray = $(".client_client_reliefs_attributes_0_relief_name")[i].options
     for(i=0; i < optionarray.length; i++ ) {
       var selected = $(".relief_fields").data("reliefs")
-
+      //this should work?!?!?
+      //need to find the option where the value matches
+      $(".client_client_reliefs_attributes_0_relief_name")[0].options.find("[value='" + selected + "']");
+      //throw in selected in that option
     }
-    //need to find the option where the value matches
-    //throw in selected in that option
   }
 }
 
