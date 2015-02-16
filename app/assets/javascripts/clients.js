@@ -18,7 +18,7 @@ function IndexNumber(class_name, field_type) {
 function SelectOptionsGenerator(arr) {
   str = "<option value>Please select</option>";
   for(i=0; i < arr.length; i++ ) {
-    str = str + "<option value=" + arr[i].name + ">" + arr[i].name + "</option>"
+    str = str + "<option value='" + arr[i].name + "'>" + arr[i].name + "</option>"
   }
   return str
 }
