@@ -1,6 +1,7 @@
-<h1>Editing client</h1>
+<%= link_to "Client: #{@client.full_name}", client_path(params[:id]) %> 
+<h2>EDIT CLIENT</h2>
 
-<%= render 'edit_form' %>
+<%= render 'form' %>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+<%#= link_to 'Show', @client %>
+<%#= link_to 'Back', clients_path %>
