@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
     unless @client
       @client = Client.new
       @client.assessments.build
-      5.times do
+      10.times do
         @client.client_reliefs.build
       end
     end
@@ -33,9 +33,7 @@ class ClientsController < ApplicationController
     end
     params[:client][:client_reliefs_attributes].each do |relief|
       unless relief[1]["relief_name"] != ""
-        5.times do
-          @client.client_reliefs.build
-        end
+        @client.client_reliefs.build
       end
     end
     #unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""

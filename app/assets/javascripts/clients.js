@@ -5,20 +5,32 @@
 function hideReliefs() {
   $(".reliefs").children().addClass("hidden") // adds hidden class to all children
   $(".reliefs div:first-child").removeClass("hidden")
+  showNextRelief();
 }
 
 function showNextRelief() {
   $("#show-field").click(function(event) {
     event.preventDefault();
-    $(".reliefs").children().removeClass("hidden") // removes hidden class to all children
+    var remove = "<a href='#' class='remove_field'>Remove field</a></div>"
+    $('.hidden').first().append(remove)
+    $('.hidden').first().removeClass("hidden") // removes hidden class to all children
   });
 }
 
+function removeRelief() {
+  $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
+    event.preventDefault(); $(this).parent('div').remove();
+  });
+}
+
+
 $(function() {
  hideReliefs();
-
 });
 
+//$( '.hidden' ).first(); //returns first div found with hidden class
+// $( '.hidden' ); //finds all divs with hidden class
+//$(".reliefs").children().css("position", "absolute");
 //$("#client_client_reliefs_attributes_1_relief_name").parent().parent()
 
 
