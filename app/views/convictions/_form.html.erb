@@ -1,4 +1,4 @@
-<%= form_for(@conviction, url: client_convictions_path) do |f| %>
+<%= form_for @conviction do |f| %>
   <% if @conviction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>

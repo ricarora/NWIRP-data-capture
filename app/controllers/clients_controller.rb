@@ -15,7 +15,9 @@ class ClientsController < ApplicationController
     unless @client
       @client = Client.new
       @client.assessments.build
-      @client.client_reliefs.build
+      5.times do
+        @client.client_reliefs.build
+      end
     end
   end
 
