@@ -119,3 +119,7 @@ input[type="checkbox"]:checked + .label-text:before {
 table {
   width: 100%;
 }
+
+.update-link {
+  padding-left: 10px;
+}
