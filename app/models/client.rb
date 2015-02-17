@@ -99,9 +99,9 @@ class Client < ActiveRecord::Base
     end
   end
 
-  def a_number
-    self.a_number
-  end
+  # def a_number
+  #   self.a_number
+  # end
 
   def full_name
     self.first_name + ' ' + self.last_name
