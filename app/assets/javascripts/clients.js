@@ -3,8 +3,9 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 function hideReliefs() {
-  $(".reliefs").children().addClass("hidden") // adds hidden class to all children
-  $(".reliefs div:first-child").removeClass("hidden")
+  $("#first-field").removeClass("small-8")
+  $("#first-field").addClass("small-9")
+  $(".reliefs div:first-child").removeClass("hidden");
   showNextRelief();
 }
 
@@ -17,11 +18,11 @@ function showNextRelief() {
   });
 }
 
-function removeRelief() {
-  $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
-    event.preventDefault(); $(this).parent('div').remove();
-  });
-}
+// function removeRelief() {
+//   $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
+//     event.preventDefault(); $(this).parent('div').remove();
+//   });
+// }
 
 
 $(function() {

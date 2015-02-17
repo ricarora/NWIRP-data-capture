@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
     unless @client
       @client = Client.new
       @client.assessments.build
-      10.times do
+      5.times do
         @client.client_reliefs.build
       end
     end
@@ -26,7 +26,6 @@ class ClientsController < ApplicationController
   end
 
   def create
-
     @client = Client.new
     unless params[:client][:assessments_attributes]["0"]["date"] != ""
       @client.assessments.build

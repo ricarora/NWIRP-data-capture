@@ -82,12 +82,13 @@ UPDATING CLIENT: @client.client_reliefs-->
   <%# end %> -->
   <div class="reliefs">
     <%= f.fields_for :client_reliefs, @client.client_reliefs do |relief_f| %>
-    <div class="field row">
+    <div class="field row hidden">
       <div class="small-3 columns">
         <%= relief_f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
       </div>
-      <div class="small-9 columns">
-        <%= relief_f.select :relief_name, ReliefSought.all.map {|relief| relief.name}, {include_blank: "Please select"} %>
+      <div class="small-8 columns" id="first-field">
+        <%= relief_f.select :relief_name, ReliefSought.all.map {|relief| relief.name},
+        {include_blank: "Please select"} %>
       </div>
     </div>
     <% end %>
