@@ -23,6 +23,9 @@ class ClientsController < ApplicationController
 
   def edit
     client = Client.find(params[:id])
+    # 2.times do
+    #   @client.client_reliefs.build
+    # end
   end
 
   def create
