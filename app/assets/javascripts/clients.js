@@ -25,7 +25,6 @@ function SelectOptionsGenerator(arr) {
 
 function selectRelief() {
   var reliefs = $(".relief_fields")
-  debugger
   for(i=0; i < reliefs.length; i++) {
     //var options = $(".client_client_reliefs_attributes_0_relief_name")
     //reliefs[i]
