@@ -14,7 +14,7 @@ class Conviction < ActiveRecord::Base
       :reject_if => proc {|attributes|
         attributes.all? {|k,v| v.blank?}
       }
-      
+
   attr_accessor :sentence_unit
 
   IJ_NAME = ["Odell", "Scala", "Fitting"]
@@ -43,9 +43,9 @@ class Conviction < ActiveRecord::Base
     end
   end
 
-  ransacker :title_diddly do |parent|
-    Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
-  end
+  # ransacker :title_diddly do |parent|
+  #   Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
+  # end
 
   def self.all_crime_names
     Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:blank?)
@@ -57,5 +57,9 @@ class Conviction < ActiveRecord::Base
 
   def self.all_nta_charges
     Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:blank?)
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(crime_name rcw subsection sentence ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
   end
 end

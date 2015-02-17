@@ -99,8 +99,16 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def a_number
+    self.a_number
+  end
+
   def full_name
     self.first_name + ' ' + self.last_name
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(first_name last_name a_number nationality ethnicity gender represented drru_case) + _ransackers.keys
   end
 
   ransacker :full_name do |parent|
