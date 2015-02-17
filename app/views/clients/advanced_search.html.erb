@@ -17,7 +17,10 @@
   </fieldset>
 
   <fieldset>
-    <legend>Condition Groups</legend>
+    <legend>Search Conditions</legend>
+    <%= f.condition_fields do |g| %>
+      <%= render 'condition_fields', f: g %>
+    <% end %>
     <%= button_to_add_fields "Add Condition", f, :condition %>
   </fieldset>
 
