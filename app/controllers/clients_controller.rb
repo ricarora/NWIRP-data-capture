@@ -56,7 +56,8 @@ class ClientsController < ApplicationController
   end
 
   def update
-    if @client.update(client_params) && @client.ethnicity.update(params[:client][:ethnicity].reject(&:empty?))
+    @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
+    if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
     else
       render :edit
