@@ -9,8 +9,6 @@
       </ul>
     </div>
   <% end %>
-
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :a_number, "A#*", class: "right inline required" %>
@@ -19,7 +17,6 @@
       <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
     </div>
   </div>
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
@@ -28,7 +25,6 @@
       <%= f.text_field :last_name %>
     </div>
   </div>
-
   <div class="field row">
     <div class="small-3 columns" >
       <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
@@ -37,7 +33,6 @@
       <%= f.text_field :first_name %>
     </div>
   </div>
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
@@ -47,7 +42,6 @@
       {include_blank: "Please select"} %>
     </div>
   </div>
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
@@ -115,7 +109,7 @@ UPDATING CLIENT: @client.client_reliefs-->
     </div>
     <% end %>
   </div>
-<!-- Trying to send to clients_path not client_path for patch-->
+<!-- Error is it's trying to send to clients_path not client_path for patch-->
   <div class="actions">
     <%= f.submit class: "button" %>
   </div>
