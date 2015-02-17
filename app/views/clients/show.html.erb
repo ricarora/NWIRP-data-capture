@@ -1,109 +1,122 @@
 <p id="notice"><%= notice %></p>
 
-<h2>CLIENT: <%= @client.full_name %></h2>
+<h2><%= @client.full_name %></h2>
 <div>
-  <table role="grid" summary="General information on client.">
-    <thead>
-      <tr>
-        <th>A#</th>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Nationality</th>
-        <th>Ethnicity</th>
-        <th>Gender</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @client.a_number %></td>
-        <td><%= @client.last_name %></td>
-        <td><%= @client.first_name %></td>
-        <td><%= @client.nationality %></td>
-        <td><%= @client.ethnicity.join("<br>").html_safe %></td>
-        <td><%= @client.gender %></td>
-      </tr>
-    </tbody>
-  </table>
-  <table role="grid" summary="">
-    <thead>
-      <tr>
-        <th>Relief Sought</th>
-        <th>Represented</th>
-        <th>Drru Case</th>
-        <th>Assessment Date(s)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <% @client.client_reliefs.each do |relief| %>
-          <div><%= relief.relief_name %></div>
+  <div class="panel">
+    <table role="grid" summary="General information on client.">
+      <thead>
+        <tr>
+          <th>A#</th>
+          <th>LAST NAME</th>
+          <th>FIRST NAME</th>
+          <th>NATIONALITY</th>
+          <th>ETHNICITY</th>
+          <th>GENDER</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @client.a_number %></td>
+          <td><%= @client.last_name %></td>
+          <td><%= @client.first_name %></td>
+          <td><%= @client.nationality %></td>
+          <td><%= @client.ethnicity.join("<br>").html_safe %></td>
+          <td><%= @client.gender %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table role="grid" summary="">
+      <thead>
+        <tr>
+          <th>RELIEF SOUGHT</th>
+          <th>REPRESENTED</th>
+          <th>DRRU CASE</th>
+          <th>ASSESSMENT DATE(S)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% @client.client_reliefs.each do |relief| %>
+            <div><%= relief.relief_name %></div>
+            <% end %>
+          </td>
+          <td><%= @client.represented %></td>
+          <td><%= translate(@client.drru_case.class) %></td>
+          <td>
+            <% @client.assessments.each do |assessment| %>
+            <div><%= (assessment.date).strftime("%D") %></div>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="update-link"><%= link_to "EDIT CLIENT", edit_client_path(@client) %></span>
+  </div>
+
+
+
+    <% @client.convictions.each_with_index do |conviction, index| %>
+  <div class="panel">
+    <h4>Conviction <%= index + 1 %></h4>
+    <table role="grid" summary="Client conviction" class="conviction-table">
+      <thead>
+        <tr>
+          <th>CRIME NAME</th>
+          <th>STATE CRIME COMMITTED</th>
+          <th>RCW</th>
+          <th>SUBSECTION</th>
+          <th>DV ON ROC</th>
+          <th>SENTENCE (IN DAYS)</th>
+          <th>IMMIGRATION JUDGE (IJ)</th>
+          <th>NTA CHARGES</th>
+          <th>IJ DECISION DATE</th>
+          <th>IJ FINDING</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= conviction.crime_name %></td>
+          <td><%= conviction.state_committed %></td>
+          <td><%= conviction.rcw %></td>
+          <td><%= conviction.subsection %></td>
+          <td><%= translate(conviction.dv_on_roc.class) %></td>
+          <td><%= conviction.sentence %></td>
+          <td><%= conviction.ij_name %></td>
+          <td><%= conviction.nta_charges %></td>
+          <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
+          <td><%= conviction.ij_finding %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table role="grid" summary="Grounds of removability tied to conviction">
+      <thead>
+        <tr>
+          <% conviction.conviction_grounds.each do |ground| %>
+          <th><%= ground.gor_name %></th>
           <% end %>
-        </td>
-        <td><%= @client.represented %></td>
-        <td><%= translate(@client.drru_case.class) %></td>
-        <td>
-          <% @client.assessments.each do |assessment| %>
-          <div><%= (assessment.date).strftime("%D") %></div>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% conviction.conviction_grounds.each do |ground| %>
+          <td><%= ground.status %></td>
           <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-  <% @client.convictions.each_with_index do |conviction, index| %>
-<div class="panel">
-  <h4>Conviction <%= index + 1 %></h4>
-  <table role="grid" summary="Client conviction" class="conviction-table">
-    <thead>
-      <tr>
-        <th>Crime Name</th>
-        <th>State Crime Committed</th>
-        <th>RCW</th>
-        <th>Subsection</th>
-        <th>DV on ROC</th>
-        <th>Sentence(IN DAYS)</th>
-        <th>Immigration Judge(IJ) Name</th>
-        <th>NTA Charges</th>
-        <th>IJ Decision Date</th>
-        <th>IJ Finding</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= conviction.crime_name %></td>
-        <td><%= conviction.state_committed %></td>
-        <td><%= conviction.rcw %></td>
-        <td><%= conviction.subsection %></td>
-        <td><%= conviction.dv_on_roc %></td>
-        <td><%= conviction.sentence %></td>
-        <td><%= conviction.ij_name %></td>
-        <td><%= conviction.nta_charges %></td>
-        <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
-        <td><%= conviction.ij_finding %></td>
-      </tr>
-    </tbody>
-  </table>
-  <table role="grid" summary="Grounds of removability tied to conviction">
-    <thead>
-      <tr>
-        <% conviction.conviction_grounds.each do |ground| %>
-        <th><%= ground.gor_name %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <% conviction.conviction_grounds.each do |ground| %>
-        <td><%= ground.status %></td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </tr>
+      </tbody>
+    </table>
+    <% if !conviction.notes.blank? %>
+      <table>
+        <tr>
+          <th>ADDITIONAL NOTES</th>
+        </tr>
+        <tr>
+          <td><%= conviction.notes %></td>
+        </tr>
+      <% end %>
+    </table>
+    <span class="update-link"><%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction) %></div>
+  </div>
   <% end %>
-
-
-<%= link_to "Edit Client Information", edit_client_path(@client), class: "button round" %>
-
-<%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button round" %>
+<%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button" %>
+</div>
