@@ -80,6 +80,7 @@ UPDATING CLIENT: @client.client_reliefs-->
       <%# end %>
     </div>
   <%# end %> -->
+  <div class="reliefs">
     <%= f.fields_for :client_reliefs, @client.client_reliefs do |relief_f| %>
     <div class="field row">
       <div class="small-3 columns">
@@ -90,8 +91,15 @@ UPDATING CLIENT: @client.client_reliefs-->
       </div>
     </div>
     <% end %>
-    <a href="#" id="add_field">Add another Relief Sought</a>
-
+  </div>
+  <span class="field row">
+    <span class="small-3 columns">
+    </span>
+    <span class="small-3 columns">
+      <a href="#" id="show-field">Add another Relief Sought</a>
+    </span>
+  </span>
+  <br>
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :represented, "REPRESENTED", class: "right inline" %>
