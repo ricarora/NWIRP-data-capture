@@ -6,23 +6,25 @@ function hideReliefs() {
   $("#first-field").removeClass("small-8")
   $("#first-field").addClass("small-9")
   $(".reliefs div:first-child").removeClass("hidden");
-  showNextRelief();
+
+  var remove = "<a href='#' class='remove_field'>Remove field</a></div>"
+  $('.hidden').append(remove)
+  showRelief();
 }
 
-function showNextRelief() {
+function showRelief() {
   $("#show-field").click(function(event) {
     event.preventDefault();
-    var remove = "<a href='#' class='remove_field'>Remove field</a></div>"
-    $('.hidden').first().append(remove)
     $('.hidden').first().removeClass("hidden") // removes hidden class to all children
+  });
+
+  $(".reliefs").on("click",".remove_field", function(event){ //user click on remove text
+      event.preventDefault();
+      $(this).parent('div').addClass("hidden");
+      //should also remove any select value that might be there
   });
 }
 
-// function removeRelief() {
-//   $(".relief_fields").on("click",".remove_field", function(event){ //user click on remove text
-//     event.preventDefault(); $(this).parent('div').remove();
-//   });
-// }
 
 
 $(function() {
