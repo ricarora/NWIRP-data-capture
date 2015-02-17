@@ -12,13 +12,11 @@ class ClientsController < ApplicationController
   end
 
   def new
-
-    @client = Client.new
-    @client.assessments.build(client_id: @client.id)
-    #@client.assessments.build(client_id: @client.id, date: Date.today)
-    #@client.assessments.build(client_id: @client.id)
-    @client.client_reliefs.build(client_id: @client.id)
-    # raise
+    unless @client
+      @client = Client.new
+      @client.assessments.build
+      @client.client_reliefs.build
+    end
   end
 
   def edit
@@ -26,16 +24,26 @@ class ClientsController < ApplicationController
   end
 
   def create
-    # raise
+
     @client = Client.new
-    params[:client][:client_reliefs_attributes].map do |key, cr_hash|
-      if !cr_hash[:relief_name].empty?
-        @client.client_reliefs(relief_name: cr_hash[:relief_name])
+    unless params[:client][:assessments_attributes]["0"]["date"] != ""
+      @client.assessments.build
+    end
+    params[:client][:client_reliefs_attributes].each do |relief|
+      unless relief[1]["relief_name"] != ""
+        @client.client_reliefs.build
       end
     end
-    params[:client][:assessments_attributes].map do |key, ass_hash|
-      @client.assessments(date: ass_hash[:date])
-    end
+    #unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
+    # p @client
+    # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
+    #   if !cr_hash[:relief_name].empty?
+    #     @client.client_reliefs(relief_name: cr_hash[:relief_name])
+    #   end
+    # end
+    # params[:client][:assessments_attributes].map do |key, ass_hash|
+    #   @client.assessments(date: ass_hash[:date])
+    # end
     @client.attributes = client_params
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
@@ -46,7 +54,7 @@ class ClientsController < ApplicationController
   end
 
   def update
-    if @client.update(client_params)
+    if @client.update(client_params) && @client.ethnicity.update(params[:client][:ethnicity].reject(&:empty?))
       redirect_to @client, notice: 'Client was successfully updated.'
     else
       render :edit

@@ -1,123 +1,116 @@
 <%= form_for(@client, url: clients_path) do |f| %>
-<% if @client.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
-  <ul>
-    <% @client.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :a_number, "A#*", class: "right inline required" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
-  </div>
-</div>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.text_field :last_name %>
-  </div>
-</div>
-
-<div class="field row">
-  <div class="small-3 columns" >
-    <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.text_field :first_name %>
-  </div>
-</div>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.select :nationality, Client::NATIONALITY,
-    {include_blank: "Please select"} %>
-  </div>
-</div>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.select :ethnicity, Client::ETHNICITY,
-    {}, {multiple: true, class: "multiple-selections"} %>
-  </div>
-</div>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :gender, "GENDER", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
-  </div>
-</div>
-
-<% first_relief = true %>
-<% first_link = true %>
-<%= f.fields_for :client_reliefs do |builder| %>
-<div class="field row">
-  <% if first_relief
-          first_relief = false %>
-  <div class="small-3 columns">
-    <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
-  </div>
-  <% end %> <!-- first relief -->
-  <div data-reliefs="<%= builder.object.relief_name %>" class="small-6 columns relief_fields">
-  </div>
-  <% if first_link
-        first_link = false %>
-  <a href="#" id="add_field">Add another Relief Sought</a>
+  <% if @client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <ul>
+        <% @client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-</div>
-<% end %>
-
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :represented, "REPRESENTED", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <%= f.select :represented, Client::REPRESENTED,
-    {include_blank: "Please select"} %>
-  </div>
-</div>
-<div class="field row">
-  <div class="small-3 columns">
-    <%= f.label :drru_case, "DRRU CASE", class: "right inline" %>
-  </div>
-  <div class="small-9 columns">
-    <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
-  </div>
-</div>
-
-<div class="assessment_fields">
-<%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
-<div class="field row">
+  <div class="field row">
     <div class="small-3 columns">
-      <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+      <%= f.label :a_number, "A#*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= assessment_f.date_field :date, data: {index: 0} %>
+      <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
     </div>
-</div>
-<% end %>
-</div>
-<a href="#" id="add_assessment_field">Add another Assessment</a>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :last_name, "LAST NAME*", class: "right inline required" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns" >
+      <%= f.label :first_name, "FIRST NAME", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :first_name %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :nationality, "NATIONALITY", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :nationality, Client::NATIONALITY,
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :ethnicity, "ETHNICITY", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :ethnicity, Client::ETHNICITY,
+      {}, {multiple: true, class: "multiple-selections"} %>
+    </div>
+  </div>
 
-<div class="actions">
-  <%= f.submit "Create Client", class: "button round" %>
-</div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :gender, "GENDER", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
+    </div>
+  </div>
+<!-- FAILED SUBMIT CLIENT: params[:client][:client_reliefs_attributes][1]
+UPDATING CLIENT: @client.client_reliefs-->
+  <% first_relief = true %>
+  <% first_link = true %>
+  <%= f.fields_for :client_reliefs do |builder| %>
+    <div class="field row">
+      <% if first_relief
+          first_relief = false %>
+        <div class="small-3 columns">
+          <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+        </div>
+      <% end %> <!-- first relief -->
+        <div data-reliefs="<%= builder.object.relief_name %>" class="small-6 columns relief_fields">
+        </div>
+      <% if first_link
+          first_link = false %>
+          <a href="#" id="add_field">Add another Relief Sought</a>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :represented, "REPRESENTED", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.select :represented, Client::REPRESENTED,
+      {include_blank: "Please select"} %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :drru_case, "DRRU CASE", class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
+    </div>
+  </div>
+  <div class="assessment_fields">
+    <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
+    <div class="field row">
+      <div class="small-3 columns">
+        <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+      </div>
+      <div class="small-9 columns">
+        <%= assessment_f.date_field :date, data: {index: 0} %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<!-- Error is it's trying to send to clients_path not client_path for patch-->
+  <div class="actions">
+    <%= f.submit class: "button" %>
+  </div>
 <% end %>
