@@ -8,7 +8,6 @@ $(function() {
   $("#add_crime_name").click(function(event) {
     event.preventDefault();
     $(".crime_name_field").append(crimeNameInput);
-    debugger
     $(".crime_name_group").prop('disabled', true);
     $("#add_crime_name").hide();
   });
