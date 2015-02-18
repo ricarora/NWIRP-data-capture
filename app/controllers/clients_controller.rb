@@ -15,9 +15,7 @@ class ClientsController < ApplicationController
     unless @client
       @client = Client.new
       @client.assessments.build
-      5.times do
-        @client.client_reliefs.build
-      end
+      build_relief_fields
     end
   end
 
@@ -30,30 +28,24 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    unless params[:client][:assessments_attributes]["0"]["date"] != ""
+    # puts "client_reliefs is #{@client.client_reliefs.inspect}"
+    if params[:client][:assessments_attributes]["0"]["date"] == ""
       @client.assessments.build
     end
-    params[:client][:client_reliefs_attributes].each do |relief|
-      unless relief[1]["relief_name"] != ""
-        @client.client_reliefs.build
-      end
-    end
-    #unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
-    # p @client
-    # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
-    #   if !cr_hash[:relief_name].empty?
-    #     @client.client_reliefs(relief_name: cr_hash[:relief_name])
-    #   end
-    # end
-    # params[:client][:assessments_attributes].map do |key, ass_hash|
-    #   @client.assessments(date: ass_hash[:date])
-    # end
+    
     @client.attributes = client_params
+    build_relief_fields
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
       render :new
+    end
+  end
+
+  def build_relief_fields
+    (5 - @client.client_reliefs.length).times do
+      @client.client_reliefs.build
     end
   end
 
