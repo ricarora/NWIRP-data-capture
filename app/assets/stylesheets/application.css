@@ -83,9 +83,7 @@ a:hover, a:focus {
   margin-bottom: 25px;
 }
 
-input[type=checkbox] {
-  display: none;
-}
+/*
 
 input[type="checkbox"] + .label-text:before {
   content: "No";
@@ -99,7 +97,7 @@ input[type="checkbox"]:checked + .label-text:before {
   background-color: #444;
   color: white;
   padding: 5px;
-}
+}*/
 
 .required {
   font-weight: 900;

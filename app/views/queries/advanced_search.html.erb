@@ -8,7 +8,7 @@
 
   <% setup_search_form f %>
 
-  <fieldset>
+  <fieldset class="hidden">
     <legend>Sorting</legend>
     <%= f.sort_fields do |s| %>
       <%= render 'sort_fields', f: s %>
