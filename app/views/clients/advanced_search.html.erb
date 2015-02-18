@@ -40,5 +40,8 @@
   <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
   <%= f.submit "Search", class: "button round" %>
 <% end %>
-
-<%= render 'results' %>
+<% if @clients %>
+  <%= render 'results' %>
+<% elsif @convictions %>
+  <%= render 'conviction_results' %>
+<% end %>

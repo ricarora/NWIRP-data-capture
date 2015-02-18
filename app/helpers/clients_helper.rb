@@ -2,7 +2,11 @@ module ClientsHelper
 
   def model_fields
     # which fields to display and sort by
-    [:id, :first_name, :last_name, :crime_name]
+    if @clients
+      [:id, :first_name, :last_name, :crime_name]
+    elsif @convictions
+      [:crime_name, :rcw]
+    end  
   end
 
   def results_limit
