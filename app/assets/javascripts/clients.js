@@ -38,7 +38,7 @@ function hideAssessments() {
     }
     $(assessment).find(".remove_field").click(function(event) {
       event.preventDefault();
-      //need to set value back to nil
+      ($(assessment.find(".date")).val(null))
       $(assessment).addClass("hidden");
     });
   });
