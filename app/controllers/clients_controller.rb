@@ -14,50 +14,53 @@ class ClientsController < ApplicationController
   def new
     unless @client
       @client = Client.new
-      @client.assessments.build
-      @client.client_reliefs.build
+      build_relief_fields
+      build_assessment_fields
     end
   end
 
   def edit
     client = Client.find(params[:id])
+    build_relief_fields
+    build_assessment_fields
   end
 
   def create
-
     @client = Client.new
-    unless params[:client][:assessments_attributes]["0"]["date"] != ""
-      @client.assessments.build
-    end
-    params[:client][:client_reliefs_attributes].each do |relief|
-      unless relief[1]["relief_name"] != ""
-        @client.client_reliefs.build
-      end
-    end
-    #unless params[:client][:client_reliefs_attributes]["0"]["relief_name"] != ""
-    # p @client
-    # params[:client][:client_reliefs_attributes].map do |key, cr_hash|
-    #   if !cr_hash[:relief_name].empty?
-    #     @client.client_reliefs(relief_name: cr_hash[:relief_name])
-    #   end
-    # end
-    # params[:client][:assessments_attributes].map do |key, ass_hash|
-    #   @client.assessments(date: ass_hash[:date])
-    # end
     @client.attributes = client_params
+    remove_blank_assessments
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
+    #@client.format_a_number
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
+      build_relief_fields
+      build_assessment_fields
       render :new
     end
   end
 
+  def build_assessment_fields
+    (10 - @client.assessments.length).times do
+      @client.assessments.build
+    end
+  end
+
+  def build_relief_fields
+    (10 - @client.client_reliefs.length).times do
+      @client.client_reliefs.build
+    end
+  end
+
   def update
-    if @client.update(client_params) && @client.ethnicity.update(params[:client][:ethnicity].reject(&:empty?))
+    remove_blank_assessments
+    @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
+    if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
     else
       render :edit
+      build_relief_fields
+      build_assessment_fields
     end
   end
 
@@ -82,9 +85,19 @@ class ClientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def remove_blank_assessments
+      params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
+        date.each do |k, v|
+          if v.blank?
+            params[:client][:assessments_attributes].delete(index)
+          end
+        end
+      end
     end
 
     def client_params

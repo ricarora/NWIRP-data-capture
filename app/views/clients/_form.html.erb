@@ -1,4 +1,4 @@
-<%= form_for(@client, url: clients_path) do |f| %>
+<%= form_for @client do |f| %>
   <% if @client.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -51,7 +51,6 @@
       {}, {multiple: true, class: "multiple-selections"} %>
     </div>
   </div>
-
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :gender, "GENDER", class: "right inline" %>
@@ -60,26 +59,35 @@
       <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
     </div>
   </div>
-<!-- FAILED SUBMIT CLIENT: params[:client][:client_reliefs_attributes][1]
-UPDATING CLIENT: @client.client_reliefs-->
-  <% first_relief = true %>
-  <% first_link = true %>
-  <%= f.fields_for :client_reliefs do |builder| %>
-    <div class="field row">
-      <% if first_relief
-          first_relief = false %>
-        <div class="small-3 columns">
-          <%= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
-        </div>
-      <% end %> <!-- first relief -->
-        <div data-reliefs="<%= builder.object.relief_name %>" class="small-6 columns relief_fields">
-        </div>
-      <% if first_link
-          first_link = false %>
-          <a href="#" id="add_field">Add another Relief Sought</a>
-      <% end %>
+  <div class="reliefs">
+    <% first_relief = true %>
+    <%= f.fields_for :client_reliefs, @client.client_reliefs do |relief_f| %>
+    <div class="field row relief" id="relief-<%=relief_f.index%>">
+      <div class="small-3 columns">
+        <% if first_relief
+            first_relief = false %>
+            <%= relief_f.label :relief_name, "RELIEF SOUGHT",
+            class: "right inline" %>
+        <% end %>
+      </div>
+      <div class="small-9 columns">
+        <%= relief_f.select :relief_name, ReliefSought.order_reliefs.map {|relief| relief.name},
+        {include_blank: "Please select"}, class: "relief-options" %>
+        <% if relief_f.index > 0 %>
+          <a href='#' class='remove_field'>Remove field</a>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
+  <span class="field row">
+    <span class="small-3 columns">
+    </span>
+    <span class="small-3 columns">
+      <a href="#" id="show-relief">Add another Relief Sought</a>
+    </span>
+  </span>
+  <br>
   <div class="field row">
     <div class="small-3 columns">
       <%= f.label :represented, "REPRESENTED", class: "right inline" %>
@@ -98,18 +106,32 @@ UPDATING CLIENT: @client.client_reliefs-->
     </div>
   </div>
   <div class="assessment_fields">
+    <% first_relief = true %>
     <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
-    <div class="field row">
+    <div class="field row assessment" id="assessment-<%=assessment_f.index%>">
       <div class="small-3 columns">
-        <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+        <% if first_relief
+            first_relief = false %>
+            <%= assessment_f.label :date, "ASSESSMENT DATE*",
+            class: "right inline required" %>
+        <% end %>
       </div>
       <div class="small-9 columns">
-        <%= assessment_f.date_field :date, data: {index: 0} %>
+        <%= assessment_f.date_field :date, class: "date" %>
+        <% if assessment_f.index > 0 %>
+          <a href='#' class='remove_field'>Remove field</a>
+        <% end %>
       </div>
     </div>
     <% end %>
   </div>
-<!-- Error is it's trying to send to clients_path not client_path for patch-->
+  <span class="field row">
+    <span class="small-3 columns">
+    </span>
+    <span class="small-3 columns">
+      <a href="#" id="show-assessment">Add another Assessment Date</a>
+    </span>
+  </span>
   <div class="actions">
     <%= f.submit class: "button" %>
   </div>
