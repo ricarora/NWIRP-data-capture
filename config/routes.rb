@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get '/advanced_search', to: 'search#advanced_search'
-  post '/advanced_search', to: 'search#advanced_search'
+  get '/advanced_search', to: 'queries#advanced_search'
+  post '/advanced_search', to: 'queries#advanced_search'
 
   resources :removability_grounds, param: :name
 
