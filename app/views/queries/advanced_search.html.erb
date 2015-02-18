@@ -26,12 +26,13 @@
 
   <div>
   <div>Select the displayed result:</div>
+
   <div class="radio">
-  <%= radio_button_tag "choice", "client", checked = true %>
+  <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? false : true  %>
   <%= label_tag "choice", "Client" %>
   </div>
   <div class="radio">
-  <%= radio_button_tag "choice", "conviction", checked = false %>
+  <%= radio_button_tag "choice", "conviction", checked = params[:choice] && params[:choice] == "conviction" ? true : false %>
   <%= label_tag "choice", "Conviction" %>
   </div>
 </div>
