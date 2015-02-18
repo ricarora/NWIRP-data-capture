@@ -4,4 +4,9 @@ class ReliefSought < ActiveRecord::Base
   self.primary_key = 'name'
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
+
+  def self.order_reliefs
+    self.all.sort_by {|a| a.name }
+  end
+
 end
