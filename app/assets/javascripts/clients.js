@@ -8,15 +8,16 @@ function hideReliefs() {
     if (shouldHideRelief(relief)) {
       $(relief).addClass("hidden");
     }
-    $(relief).find(".remove_field").click(function(event) {
+    $(relief).find(".remove_field").click(function(event) { //remove click function
       event.preventDefault();
-      $(relief).addClass("hidden");
+      ($(relief).find(".relief-options").val(null)) //sets value back to default
+      $(relief).addClass("hidden"); //hides relief input
     });
   });
 
   $("#show-relief").click(function(event) {
     event.preventDefault();
-    $('.hidden.relief').first().removeClass("hidden") // removes hidden class to all children
+    $('.hidden.relief').first().removeClass("hidden") // removes hidden class from the top hidden
   });
 }
 
@@ -41,13 +42,14 @@ function hideAssessments() {
     }
     $(assessment).find(".remove_field").click(function(event) {
       event.preventDefault();
+      //need to set value back to nil
       $(assessment).addClass("hidden");
     });
   });
 
   $("#show-assessment").click(function(event) {
     event.preventDefault();
-    $('.hidden.assessment').first().removeClass("hidden") // removes hidden class to all children
+    $('.hidden.assessment').first().removeClass("hidden")
   });
 }
 
@@ -55,14 +57,13 @@ function shouldHideAssessment(assessment) {
   if ($(assessment).is("#assessment-0")) {
     return false;
   }
-  // else if ($(assessment).find(".relief-options").val()) {
+  // else if ($(assessment).find(".date").value) { //need to figure out how to check value
   //   return false;
   // }
   else {
     return true;
   }
 }
-
 
 
 $(function() {

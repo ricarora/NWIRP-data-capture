@@ -61,10 +61,14 @@
     </div>
   </div>
   <div class="reliefs">
+    <% first_relief = true %>
     <%= f.fields_for :client_reliefs, @client.client_reliefs do |relief_f| %>
     <div class="field row relief" id="relief-<%=relief_f.index%>">
       <div class="small-3 columns">
+        <% if first_relief
+            first_relief = false %>
         <%= relief_f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+        <% end %>
       </div>
       <div class="small-9 columns">
         <%= relief_f.select :relief_name, ReliefSought.all.map {|relief| relief.name},
