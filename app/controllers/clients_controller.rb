@@ -28,13 +28,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new
     @client.attributes = client_params
-    params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
-      date.each do |k, v|
-        if v.blank?
-          params[:client][:assessments_attributes].delete(index)
-        end
-      end
-    end
+    remove_blank_assessments
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     #@client.format_a_number
     if @client.save
@@ -59,13 +53,7 @@ class ClientsController < ApplicationController
   end
 
   def update
-    params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
-      date.each do |k, v|
-        if v.blank?
-          params[:client][:assessments_attributes].delete(index)
-        end
-      end
-    end
+    remove_blank_assessments
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
@@ -100,6 +88,16 @@ class ClientsController < ApplicationController
 
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def remove_blank_assessments
+      params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
+        date.each do |k, v|
+          if v.blank?
+            params[:client][:assessments_attributes].delete(index)
+          end
+        end
+      end
     end
 
     def client_params
