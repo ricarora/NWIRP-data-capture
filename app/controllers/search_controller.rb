@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  def advance_search
+  def advanced_search
     if params[:choice] == "client"
       @search = Client.search(params[:q])
       @search.build_condition if @search.conditions.empty?
