@@ -67,7 +67,8 @@
       <div class="small-3 columns">
         <% if first_relief
             first_relief = false %>
-        <%= relief_f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
+            <%= relief_f.label :relief_name, "RELIEF SOUGHT",
+            class: "right inline" %>
         <% end %>
       </div>
       <div class="small-9 columns">
@@ -106,10 +107,15 @@
     </div>
   </div>
   <div class="assessment_fields">
+    <% first_relief = true %>
     <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
     <div class="field row assessment" id="assessment-<%=assessment_f.index%>">
       <div class="small-3 columns">
-        <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
+        <% if first_relief
+            first_relief = false %>
+            <%= assessment_f.label :date, "ASSESSMENT DATE*",
+            class: "right inline required" %>
+        <% end %>
       </div>
       <div class="small-9 columns">
         <%= assessment_f.date_field :date, class: "date" %>
