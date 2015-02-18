@@ -123,3 +123,8 @@ table {
 .update-link {
   padding-left: 10px;
 }
+
+.hidden {
+  position: absolute;
+  display: none;
+}

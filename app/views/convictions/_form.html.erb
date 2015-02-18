@@ -1,4 +1,4 @@
-<%= form_for(@conviction, url: client_convictions_path) do |f| %>
+<%= form_for [@client, @conviction] do |f| %>
   <% if @conviction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@conviction.errors.count, "error") %> prohibited this conviction from being saved:</h2>
@@ -127,7 +127,6 @@
       <%= f.text_area :notes, row: 3 %>
     </div>
   </div>
-  <!-- Trying to send to convictions_path not conviction_path for patch-->
   <div class="actions">
     <%= f.submit class: "button" %>
   </div>
