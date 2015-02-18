@@ -60,35 +60,18 @@
       <%= f.select :gender, Client::GENDER, {include_blank: "Please select"} %>
     </div>
   </div>
-<!-- FAILED SUBMIT CLIENT: params[:client][:client_reliefs_attributes][1]
-UPDATING CLIENT: @client.client_reliefs-->
-  <!-- <%# first_relief = true %>
-  <%# first_link = true %>
-  <%#= f.fields_for :client_reliefs do |builder| %>
-    <div class="field row">
-      <%# if first_relief
-          first_relief = false %>
-        <div class="small-3 columns">
-          <%#= builder.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
-        </div>
-      <%# end %> <! first relief -->
-        <!-- <div data-reliefs="<%#= builder.object.relief_name %>" class="small-6 columns relief_fields">
-        </div>
-      <%# if first_link
-          first_link = false %>
-          <a href="#" id="add_field">Add another Relief Sought</a>
-      <%# end %>
-    </div>
-  <%# end %> -->
   <div class="reliefs">
     <%= f.fields_for :client_reliefs, @client.client_reliefs do |relief_f| %>
-    <div class="field row hidden">
+    <div class="field row relief" id="relief-<%=relief_f.index%>">
       <div class="small-3 columns">
         <%= relief_f.label :relief_name, "RELIEF SOUGHT", class: "right inline" %>
       </div>
-      <div class="small-8 columns" id="first-field">
+      <div class="small-8 columns">
         <%= relief_f.select :relief_name, ReliefSought.all.map {|relief| relief.name},
-        {include_blank: "Please select"} %>
+        {include_blank: "Please select"}, class: "relief-options" %>
+        <% if relief_f.index > 0 %>
+          <a href='#' class='remove_field'>Remove field</a>
+        <% end %>
       </div>
     </div>
     <% end %>

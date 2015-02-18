@@ -3,33 +3,45 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 function hideReliefs() {
-  $("#first-field").removeClass("small-8")
-  $("#first-field").addClass("small-9")
-  $(".reliefs div:first-child").removeClass("hidden");
+  $(".relief").each(function() {
+    var relief = $(this)
+    if (shouldHideRelief(relief)) {
+      $(relief).addClass("hidden");
+    }
+    $(relief).find(".remove_field").click(function(event) {
+      event.preventDefault();
+      $(relief).addClass("hidden");
+    });
+  });
 
-  var remove = "<a href='#' class='remove_field'>Remove field</a></div>"
-  $('.hidden').append(remove)
-  showRelief();
-}
-
-function showRelief() {
   $("#show-field").click(function(event) {
     event.preventDefault();
     $('.hidden').first().removeClass("hidden") // removes hidden class to all children
   });
-
-  $(".reliefs").on("click",".remove_field", function(event){ //user click on remove text
-      event.preventDefault();
-      $(this).parent('div').addClass("hidden");
-      //should also remove any select value that might be there
-  });
 }
 
+function shouldHideRelief(relief) {
+  if ($(relief).is("#relief-0")) {
+    return false;
+  }
+  else if ($(relief).find(".relief-options").val()) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 
 $(function() {
  hideReliefs();
 });
+
+
+// $("#first-field").removeClass("small-8")
+// $("#first-field").addClass("small-9")
+//$(".reliefs div:first-child").removeClass("hidden");
+
 
 //$( '.hidden' ).first(); //returns first div found with hidden class
 // $( '.hidden' ); //finds all divs with hidden class
