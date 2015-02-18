@@ -55,7 +55,7 @@
       <%= f.label :dv_on_roc, "DV ON ROC", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <label><%= f.check_box :dv_on_roc %><span class="label-text"></span></label>
+      <%= f.select :dv_on_roc, [["Yes", "True"], ["No", "False"]] %>
     </div>
   </div>
   <div class="field row">
