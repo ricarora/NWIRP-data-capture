@@ -14,13 +14,15 @@ class ClientsController < ApplicationController
   def new
     unless @client
       @client = Client.new
-      @client.assessments.build
       build_relief_fields
+      build_assessment_fields
     end
   end
 
   def edit
     client = Client.find(params[:id])
+    build_relief_fields
+    build_assessment_fields
   end
 
   def create
