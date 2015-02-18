@@ -1,7 +1,7 @@
 module ConvictionsHelper
   def model_fields
     # which fields to display and sort by
-    [:id, :first_name, :last_name, :convictions]
+    [:id, :first_name, :last_name]
   end
 
   def results_limit
