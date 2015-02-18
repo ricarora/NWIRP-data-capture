@@ -27,18 +27,21 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    # if params[:client][:assessments_attributes]["0"]["date"] == ""
-    #   @client.assessments.build
-    # end
-
     @client.attributes = client_params
-    build_relief_fields
-    build_assessment_fields
+    params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
+      date.each do |k, v|
+        if v.blank?
+          params[:client][:assessments_attributes].delete(index)
+        end
+      end
+    end
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     #@client.format_a_number
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
+      build_relief_fields
+      build_assessment_fields
       render :new
     end
   end
@@ -56,11 +59,20 @@ class ClientsController < ApplicationController
   end
 
   def update
+    params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
+      date.each do |k, v|
+        if v.blank?
+          params[:client][:assessments_attributes].delete(index)
+        end
+      end
+    end
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
     else
       render :edit
+      build_relief_fields
+      build_assessment_fields
     end
   end
 
