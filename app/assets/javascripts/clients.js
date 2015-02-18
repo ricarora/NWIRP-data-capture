@@ -1,7 +1,3 @@
-// Place all the behaviors and hooks related to the matching controller here.//
-// All this logic will automatically be available in application.js.
-// You can use CoffeeScript in this file: http://coffeescript.org/
-
 function hideReliefs() {
   $(".relief").each(function() {
     var relief = $(this)
@@ -57,9 +53,9 @@ function shouldHideAssessment(assessment) {
   if ($(assessment).is("#assessment-0")) {
     return false;
   }
-  // else if ($(assessment).find(".date").value) { //need to figure out how to check value
-  //   return false;
-  // }
+  else if ($(assessment.find(".date")).val()) { //need to figure out how to check value
+    return false;
+  }
   else {
     return true;
   }
