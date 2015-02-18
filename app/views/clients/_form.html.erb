@@ -80,7 +80,7 @@
     <span class="small-3 columns">
     </span>
     <span class="small-3 columns">
-      <a href="#" id="show-field">Add another Relief Sought</a>
+      <a href="#" id="show-relief">Add another Relief Sought</a>
     </span>
   </span>
   <br>
@@ -103,16 +103,26 @@
   </div>
   <div class="assessment_fields">
     <%= f.fields_for :assessments, @client.assessments do |assessment_f| %>
-    <div class="field row">
+    <div class="field row assessment" id="assessment-<%=assessment_f.index%>">
       <div class="small-3 columns">
         <%= assessment_f.label :date, "ASSESSMENT DATE*", class: "right inline required" %>
       </div>
       <div class="small-9 columns">
-        <%= assessment_f.date_field :date, data: {index: 0} %>
+        <%= assessment_f.date_field :date, class: "date" %>
+        <% if assessment_f.index > 0 %>
+          <a href='#' class='remove_field'>Remove field</a>
+        <% end %>
       </div>
     </div>
     <% end %>
   </div>
+  <span class="field row">
+    <span class="small-3 columns">
+    </span>
+    <span class="small-3 columns">
+      <a href="#" id="show-assessment">Add another Assessment Date</a>
+    </span>
+  </span>
   <div class="actions">
     <%= f.submit class: "button" %>
   </div>

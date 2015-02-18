@@ -21,22 +21,19 @@ class ClientsController < ApplicationController
 
   def edit
     client = Client.find(params[:id])
-    # 2.times do
-    #   @client.client_reliefs.build
-    # end
   end
 
   def create
     @client = Client.new
-    # puts "client_reliefs is #{@client.client_reliefs.inspect}"
-    if params[:client][:assessments_attributes]["0"]["date"] == ""
-      @client.assessments.build
-    end
+    # if params[:client][:assessments_attributes]["0"]["date"] == ""
+    #   @client.assessments.build
+    # end
 
     @client.attributes = client_params
     build_relief_fields
+    build_assessment_fields
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
-    @client.format_a_number
+    #@client.format_a_number
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
@@ -45,7 +42,9 @@ class ClientsController < ApplicationController
   end
 
   def build_assessment_fields
-    
+    (10 - @client.assessments.length).times do
+      @client.assessments.build
+    end
   end
 
   def build_relief_fields
@@ -84,7 +83,7 @@ class ClientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_client
       @client = Client.find(params[:id])
     end
