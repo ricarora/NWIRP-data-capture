@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/advance_search'
+
   resources :removability_grounds, param: :name
 
   devise_for :users

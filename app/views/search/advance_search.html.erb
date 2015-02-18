@@ -1,0 +1,47 @@
+<h1>Advanced Search</h1>
+
+<%= search_form_for(
+  @search,
+  url: advanced_search_clients_path,
+  html: { method: :post }
+  ) do |f| %>
+
+  <% setup_search_form f %>
+
+  <fieldset>
+    <legend>Sorting</legend>
+    <%= f.sort_fields do |s| %>
+      <%= render 'sort_fields', f: s %>
+    <% end %>
+    <%= button_to_add_fields "Add Sort", f, :sort %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Search Conditions</legend>
+    <%= f.condition_fields do |g| %>
+      <%= render 'condition_fields', f: g %>
+    <% end %>
+    <%= button_to_add_fields "Add Condition", f, :condition %>
+  </fieldset>
+
+  <div>
+  <div>Select the displayed result:</div>
+  <div class="radio">
+  <%= radio_button_tag "choice", "client", checked = false %>
+  <%= label_tag "choice", "Client" %>
+  </div>
+  <div class="radio">
+  <%= radio_button_tag "choice", "conviction", checked = true %>
+  <%= label_tag "choice", "Conviction" %>
+  </div>
+</div>
+
+  <%= label_tag :distinct, 'Return distinct records?' %>
+  <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
+  <%= f.submit "Search", class: "button round" %>
+<% end %>
+<% if @clients %>
+  <%= render 'client_results' %>
+<% elsif @convictions %>
+  <%= render 'conviction_results' %>
+<% end %>

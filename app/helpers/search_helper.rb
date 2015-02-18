@@ -1,11 +1,10 @@
-module ClientsHelper
-
+module SearchHelper
   def model_fields
     # which fields to display and sort by
     if @clients
       [:id, :first_name, :last_name, :crime_name]
     elsif @convictions
-      []
+      [:crime_name, :rcw, :subsection]
     end
   end
 
