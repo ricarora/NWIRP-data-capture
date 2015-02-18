@@ -37,6 +37,12 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def format_a_number
+    if !self.a_number.include?("-")
+      self.a_number.insert(3, "-").insert(7, "-")
+    end
+  end
+
   GENDER = ["Male", "Female", "Other", "Unknown"]
 
   REPRESENTED = ["Yes", "No", "Unknown"]

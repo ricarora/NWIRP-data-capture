@@ -32,10 +32,11 @@ class ClientsController < ApplicationController
     if params[:client][:assessments_attributes]["0"]["date"] == ""
       @client.assessments.build
     end
-    
+
     @client.attributes = client_params
     build_relief_fields
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
+    @client.format_a_number
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
@@ -43,8 +44,12 @@ class ClientsController < ApplicationController
     end
   end
 
+  def build_assessment_fields
+    
+  end
+
   def build_relief_fields
-    (5 - @client.client_reliefs.length).times do
+    (10 - @client.client_reliefs.length).times do
       @client.client_reliefs.build
     end
   end
