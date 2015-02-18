@@ -86,6 +86,7 @@ class ClientsController < ApplicationController
       @convictions  = params[:distinct].to_i.zero? ?
         @search.result :
         @search.result(distinct: true)
+    end
   end
 
   private
