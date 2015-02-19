@@ -99,14 +99,15 @@ class Client < ActiveRecord::Base
     end
   end
 
-  def A_number
-    self.a_number
+  ransacker :relief_sought do |parent|
+    reliefs = Arel::Table.new(:client_reliefs)
+    clients = parent.table
+    relief_join = clients.join(reliefs).on(clients[:id].eq(reliefs[:client_id]))
+    Arel::Nodes::InfixOperation.new('||',
+      Arel::Nodes::InfixOperation.new('||', relief_join, ' '),
+      reliefs[:relief_name])
   end
 
-  ransacker :A_number do |parent|
-    # Arel::Nodes::InfixOperation.new('||', parent.table[:a_number], parent.table[:a_number])
-    Arel.sql("a_number")
-  end
 
   def full_name
     self.first_name + ' ' + self.last_name
