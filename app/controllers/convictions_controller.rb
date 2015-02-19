@@ -19,7 +19,6 @@ class ConvictionsController < ApplicationController
   def edit
     @client = Client.find(params[:client_id])
     @conviction = Conviction.find(params[:id])
-
   end
 
   def create
@@ -29,8 +28,8 @@ class ConvictionsController < ApplicationController
     params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
       @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
     end
+    format_rcw
     @conviction.attributes = conviction_params
-    @conviction.format_rcw
     @conviction.sentence = convert_to_days(conviction_params[:sentence].to_i, params[:conviction][:sentence_unit])
     if @conviction.save
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully created.'
@@ -53,6 +52,8 @@ class ConvictionsController < ApplicationController
   end
 
   def update
+    @client = Client.find(params[:client_id])
+    format_rcw
     if @conviction.update(conviction_params)
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully updated.'
     else
@@ -66,6 +67,12 @@ class ConvictionsController < ApplicationController
   end
 
   private
+
+    def format_rcw
+      if params[:conviction][:rcw].length == 7
+        params[:conviction][:rcw].insert(2, ".").insert(5, ".")
+      end
+    end
 
     def set_conviction
       @conviction = Conviction.find(params[:id])
