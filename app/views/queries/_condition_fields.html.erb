@@ -2,7 +2,7 @@
   class: 'fields condition', 'data-object-name' => f.object_name
   } do %>
 
-  <%= content_tag(:legend, button_to_remove_fields('remove', f),
+  <%= content_tag(:legend, button_to_remove_fields('Remove Condition', f),
     nil, false) %>
 
   <%= f.attribute_fields do |a| %>
@@ -15,6 +15,6 @@
     <%= render 'value_fields', f: v %>
   <% end %>
 
-  <%= button_to_add_fields 'Add Value', f, :value %>
+  <%= button_to_add_fields 'Add Value to Condition', f, :value %>
 
 <% end %>

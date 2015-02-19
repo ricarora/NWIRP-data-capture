@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def button_to_remove_fields(name, f)
-    content_tag :button, name, class: 'remove_fields button red-button condition-remove'
+    content_tag :button, name, class: 'remove_fields search-conditions remove-condition red'
   end
 
   def button_to_add_fields(name, f, type)
@@ -32,7 +32,7 @@ module ApplicationHelper
     fields = f.send("#{type}_fields", new_object, child_index: "new_#{type}") do |builder|
       render(type.to_s + "_fields", f: builder)
     end
-    content_tag :button, name, :class => 'add_fields button green-button', 'data-field-type' => type, 'data-content' => "#{fields}"
+    content_tag :button, name, :class => 'add_fields search-conditions green', 'data-field-type' => type, 'data-content' => "#{fields}"
   end
 
   def button_to_nest_fields(name, type)
