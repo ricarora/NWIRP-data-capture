@@ -28,10 +28,10 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
+    format_a_number
     @client.attributes = client_params
     remove_blank_assessments
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
-    #@client.format_a_number
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
     else
@@ -105,6 +105,12 @@ class ClientsController < ApplicationController
             params[:client][:assessments_attributes].delete(index)
           end
         end
+      end
+    end
+
+    def format_a_number
+      if params[:client][:a_number].length == 9
+        params[:client][:a_number].insert(3, "-").insert(7, "-")
       end
     end
 
