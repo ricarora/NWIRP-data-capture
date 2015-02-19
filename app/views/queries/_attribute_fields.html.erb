@@ -1,7 +1,8 @@
-<% if @clients %>
-  <%= content_tag(:span, f.attribute_select(associations: %w(convictions)),
+<% if @convictions %>
+  <%= content_tag(:span, f.attribute_select(associations: %w(client)),
     { class: 'fields', 'data-object-name' => f.object_name }, false) %>
 <% else %>
-  <%= content_tag(:span, f.attribute_select(associations: %w(clients)),
+  <%= content_tag(:span, f.attribute_select(associations: %w(convictions)),
     { class: 'fields', 'data-object-name' => f.object_name }, false) %>
+
 <% end %>
