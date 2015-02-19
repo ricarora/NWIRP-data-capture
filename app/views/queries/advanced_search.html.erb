@@ -25,8 +25,7 @@
   </fieldset>
 
   <div>
-  <div>Select the displayed result:</div>
-
+  <h3>SEARCH:</h3>
   <div class="radio">
   <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? false : true  %>
   <%= label_tag "choice", "Client" %>
@@ -40,7 +39,7 @@
   <%= label_tag :distinct, 'Return distinct records?' %>
   <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
 
-  <%= f.submit "Search", class: "button green-button" %>
+  <%= f.submit "Search Database", class: "button green-button big-button" %>
 <% end %>
 <% if @clients %>
   <%= render 'client_results' %>
