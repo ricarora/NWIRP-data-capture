@@ -7,6 +7,7 @@ $(function() {
   var crimeNameInput = '<div><input id="newCrime" name="conviction[crime_name]" type="text"><a href="#" class="remove_field">Remove field</a></div>';
   $("#add_crime_name").click(function(event) {
     event.preventDefault();
+    $(".crime_name_group").val(null)
     $(".crime_name_field").append(crimeNameInput);
     $(".crime_name_group").prop('disabled', true);
     $("#add_crime_name").hide();
@@ -24,6 +25,7 @@ $(function() {
   var subsectionInput = '<div><input id="newSubsection" name="conviction[subsection]" type="text"><a href="#" class="remove_field">Remove field</a></div>';
   $("#add_subsection").click(function(event) {
     event.preventDefault();
+    $(".subsection_group").val(null)
     $(".subsection_field").append(subsectionInput);
     $(".subsection_group").prop('disabled', true);
     $("#add_subsection").hide();
@@ -41,6 +43,7 @@ $(function() {
   var ntaChargesInput = '<div><input id="newNtaCharges" name="conviction[nta_charges]" type="text"><a href="#" class="remove_field">Remove field</a></div>';
   $("#add_nta_charges").click(function(event) {
     event.preventDefault();
+    $(".nta_charges_group").val(null)
     $(".nta_charges_field").append(ntaChargesInput);
     $(".nta_charges_group").prop('disabled', true);
     $("#add_nta_charges").hide();

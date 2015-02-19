@@ -14,7 +14,11 @@
       <%= f.label :a_number, "A#*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+      <% if @client.new_record? %>
+        <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+      <% else %>
+        <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX", disabled: true %>
+      <% end %>
     </div>
   </div>
   <div class="field row">
@@ -71,7 +75,8 @@
         <% end %>
       </div>
       <div class="small-9 columns">
-        <%= relief_f.select :relief_name, ReliefSought.order_reliefs.map {|relief| relief.name},
+        <%= relief_f.select :relief_name,
+        ReliefSought.order_reliefs.map {|relief| relief.name},
         {include_blank: "Please select"}, class: "relief-options" %>
         <% if relief_f.index > 0 %>
           <a href='#' class='remove_field'>Remove field</a>
@@ -83,7 +88,7 @@
   <span class="field row">
     <span class="small-3 columns">
     </span>
-    <span class="small-3 columns">
+    <span class="small-9 columns add-field">
       <a href="#" id="show-relief">Add another Relief Sought</a>
     </span>
   </span>
@@ -102,7 +107,7 @@
       <%= f.label :drru_case, "DRRU CASE", class: "right inline" %>
     </div>
     <div class="small-9 columns">
-      <label><%= f.check_box :drru_case %><span class="label-text"></span></label>
+      <%= f.select :drru_case, [["Yes", "True"], ["No", "False"]] %>
     </div>
   </div>
   <div class="assessment_fields">
@@ -124,11 +129,12 @@
       </div>
     </div>
     <% end %>
+
   </div>
   <span class="field row">
     <span class="small-3 columns">
     </span>
-    <span class="small-3 columns">
+    <span class="small-9 columns add-field">
       <a href="#" id="show-assessment">Add another Assessment Date</a>
     </span>
   </span>

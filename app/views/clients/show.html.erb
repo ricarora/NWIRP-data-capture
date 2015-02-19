@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @client.full_name %></h2>
+<h2>Client: <%= @client.full_name %></h2>
 <div>
   <div class="panel">
     <table role="grid" summary="General information on client.">
@@ -58,7 +58,7 @@
 
     <% @client.convictions.each_with_index do |conviction, index| %>
   <div class="panel">
-    <h4>Conviction <%= index + 1 %></h4>
+    <h3>Conviction <%= index + 1 %></h3>
     <table role="grid" summary="Client conviction" class="conviction-table">
       <thead>
         <tr>
