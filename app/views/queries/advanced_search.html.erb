@@ -1,4 +1,4 @@
-<h1>Advanced Search</h1>
+<h2>SEARCH</h2>
 
 <%= search_form_for(
   @search,
@@ -39,7 +39,8 @@
 
   <%= label_tag :distinct, 'Return distinct records?' %>
   <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
-  <%= f.submit "Search", class: "button round" %>
+
+  <%= f.submit "Search", class: "button green-button" %>
 <% end %>
 <% if @clients %>
   <%= render 'client_results' %>
