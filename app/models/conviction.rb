@@ -43,6 +43,12 @@ class Conviction < ActiveRecord::Base
     end
   end
 
+  def format_rcw
+    if rcw.length == 7
+      rcw.insert(2, ".").insert(5, ".")
+    end
+  end
+
   # ransacker :title_diddly do |parent|
   #   Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
   # end
