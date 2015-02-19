@@ -70,7 +70,15 @@ h3 {
 
 }
 
-.button:focus, .button:hover {
+.red-button:focus, .red-button:hover {
+  color: white;
+  background-color: #fa4542;
+  border: #fa4542;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.green-button:focus, .green-button:hover {
   color: white;
   background-color: #2dc2bb;
   border: #2dc2bb;
@@ -137,12 +145,14 @@ input[type="checkbox"]:checked + .label-text:before {
 
 /* SHOW */
 
+
 table {
   width: 100%;
 }
 
 .update-link {
   padding-left: 10px;
+  color: #fa4542;
 }
 
 .hidden {
