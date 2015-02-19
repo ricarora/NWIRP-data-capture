@@ -4,7 +4,7 @@ module QueriesHelper
     if @clients
       [:id, :first_name, :last_name]
     elsif @convictions
-      [:crime_name, :rcw, :subsection]
+      [:crime_name, :rcw, :subsection, :ij_name, :ij_finding]
     end
   end
 

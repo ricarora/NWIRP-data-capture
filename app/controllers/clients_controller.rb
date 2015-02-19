@@ -55,6 +55,8 @@ class ClientsController < ApplicationController
 
   def update
     remove_blank_assessments
+    remove_blank_reliefs
+    check_client_reliefs
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
@@ -96,6 +98,29 @@ class ClientsController < ApplicationController
 
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def check_client_reliefs
+      @client.client_reliefs.each do |relief|
+        params[:client][:client_reliefs_attributes].each do |index, name|
+          name.each do |k,v|
+            if relief.relief_name == v
+              return true
+            end
+            relief.destroy
+          end
+        end
+      end
+    end
+
+    def remove_blank_reliefs
+      params[:client][:client_reliefs_attributes].each do |index, name|  #remove blank assessment dates from params
+        name.each do |k, v|
+          if v.blank?
+            params[:client][:client_reliefs_attributes].delete(index)
+          end
+        end
+      end
     end
 
     def remove_blank_assessments
