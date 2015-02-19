@@ -99,16 +99,6 @@ class Client < ActiveRecord::Base
     end
   end
 
-  ransacker :relief_sought do |parent|
-    reliefs = Arel::Table.new(:client_reliefs)
-    clients = parent.table
-    relief_join = clients.join(reliefs).on(clients[:id].eq(reliefs[:client_id]))
-    Arel::Nodes::InfixOperation.new('||',
-      Arel::Nodes::InfixOperation.new('||', relief_join, ' '),
-      reliefs[:relief_name])
-  end
-
-
   def full_name
     self.first_name + ' ' + self.last_name
   end
@@ -120,6 +110,6 @@ class Client < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(first_name last_name nationality ethnicity gender represented drru_case) + _ransackers.keys
+    %w(first_name last_name nationality gender represented drru_case) + _ransackers.keys
   end
 end
