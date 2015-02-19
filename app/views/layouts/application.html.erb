@@ -8,9 +8,9 @@
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
     <script type="text/javascript">
-     $(function() {
-       <%= yield :document_ready %>
-     });
+       $(function() {
+         <%= yield :document_ready %>
+       });
    </script>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
