@@ -14,7 +14,11 @@
       <%= f.label :a_number, "A#*", class: "right inline required" %>
     </div>
     <div class="small-9 columns">
-      <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+      <% if @client.new_record? %>
+        <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX" %>
+      <% else %>
+        <%= f.text_field :a_number, placeholder: "XXX-XXX-XXX", disabled: true %>
+      <% end %>
     </div>
   </div>
   <div class="field row">
