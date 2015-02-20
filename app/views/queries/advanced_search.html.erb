@@ -39,7 +39,6 @@
     <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
     <%= label_tag :distinct, 'Return distinct records?' %>
   </div>
-
   <%= f.submit "Search Database", class: "button green-button big-button" %>
 <% end %>
 <% if @clients %>
