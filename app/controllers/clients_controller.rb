@@ -116,18 +116,18 @@ class ClientsController < ApplicationController
     #   end
     # end
 
-    # def check_assessments
-    #   @client.assessments.each do |assessment|
-    #     params[:client][:assessments_attributes].each do |index, date|
-    #       date.each do |k,v|
-    #         if assessment.date == v
-    #           return true
-    #         end
-    #         assessment.destroy
-    #       end
-    #     end
-    #   end
-    # end
+    def check_assessments
+      @client.assessments.each do |assessment|
+        params[:client][:assessments_attributes].each do |index, date|
+          date.each do |k,v|
+            if assessment.date == v
+              return true
+            end
+            assessment.destroy
+          end
+        end
+      end
+    end
 
     def remove_blank_reliefs
       params[:client][:client_reliefs_attributes].each do |index, name|  #remove blank assessment dates from params
