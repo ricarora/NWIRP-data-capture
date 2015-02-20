@@ -18,6 +18,10 @@
 
 /* GLOBAL CSS */
 
+.top-div {
+  margin-top: 25px;
+}
+
 body {
   color: #444;
   font-family: 'Lato', sans-serif;
