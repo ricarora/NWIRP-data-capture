@@ -10,7 +10,7 @@ module QueriesHelper
 
   def results_limit
     # max number of search results to display
-    10
+    25
   end
 
   def display_query_sql(users)
