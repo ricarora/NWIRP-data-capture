@@ -7,4 +7,19 @@ class ConvictionGround < ActiveRecord::Base
   #validates :conviction, presence: true
 
   STATUS_OPTION = [["Yes", "Yes"], ["No", "No"], ["Finding Not Made", "Finding Not Made"]]
+
+  GROUNDS = RemovabilityGround.all.map {|ground| ground.name}
+
+  GROUNDS.each do |ground|
+    ransacker ground.to_sym do |parent|
+      Arel::Nodes::InfixOperation.new('AND',
+        Arel::Nodes::InfixOperation.new('=', parent.table[:gor_name], ground),
+        parent.table[:status])
+    end
+  end
+
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w() + _ransackers.keys
+  end
 end
