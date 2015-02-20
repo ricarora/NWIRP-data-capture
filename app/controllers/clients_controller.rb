@@ -9,7 +9,8 @@ class ClientsController < ApplicationController
       if @client
         redirect_to client_path(@client.id)
       else
-        flash.now[:alert] = 'There is currently no client with the entered A#.'
+        flash.now[:notice] = "There is currently no client with A#: #{params[:a_number_search]}"
+        params[:a_number]
         render '/clients/find'
       end
     else
@@ -145,6 +146,10 @@ class ClientsController < ApplicationController
     def format_a_number(a_number)
       if a_number.length == 9
         a_number.insert(3, "-").insert(7, "-")
+      end
+      if a_number.length == 11
+        a_number[3] = "-"
+        a_number[7] = "-"
       end
     end
 
