@@ -2,11 +2,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @search = Client.search_with_scopes(params[:q])
-    @search.build_condition if @search.conditions.empty?
-    @clients  = params[:distinct].to_i.zero? ?
-      @search.result :
-      @search.result(distinct: true)
+    @clients = Client.all
   end
 
   def show
@@ -54,6 +50,7 @@ class ClientsController < ApplicationController
   end
 
   def update
+    raise
     remove_blank_assessments
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
@@ -74,22 +71,6 @@ class ClientsController < ApplicationController
     # using search from ransack gem. This might change depending on the search
     index
     render :index
-  end
-
-  def advanced_search
-    if params[:choice] == "client"
-      @search = Client.search(params[:q])
-      @search.build_condition if @search.conditions.empty?
-      @clients  = params[:distinct].to_i.zero? ?
-        @search.result :
-        @search.result(distinct: true)
-    else
-      @search = Conviction.search(params[:q])
-      @search.build_condition if @search.conditions.empty?
-      @convictions  = params[:distinct].to_i.zero? ?
-        @search.result :
-        @search.result(distinct: true)
-    end
   end
 
   private
