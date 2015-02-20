@@ -84,11 +84,7 @@ class ClientsController < ApplicationController
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
   end
 
-  def search
-    # using search from ransack gem. This might change depending on the search
-    index
-    render :index
-  end
+  
 
   private
 

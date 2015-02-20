@@ -122,7 +122,11 @@
           <% end %>
         </div>
         <div class="small-9 columns">
-          <%= assessment_f.date_field :date, class: "date" %>
+          <% if assessment_f.object.created_at %>
+            <span class="assessment_date"><%= assessment_f.object.date %></span>
+          <% else %>
+            <%= assessment_f.date_field :date, class: "date" %>
+          <% end %>
           <% if assessment_f.index > 0 %>
             <a href='#' class='remove_field'>Remove field</a>
           <% end %>
