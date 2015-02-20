@@ -3,7 +3,9 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.all
-    format_a_number(params[:a_number_search])
+    if params[:a_number_search]
+      format_a_number(params[:a_number_search])
+    end
     @client = Client.find_client_by_a_number(params[:a_number_search])
     if @client
       redirect_to client_path(@client.id)
