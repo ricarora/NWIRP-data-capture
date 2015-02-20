@@ -2,14 +2,13 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    raise
-    Client.all.to_a.find{|client| client.a_number == params[:search]}
-    # @search = Client.search(params[:q])
-    # @search.build_condition if @search.conditions.empty?
-    # @clients  = params[:distinct].to_i.zero? ?
-    #   @search.result :
-    #   @search.result(distinct: true)
-
+    @clients = Client.all
+    @client = Client.find_client_by_a_number(params[:a_number_search])
+    if @client
+      redirect_to client_path(@client.id)
+    else
+      render :index, notice: 'There is currently no client with that A#.'
+    end
   end
 
   def show

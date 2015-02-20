@@ -1,45 +1,47 @@
-<h1>Listing clients</h1>
+<% if @client %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Last name</th>
-      <th>First name</th>
-      <th>Nationality</th>
-      <th>Ethnicity</th>
-      <th>Gender</th>
-      <th>Relief sought</th>
-      <th>Represented</th>
-      <th>Drru case</th>
-      <th>A number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% else %>
 
-  <tbody>
-    <% @clients.each do |client| %>
+  <h2>ALL CLIENTS</h2>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= client.last_name %></td>
-        <td><%= client.first_name %></td>
-        <td><%= client.nationality %></td>
-        <td><%= client.ethnicity.join("<br>").html_safe %></td>
-        <td><%= client.gender %></td>
-        <td>
-            <% client.client_reliefs.each do |relief| %>
-              <%= relief.relief_name %>
-            <% end %>
-        </td>
-        <td><%= client.represented %></td>
-        <td><%= client.drru_case %></td>
-        <td><%= client.a_number %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Last name</th>
+        <th>First name</th>
+        <th>Nationality</th>
+        <th>Ethnicity</th>
+        <th>Gender</th>
+        <th>Relief sought</th>
+        <th>Represented</th>
+        <th>Drru case</th>
+        <th>A number</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Client', new_client_path %>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.last_name %></td>
+          <td><%= client.first_name %></td>
+          <td><%= client.nationality %></td>
+          <td><%= client.ethnicity.join("<br>").html_safe %></td>
+          <td><%= client.gender %></td>
+          <td>
+              <% client.client_reliefs.each do |relief| %>
+                <%= relief.relief_name %>
+              <% end %>
+          </td>
+          <td><%= client.represented %></td>
+          <td><%= client.drru_case %></td>
+          <td><%= client.a_number %></td>
+          <td><%= link_to 'Show', client %></td>
+          <td><%= link_to 'Edit', edit_client_path(client) %></td>
+          <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Client', new_client_path %>
+<% end %>

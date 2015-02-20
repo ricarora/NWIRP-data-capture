@@ -99,9 +99,11 @@ class Client < ActiveRecord::Base
     end
   end
 
-  # def a_number
-  #   self.a_number
-  # end
+  def self.find_client_by_a_number(a_number)
+    if a_number
+      all.to_a.find { |client| client.a_number == a_number }
+    end
+  end
 
   def full_name
     self.first_name + ' ' + self.last_name
