@@ -1,47 +1,57 @@
-<% if @client %>
-
-<% else %>
-
-  <h2>ALL CLIENTS</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Last name</th>
-        <th>First name</th>
-        <th>Nationality</th>
-        <th>Ethnicity</th>
-        <th>Gender</th>
-        <th>Relief sought</th>
-        <th>Represented</th>
-        <th>Drru case</th>
-        <th>A number</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @clients.each do |client| %>
-        <tr>
-          <td><%= client.last_name %></td>
-          <td><%= client.first_name %></td>
-          <td><%= client.nationality %></td>
-          <td><%= client.ethnicity.join("<br>").html_safe %></td>
-          <td><%= client.gender %></td>
-          <td>
-              <% client.client_reliefs.each do |relief| %>
-                <%= relief.relief_name %>
-              <% end %>
-          </td>
-          <td><%= client.represented %></td>
-          <td><%= client.drru_case %></td>
-          <td><%= client.a_number %></td>
-          <td><%= link_to 'Show', client %></td>
-          <td><%= link_to 'Edit', edit_client_path(client) %></td>
-          <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
+<h2>CLIENTS</h2>
+<% @clients.each do |client| %>
+<div class="panel">
+  <table role="grid" summary="Client">
+    <tr>
+      <th>A#</th>
+      <td><%= client.a_number %></td>
+    </tr>
+    <tr>
+      <th>LAST NAME</th>
+      <td><%= client.last_name %></td>
+    </tr>
+    <tr>
+      <th>FIRST NAME</th>
+      <td><%= client.first_name %></td>
+    </tr>
+    <tr>
+      <th>NATIONALITY</th>
+      <td><%= client.nationality %></td>
+    </tr>
+    <tr>
+      <th>ETHNICITY</th>
+      <td><%= client.ethnicity.join("<br>").html_safe %></td>
+    </tr>
+    <tr>
+      <th>GENDER</th>
+      <td><%= client.gender %></td>
+    </tr>
+    <tr>
+      <th>RELIEF SOUGHT</th>
+      <td>
+        <% client.client_reliefs.each do |relief| %>
+          <div><%= relief.relief_name %></div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>REPRESENTED</th>
+      <td><%= client.represented %></td>
+    </tr>
+    <tr>
+      <th>DRRU CASE</th>
+      <td><%= translate(client.drru_case.class) %></td>
+    </tr>
+    <tr>
+      <th>ASSESSMENT DATE(S)</th>
+      <td>
+        <% client.assessments.each do |assessment| %>
+          <div><%= (assessment.date).strftime("%D") %></div>
+        <% end %>
+      </td>
+    </tr>
   </table>
-  <%= link_to 'New Client', new_client_path %>
+  <td><%= link_to 'VIEW CLIENT', client, class: "update-link" %></td>
+  <td><%= link_to 'EDIT CLIENT', edit_client_path(client), class: "update-link" %></td>
+</div>
 <% end %>
