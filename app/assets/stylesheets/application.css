@@ -163,14 +163,16 @@ table {
 
 .red {
   background-color: #444;
+  padding: 10px;
 }
 
 .red:hover, .red:focus {
-  background-color: #fa4542;
+  background-color: #951A1D;
 }
 
 .green {
   background-color: #444;
+  padding: 10px;
 }
 
 .green:hover, .green:focus {
