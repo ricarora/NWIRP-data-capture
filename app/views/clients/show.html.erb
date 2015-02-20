@@ -45,7 +45,7 @@
 
 <div class="panel">
 <% @client.convictions.each_with_index do |conviction, index| %>
-  <h3>Conviction <%= index + 1 %></h3>
+  <h3><%=link_to "Conviction #{index + 1}", client_conviction_path(@client, conviction) %></h3>
   <table role="grid" summary="Conviction">
       <tr>
         <th>CRIME NAME</th>
