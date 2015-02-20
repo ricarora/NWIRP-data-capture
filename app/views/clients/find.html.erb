@@ -1,0 +1,17 @@
+<h2>FIND CLIENT</h2>
+
+<div>
+  <%= form_tag clients_path, method: :get do %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%=label_tag :a_number_search, "CLIENT A#:",
+      class: "inline right" %>
+    </div>
+    <div class="small-9 columns">
+      <%=text_field_tag :a_number_search, params[:a_number_search],
+      placeholder: "XXX-XXX-XXX" %>
+    </div>
+  </div>
+  <%=submit_tag "Find Client", name: nil, class: "button green-button" %>
+  <% end %>
+</div>
