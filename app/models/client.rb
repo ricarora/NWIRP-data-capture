@@ -101,7 +101,7 @@ class Client < ActiveRecord::Base
 
   def self.find_client_by_a_number(a_number)
     if a_number
-      all.to_a.find { |client| client.a_number == a_number }
+      self.all.to_a.find { |client| client.a_number == a_number }
     end
   end
 
