@@ -9,7 +9,8 @@ class ClientsController < ApplicationController
       if @client
         redirect_to client_path(@client.id)
       else
-        render '/clients/find', notice: 'There is currently no client with that A#.'
+        flash.now[:alert] = 'There is currently no client with the entered A#.'
+        render '/clients/find'
       end
     else
       render :index
