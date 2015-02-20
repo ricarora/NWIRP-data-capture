@@ -151,10 +151,12 @@ input[type="checkbox"]:checked + .label-text:before {
 
 table {
   min-width: 100%;
+  border: #444;
+  border-style: solid;
+  border-width: 2px;
 }
 
 .update-link {
-  padding-left: 10px;
   color: #951A1D;
 }
 
