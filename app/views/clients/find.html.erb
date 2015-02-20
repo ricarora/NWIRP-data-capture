@@ -1,5 +1,15 @@
 <h2>FIND CLIENT</h2>
-<%= form_for @client do |f| %>
-  <%=f.text_field :search %>
-  <%=f.submit "Find Client" %>
-<% end %>
+
+<div>
+  <%= form_tag clients_path, method: :get do %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%=label_tag :find, "FIND CLIENT BY A#:", class: "inline right" %>
+    </div>
+    <div class="small-9 columns">
+      <%=text_field_tag :find, params[:find], placeholder: "XXX-XXX-XXX" %>
+    </div>
+      <%=submit_tag "Find Client", name: nil, class: "button green-button" %>
+  </div>
+  <% end %>
+</div>

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :clients do
-
+    collection do
+      get 'find'
+    end
     resources :convictions
 
   end

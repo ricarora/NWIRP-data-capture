@@ -2,11 +2,14 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @search = Client.search(params[:q])
-    @search.build_condition if @search.conditions.empty?
-    @clients  = params[:distinct].to_i.zero? ?
-      @search.result :
-      @search.result(distinct: true)
+    raise
+    Client.all.to_a.find{|client| client.a_number == params[:search]}
+    # @search = Client.search(params[:q])
+    # @search.build_condition if @search.conditions.empty?
+    # @clients  = params[:distinct].to_i.zero? ?
+    #   @search.result :
+    #   @search.result(distinct: true)
+
   end
 
   def show
