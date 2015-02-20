@@ -28,18 +28,18 @@ h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   text-align: center;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 h2 {
-  color: #2dc2bb;
+  color: #951A1D;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 
 }
 
 h3 {
-  color: #2dc2bb;
+  color: #951A1D;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 }
@@ -72,8 +72,8 @@ h3 {
 
 .red-button:focus, .red-button:hover {
   color: white;
-  background-color: #fa4542;
-  border: #fa4542;
+  background-color: #951A1D;
+  border: #951A1D;
   border-style: solid;
   border-width: 2px;
 }
@@ -104,7 +104,7 @@ a:hover, a:focus {
   background-color: white;
   float: right;
   margin-bottom: 20px;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 .add-field {
@@ -151,7 +151,7 @@ table {
 
 .update-link {
   padding-left: 10px;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 .hidden {
