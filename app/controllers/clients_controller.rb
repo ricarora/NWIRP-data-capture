@@ -3,6 +3,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.all
+    format_a_number(params[:a_number_search])
     @client = Client.find_client_by_a_number(params[:a_number_search])
     if @client
       redirect_to client_path(@client.id)
@@ -35,7 +36,7 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new
-    format_a_number
+    format_a_number(params[:client][:a_number])
     @client.attributes = client_params
     remove_blank_assessments
     remove_blank_reliefs
@@ -156,9 +157,9 @@ class ClientsController < ApplicationController
       end
     end
 
-    def format_a_number
-      if params[:client][:a_number].length == 9
-        params[:client][:a_number].insert(3, "-").insert(7, "-")
+    def format_a_number(a_number)
+      if a_number.length == 9
+        a_number.insert(3, "-").insert(7, "-")
       end
     end
 
