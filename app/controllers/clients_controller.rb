@@ -9,6 +9,11 @@ class ClientsController < ApplicationController
     else
       render :index, notice: 'There is currently no client with that A#.'
     end
+    # @search = Client.search_with_scopes(params[:q])
+    # @search.build_condition if @search.conditions.empty?
+    # @clients  = params[:distinct].to_i.zero? ?
+    #   @search.result :
+    #   @search.result(distinct: true)
   end
 
   def show
@@ -33,6 +38,7 @@ class ClientsController < ApplicationController
     format_a_number
     @client.attributes = client_params
     remove_blank_assessments
+    remove_blank_reliefs
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
@@ -57,6 +63,9 @@ class ClientsController < ApplicationController
 
   def update
     remove_blank_assessments
+    remove_blank_reliefs
+    #check_assessments
+    #check_client_reliefs
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
@@ -98,6 +107,43 @@ class ClientsController < ApplicationController
 
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    # def check_client_reliefs
+    #   @client.client_reliefs.each do |relief|
+    #     params[:client][:client_reliefs_attributes].each do |index, name|
+    #       name.each do |k,v|
+    #         if relief.relief_name == v
+    #           return true
+    #         else
+    #           relief.destroy
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
+
+    def check_assessments
+      @client.assessments.each do |assessment|
+        params[:client][:assessments_attributes].each do |index, date|
+          date.each do |k,v|
+            if assessment.date == v
+              return true
+            end
+            assessment.destroy
+          end
+        end
+      end
+    end
+
+    def remove_blank_reliefs
+      params[:client][:client_reliefs_attributes].each do |index, name|  #remove blank assessment dates from params
+        name.each do |k, v|
+          if v.blank?
+            params[:client][:client_reliefs_attributes].delete(index)
+          end
+        end
+      end
     end
 
     def remove_blank_assessments

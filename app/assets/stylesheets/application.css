@@ -28,18 +28,18 @@ h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
   text-align: center;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 h2 {
-  color: #2dc2bb;
+  color: #951A1D;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 
 }
 
 h3 {
-  color: #2dc2bb;
+  color: #951A1D;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 }
@@ -72,16 +72,16 @@ h3 {
 
 .red-button:focus, .red-button:hover {
   color: white;
-  background-color: #fa4542;
-  border: #fa4542;
+  background-color: #951A1D;
+  border: #951A1D;
   border-style: solid;
   border-width: 2px;
 }
 
 .green-button:focus, .green-button:hover {
   color: white;
-  background-color: #2dc2bb;
-  border: #2dc2bb;
+  background-color: #0971b2;
+  border: #0971b2;
   border-style: solid;
   border-width: 2px;
 }
@@ -104,7 +104,7 @@ a:hover, a:focus {
   background-color: white;
   float: right;
   margin-bottom: 20px;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 .add-field {
@@ -145,17 +145,50 @@ input[type="checkbox"]:checked + .label-text:before {
 
 /* SHOW */
 
-
 table {
-  width: 100%;
+  min-width: 100%;
 }
 
 .update-link {
   padding-left: 10px;
-  color: #fa4542;
+  color: #951A1D;
 }
 
 .hidden {
   position: absolute;
   display: none;
+}
+
+/* SEARCH */
+
+.red {
+  background-color: #444;
+  padding: 10px;
+}
+
+.red:hover, .red:focus {
+  background-color: #951A1D;
+}
+
+.green {
+  background-color: #444;
+  padding: 10px;
+}
+
+.green:hover, .green:focus {
+  background-color: #0971b2;
+}
+
+.big-button {
+  padding: 25px;
+  font-size: 25px;
+  float: left;
+}
+
+.search-option {
+  font-size: 15px;
+}
+
+fieldset {
+  margin-top: 5px;
 }
