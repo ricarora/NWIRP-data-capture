@@ -84,7 +84,10 @@ class ClientsController < ApplicationController
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
   end
 
-  
+  def delete_assessment
+    raise
+    @assessment = Assessment.find(params)
+  end
 
   private
 
