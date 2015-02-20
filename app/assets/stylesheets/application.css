@@ -159,3 +159,35 @@ table {
   position: absolute;
   display: none;
 }
+
+/* SEARCH */
+
+.red {
+  background-color: #444;
+}
+
+.red:hover, .red:focus {
+  background-color: #fa4542;
+}
+
+.green {
+  background-color: #444;
+}
+
+.green:hover, .green:focus {
+  background-color: #2dc2bb;
+}
+
+.big-button {
+  padding: 25px;
+  font-size: 25px;
+  float: left;
+}
+
+.search-option {
+  font-size: 15px;
+}
+
+fieldset {
+  margin-top: 5px;
+}

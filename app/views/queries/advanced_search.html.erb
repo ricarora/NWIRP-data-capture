@@ -1,4 +1,4 @@
-<h2>SEARCH</h2>
+<h2>SEARCH DATABASE</h2>
 
 <%= search_form_for(
   @search,
@@ -17,30 +17,30 @@
   </fieldset>
 
   <fieldset>
-    <legend>Search Conditions</legend>
+    <legend>SEARCH CONDITIONS</legend>
     <%= f.condition_fields do |g| %>
       <%= render 'condition_fields', f: g %>
     <% end %>
-    <%= button_to_add_fields "Add Condition", f, :condition %>
+    <%= button_to_add_fields "Add New Condition", f, :condition %>
   </fieldset>
 
-  <div>
-  <div>Select the displayed result:</div>
-
-  <div class="radio">
-  <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? false : true  %>
-  <%= label_tag "choice", "Client" %>
+  <div class="panel">
+    <h3>SEARCH:</h3>
+    <div class="radio">
+      <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? false : true  %>
+      <%= label_tag "choice", "CLIENTS", class: "search-option" %>
+    </div>
+    <div class="radio">
+      <%= radio_button_tag "choice", "conviction", checked = params[:choice] && params[:choice] == "conviction" ? true : false %>
+      <%= label_tag "choice", "CONVICTIONS", class: "search-option" %>
+    </div>
   </div>
-  <div class="radio">
-  <%= radio_button_tag "choice", "conviction", checked = params[:choice] && params[:choice] == "conviction" ? true : false %>
-  <%= label_tag "choice", "Conviction" %>
+  <div class="panel">
+    <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
+    <%= label_tag :distinct, 'Return distinct records?' %>
   </div>
-</div>
 
-  <%= label_tag :distinct, 'Return distinct records?' %>
-  <%= check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>
-
-  <%= f.submit "Search", class: "button green-button" %>
+  <%= f.submit "Search Database", class: "button green-button big-button" %>
 <% end %>
 <% if @clients %>
   <%= render 'client_results' %>
