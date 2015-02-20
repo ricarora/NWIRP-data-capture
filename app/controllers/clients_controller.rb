@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @search = Client.search(params[:q])
+    @search = Client.search_with_scopes(params[:q])
     @search.build_condition if @search.conditions.empty?
     @clients  = params[:distinct].to_i.zero? ?
       @search.result :
