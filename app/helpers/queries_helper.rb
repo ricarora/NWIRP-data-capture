@@ -2,9 +2,9 @@ module QueriesHelper
   def model_fields
     # which fields to display and sort by
     if @clients
-      [:id, :first_name, :last_name]
+      [:id, :first_name, :last_name, :nationality, :gender, :represented, :drru_case]
     elsif @convictions
-      [:crime_name, :rcw, :subsection, :ij_name, :ij_finding]
+      [:id, :crime_name, :rcw, :subsection, :dv_on_roc, :sentence, :ij_name, :nta_charges, :ij_finding]
     end
   end
 
