@@ -5,12 +5,14 @@ class ClientsController < ApplicationController
     @clients = Client.all
     if params[:a_number_search]
       format_a_number(params[:a_number_search])
-    end
-    @client = Client.find_client_by_a_number(params[:a_number_search])
-    if @client
-      redirect_to client_path(@client.id)
+      @client = Client.find_client_by_a_number(params[:a_number_search])
+      if @client
+        redirect_to client_path(@client.id)
+      else
+        render '/clients/find', notice: 'There is currently no client with that A#.'
+      end
     else
-      render :index, notice: 'There is currently no client with that A#.'
+      render :index
     end
   end
 
