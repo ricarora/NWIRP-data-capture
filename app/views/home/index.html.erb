@@ -9,9 +9,10 @@
 <hr>
 <div class="row">
   <div class="small-12 columns">
-    <ul class="medium-block-grid-2">
-      <li><%=link_to "Add Client", '/clients/new', class: "button green-button" %></li>
-      <li><%=link_to "Search Database", '/advanced_search', class: "button green-button" %></li>
+    <ul class="medium-block-grid-3">
+      <li><%=link_to "Add Client", new_client_path, class: "button green-button" %></li>
+      <li><%=link_to "Find Client", find_clients_path, class: "button green-button" %></li>
+      <li><%=link_to "Search Database", advanced_search_path, class: "button green-button" %></li>
     </ul>
   </div>
 </div>
