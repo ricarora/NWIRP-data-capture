@@ -20,7 +20,7 @@ server '52.10.224.131',
   user: 'ubuntu',
   roles: %w{web app db},
   ssh_options: {
-    keys: %w(/Users/Tom/.ssh/ec2-tryout.pem),
+    keys: %w(/Users/Tom/.ssh/ec2-nwirp.pem),
     forward_agent: false,
     auth_methods: %w(publickey)
   }
