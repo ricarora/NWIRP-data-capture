@@ -65,7 +65,7 @@ class ClientsController < ApplicationController
 
   def update
     remove_blank_assessments_and_mark_for_destruction
-    remove_blank_reliefs
+    remove_blank_reliefs_and_mark_for_destruction
     #check_assessments
     #check_client_reliefs
 
@@ -117,12 +117,15 @@ class ClientsController < ApplicationController
       end
     end
 
-    def remove_blank_reliefs
+    def remove_blank_reliefs_and_mark_for_destruction
       params[:client][:client_reliefs_attributes].each do |index, name|  #remove blank assessment dates from params
-        name.each do |k, v|
-          if v.blank?
+        if name.has_key?("relief_name")
+          if name["relief_name"].blank?
             params[:client][:client_reliefs_attributes].delete(index)
           end
+        end
+        if name.has_key?("_destroy")
+          @client.client_reliefs.find(name["id"].to_i).mark_for_destruction
         end
       end
     end
@@ -161,6 +164,6 @@ class ClientsController < ApplicationController
                                      :drru_case,
                                      :a_number,
                                      :assessments_attributes => [:id, :date, :_destroy],
-                                     :client_reliefs_attributes => [:id, :relief_name])
+                                     :client_reliefs_attributes => [:id, :relief_name, :_destroy])
     end
 end
