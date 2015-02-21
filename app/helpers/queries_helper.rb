@@ -1,6 +1,5 @@
 module QueriesHelper
-  def model_fields
-    # which fields to display and sort by
+  def model_fields # which fields to display and sort by
     if @clients
       [:id, :first_name, :last_name, :nationality, :gender, :represented, :drru_case]
     elsif @convictions
@@ -8,9 +7,8 @@ module QueriesHelper
     end
   end
 
-  def results_limit
-    # max number of search results to display
-    25
+  def results_limit # max number of search results to display
+    50
   end
 
   def display_query_sql(users)
