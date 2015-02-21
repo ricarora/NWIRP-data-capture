@@ -63,6 +63,6 @@ function shouldHideAssessment(assessment) {
 
 
 $(function() {
- hideReliefs();
+ // hideReliefs();
  // hideAssessments();
 });
