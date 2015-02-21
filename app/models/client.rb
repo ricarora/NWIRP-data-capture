@@ -1,8 +1,8 @@
 class Client < ActiveRecord::Base
-  has_many :assessments, autosave: true
+  has_many :assessments, autosave: true, :dependent => :destroy
   has_many :convictions
   has_many :relief_soughts, through: :client_reliefs
-  has_many :client_reliefs, autosave: true
+  has_many :client_reliefs, autosave: true, :dependent => :destroy
   validates :last_name, :a_number, :assessments, presence: true
   validates :a_number, format: { with: /\d{3}-\d{3}-\d{3}/,
     message: "Only allows numbers in this format: XXX-XXX-XXX." }
@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
     message: "Only accepts Yes, No, or Unknown.", allow_blank: true}
   validate :validate_a_number_uniqueness
 
-  accepts_nested_attributes_for :client_reliefs, :assessments,
+  accepts_nested_attributes_for :client_reliefs, :assessments, allow_destroy: true,
       :reject_if => proc {|attributes|
         attributes.all? {|k,v| v.blank?}
       }

@@ -64,10 +64,11 @@ class ClientsController < ApplicationController
   end
 
   def update
-    remove_blank_assessments
+    remove_blank_assessments_and_mark_for_destruction
     remove_blank_reliefs
     #check_assessments
     #check_client_reliefs
+
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
@@ -81,14 +82,6 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
-  end
-
-  def destroy_assessment
-    @assessment = Assessment.find(params[:assessment_id])
-    if @assessment.client_id == params[:id].to_i
-      @assessment.destroy
-    end
-    redirect_to edit_client_path(params[:id])
   end
 
   private
@@ -134,12 +127,15 @@ class ClientsController < ApplicationController
       end
     end
 
-    def remove_blank_assessments
+    def remove_blank_assessments_and_mark_for_destruction
       params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
-        date.each do |k, v|
-          if v.blank?
+        if date.has_key?("date")
+          if date["date"].blank?
             params[:client][:assessments_attributes].delete(index)
           end
+        end
+        if date.has_key?('_destroy')
+          @client.assessments.find(date["id"].to_i).mark_for_destruction
         end
       end
     end
@@ -164,7 +160,7 @@ class ClientsController < ApplicationController
                                      :represented,
                                      :drru_case,
                                      :a_number,
-                                     :assessments_attributes => [:id, :date],
+                                     :assessments_attributes => [:id, :date, :_destroy],
                                      :client_reliefs_attributes => [:id, :relief_name])
     end
 end
