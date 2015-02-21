@@ -76,15 +76,17 @@
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
         <td><%= conviction.ij_finding %></td>
       </tr>
-      <% unless conviction.notes.blank? %>
+    </table>
+    <% unless conviction.notes.blank? %>
+      <table>
         <tr>
           <th>ADDITIONAL NOTES</th>
         </tr>
         <tr>
           <td><%= conviction.notes %></td>
         </tr>
-      <% end %>
-  </table>
+      </table>
+    <% end %>
   <table role="grid" summary="Conviction Grounds of Removability">
     <% conviction.conviction_grounds.each do |ground| %>
     <tr>
