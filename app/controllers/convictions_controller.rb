@@ -6,6 +6,7 @@ class ConvictionsController < ApplicationController
   end
 
   def show
+    @client = Client.find(params[:client_id])
   end
 
   def new
