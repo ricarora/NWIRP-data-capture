@@ -124,11 +124,9 @@
         <div class="small-9 columns">
           <% if !@client.new_record? && assessment_f.object.created_at %>
             <%#= assessment_f.date_field :date, class: "date", disabled: true %>
-            <%= assessment_f.object.date %>
-            <!-- <span class='delete_check_box'><%= check_box_tag 'client[assessments_attributes][delete_date][]', assessment_f.object.id, checked=false %>
-            Delete</span> -->
+            <span><%= assessment_f.object.date %>
             <%= assessment_f.check_box :_destroy %>
-            <%= assessment_f.label :_destroy, "Remove Assessment" %>
+            <%= assessment_f.label :_destroy, "Remove Assessment", class: 'delete_check_box' %></span>
           <% else %>
             <%= assessment_f.date_field :date, class: "date" %>
           <% end %>
