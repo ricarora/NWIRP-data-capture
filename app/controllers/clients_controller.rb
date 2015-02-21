@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
 
   def index
     @clients = Client.all
@@ -64,11 +64,11 @@ class ClientsController < ApplicationController
   end
 
   def update
-    raise
-    remove_blank_assessments
-    remove_blank_reliefs
+    remove_blank_assessments_and_mark_for_destruction
+    remove_blank_reliefs_and_mark_for_destruction
     #check_assessments
     #check_client_reliefs
+
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
@@ -82,12 +82,6 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
-  end
-
-  def search
-    # using search from ransack gem. This might change depending on the search
-    index
-    render :index
   end
 
   private
@@ -123,22 +117,28 @@ class ClientsController < ApplicationController
       end
     end
 
-    def remove_blank_reliefs
+    def remove_blank_reliefs_and_mark_for_destruction
       params[:client][:client_reliefs_attributes].each do |index, name|  #remove blank assessment dates from params
-        name.each do |k, v|
-          if v.blank?
+        if name.has_key?("relief_name")
+          if name["relief_name"].blank?
             params[:client][:client_reliefs_attributes].delete(index)
           end
+        end
+        if name.has_key?("_destroy")
+          @client.client_reliefs.find(name["id"].to_i).mark_for_destruction
         end
       end
     end
 
-    def remove_blank_assessments
+    def remove_blank_assessments_and_mark_for_destruction
       params[:client][:assessments_attributes].each do |index, date|  #remove blank assessment dates from params
-        date.each do |k, v|
-          if v.blank?
+        if date.has_key?("date")
+          if date["date"].blank?
             params[:client][:assessments_attributes].delete(index)
           end
+        end
+        if date.has_key?('_destroy')
+          @client.assessments.find(date["id"].to_i).mark_for_destruction
         end
       end
     end
@@ -163,7 +163,7 @@ class ClientsController < ApplicationController
                                      :represented,
                                      :drru_case,
                                      :a_number,
-                                     :assessments_attributes => [:id, :date],
-                                     :client_reliefs_attributes => [:id, :relief_name])
+                                     :assessments_attributes => [:id, :date, :_destroy],
+                                     :client_reliefs_attributes => [:id, :relief_name, :_destroy])
     end
 end
