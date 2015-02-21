@@ -43,9 +43,10 @@
   <%= link_to "EDIT CLIENT", edit_client_path(@client), class: "update-link" %>
 </div>
 
-<div class="panel">
+
 <% @client.convictions.each_with_index do |conviction, index| %>
-  <h3><%=link_to "Conviction #{index + 1}", client_conviction_path(@client, conviction) %></h3>
+<div class="panel">
+  <h3>Conviction <%= index + 1 %></h3>
   <table role="grid" summary="Conviction">
       <tr>
         <th>CRIME NAME</th>
@@ -93,6 +94,6 @@
     <% end %>
   </table>
   <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction), class: "update-link"%>
-<% end %>
 </div>
+<% end %>
 <%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button green-button" %>
