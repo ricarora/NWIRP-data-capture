@@ -122,8 +122,10 @@
           <% end %>
         </div>
         <div class="small-9 columns">
-          <% if assessment_f.object.created_at %>
-            <span class="assessment_date"><%= assessment_f.object.date %></span>
+          <% if !@client.new_record? && assessment_f.object.created_at %>
+            <%#= assessment_f.date_field :date, class: "date", disabled: true %>
+            <%= assessment_f.object.date %>
+            <%= check_box 'client[assessment]', :delete_date, {class: 'date'}, assessment_f.object.id, '' %>Delete
           <% else %>
             <%= assessment_f.date_field :date, class: "date" %>
           <% end %>

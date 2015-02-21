@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
 
   def index
     @clients = Client.all
@@ -64,7 +64,6 @@ class ClientsController < ApplicationController
   end
 
   def update
-    raise
     remove_blank_assessments
     remove_blank_reliefs
     #check_assessments
@@ -84,9 +83,12 @@ class ClientsController < ApplicationController
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
   end
 
-  def delete_assessment
-    raise
-    @assessment = Assessment.find(params)
+  def destroy_assessment
+    @assessment = Assessment.find(params[:assessment_id])
+    if @assessment.client_id == params[:id].to_i
+      @assessment.destroy
+    end
+    redirect_to edit_client_path(params[:id])
   end
 
   private
