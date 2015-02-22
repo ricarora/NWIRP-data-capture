@@ -159,6 +159,8 @@ table {
   border: #444;
   border-style: solid;
   border-width: 2px;
+  table-layout: fixed;
+  word-wrap:break-word;
 }
 
 .update-link {
@@ -168,6 +170,14 @@ table {
 .hidden {
   position: absolute;
   display: none;
+}
+
+.check-box {
+  padding-left: 40px;
+}
+
+.existing-relief {
+  padding-top: 5px;
 }
 
 /* SEARCH */

@@ -66,9 +66,6 @@ class ClientsController < ApplicationController
   def update
     remove_blank_assessments_and_mark_for_destruction
     remove_blank_reliefs_and_mark_for_destruction
-    #check_assessments
-    #check_client_reliefs
-
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
