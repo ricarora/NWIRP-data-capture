@@ -39,8 +39,8 @@ class ClientsController < ApplicationController
     @client = Client.new
     format_a_number(params[:client][:a_number])
     @client.attributes = client_params
-    remove_blank_assessments
-    remove_blank_reliefs
+    remove_blank_assessments_and_mark_for_destruction
+    remove_blank_reliefs_and_mark_for_destruction
     @client.ethnicity = params[:client][:ethnicity].reject(&:empty?)
     if @client.save
       redirect_to client_path(@client.id), notice: 'Client was successfully created.'
