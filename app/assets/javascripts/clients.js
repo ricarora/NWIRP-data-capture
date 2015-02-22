@@ -18,10 +18,10 @@ function hideReliefs() {
 }
 
 function shouldHideRelief(relief) {
-  if ($(relief).is("#relief-0")) {
+  if($(relief).is("#relief-0")) {
     return false;
   }
-  else if ($(relief).find(".relief-options").val()) {
+  else if ($(relief).html().indexOf("Delete Relief") != -1)  { //else if ($((relief).innerHTML).indexOf("DELETE") !== -1) {
     return false;
   }
   else {
@@ -53,7 +53,7 @@ function shouldHideAssessment(assessment) {
   if ($(assessment).is("#assessment-0")) {
     return false;
   }
-  else if ($(assessment.find(".date")).val()) { //need to figure out how to check value
+  else if ($(assessment).html().indexOf("Delete Assessment") != -1) { //need to figure out how to check value
     return false;
   }
   else {
@@ -63,6 +63,6 @@ function shouldHideAssessment(assessment) {
 
 
 $(function() {
- // hideReliefs();
- // hideAssessments();
+  hideReliefs();
+  hideAssessments();
 });
