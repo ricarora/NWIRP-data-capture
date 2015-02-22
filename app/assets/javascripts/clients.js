@@ -18,12 +18,15 @@ function hideReliefs() {
 }
 
 function shouldHideRelief(relief) {
-  if ($(relief).is("#relief-0")) {
+  if($(relief).is("#relief-0")) {
     return false;
   }
-  else if ($(relief).find(".relief-options").val()) {
+  else if //($(relief).not('has:(".existing-relief")')) { //textContent.(contains("Please select"))) {//($(relief).find("input:checkbox")) { //($(relief).hasClass(".existing-relief")) {//($('relief:not(:contains("Please select"))')) {
     return false;
   }
+  // else if ($(relief).find(".relief-options").val()) {
+  //   return false;
+  // }
   else {
     return true;
   }

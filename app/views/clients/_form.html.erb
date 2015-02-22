@@ -76,9 +76,11 @@
       </div>
       <div class="small-9 columns">
         <% if !@client.new_record? && relief_f.object.created_at %>
-          <span><%= relief_f.object.relief_name %>
-          <%= relief_f.check_box :_destroy %>
-          <%= relief_f.label :_destroy, "Remove Relief Sought", class: 'delete_check_box' %></span>
+          <div class: "existing-relief">
+            <%= relief_f.object.relief_name %>
+            <%= relief_f.check_box :_destroy %>
+            <%= relief_f.label :_destroy, "REMOVE", class: 'delete_check_box' %>
+          </div>
         <% else %>
           <%= relief_f.select :relief_name,
           ReliefSought.order_reliefs.map {|relief| relief.name},
