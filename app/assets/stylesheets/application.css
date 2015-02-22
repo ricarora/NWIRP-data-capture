@@ -170,6 +170,14 @@ table {
   display: none;
 }
 
+.check-box {
+  padding-left: 40px;
+}
+
+.existing-relief {
+  padding-top: 10px;
+}
+
 /* SEARCH */
 
 .red {
