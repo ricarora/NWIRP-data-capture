@@ -28,3 +28,43 @@ grounds_of_removabilities = ["AGGRAVATED FELONY", "CIMT?", "PSC - ASYLUM?",
 grounds_of_removabilities.each do |ground|
   RemovabilityGround.where(name: ground).first_or_create
 end
+
+(1..10).each do
+  client = {
+    a_number: "#{Faker::Number.number(3)}-#{Faker::Number.number(3)}-#{Faker::Number.number(3)}",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    nationality: Client::NATIONALITY.sample,
+    ethnicity: Client::ETHNICITY.sample,
+    gender: Client::GENDER.sample,
+    represented: Client::REPRESENTED.sample,
+    drru_case: [true, false].sample,
+  }
+  c = Client.new(client)
+  c.assessments = [Assessment.new(date: Faker::Date.between(100.days.ago, Date.today))]
+  c.client_reliefs = [ClientRelief.new(relief_name: reliefs_sought.sample)]
+  c.save
+  c.convictions = []
+  (1..[3,4].sample).each do
+    conviction = {
+      crime_name: ["Assault/Battery", "Aiding & Abetting / Accessory", "Drug Possession", "Burglary", "Theft / Larceny", "Forgery", "Homicide", "Shoplifting"].sample,
+      rcw: "9a.#{Faker::Number.number(2)}.#{Faker::Number.number(3)}",
+      subsection: "Subsection #{Faker::Number.digit}",
+      sentence: Faker::Number.number(3),
+      ij_name: Conviction::IJ_NAME.sample,
+      nta_charges: "NTA Charge #{Faker::Number.digit}",
+      ij_decision_date: Faker::Date.between(100.days.ago, Date.today),
+      ij_finding: Faker::Lorem.sentence(3, true, 4),
+      notes: [true, false].sample ? Faker::Lorem.paragraph : "",
+      state_committed: Conviction::STATE_COMMITTED.sample,
+      dv_on_roc: [true, false].sample,
+    }
+    c.convictions.append([Conviction.new(conviction)])
+    con = c.convictions[-1]
+    con.conviction_grounds = []
+    grounds_of_removabilities.each do |ground|
+      con.conviction_grounds.append(ConvictionGround.new(gor_name: ground, status: ["Yes", "No", "Finding Not Made"].sample))
+    end
+    con.save  
+  end
+end
