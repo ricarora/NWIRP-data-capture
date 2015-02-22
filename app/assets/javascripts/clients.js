@@ -21,6 +21,9 @@ function shouldHideRelief(relief) {
   if($(relief).is("#relief-0")) {
     return false;
   }
+  else if ($(relief).html().indexOf("DELETE") != -1)  {//else if ($((relief).innerHTML).indexOf("DELETE") !== -1) {
+    return false;
+  }
   //else if //($(relief).not('has:(".existing-relief")')) { //textContent.(contains("Please select"))) {//($(relief).find("input:checkbox")) { //($(relief).hasClass(".existing-relief")) {//($('relief:not(:contains("Please select"))')) {
   //  return false;
   //}
