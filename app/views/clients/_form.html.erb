@@ -76,7 +76,6 @@
       </div>
       <div class="small-9 columns">
         <% if !@client.new_record? && relief_f.object.created_at %>
-          <%#= assessment_f.date_field :date, class: "date", disabled: true %>
           <span><%= relief_f.object.relief_name %>
           <%= relief_f.check_box :_destroy %>
           <%= relief_f.label :_destroy, "Remove Relief Sought", class: 'delete_check_box' %></span>
@@ -85,7 +84,7 @@
           ReliefSought.order_reliefs.map {|relief| relief.name},
           {include_blank: "Please select"}, class: "relief-options" %>
         <% end %>
-        <% if relief_f.index > 0 %>
+        <% if relief_f.index > 0 && !relief_f.object.created_at %>
           <a href='#' class='remove_field'>Remove field</a>
         <% end %>
       </div>

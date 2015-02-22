@@ -29,40 +29,40 @@ function shouldHideRelief(relief) {
   }
 }
 
-
-function hideAssessments() {
-  $(".assessment").each(function() {
-    var assessment = $(this)
-    if (shouldHideAssessment(assessment)) {
-      $(assessment).addClass("hidden");
-    }
-    $(assessment).find(".remove_field").click(function(event) {
-      event.preventDefault();
-      ($(assessment.find(".date")).val(null))
-      $(assessment).addClass("hidden");
-    });
-  });
-
-  $("#show-assessment").click(function(event) {
-    event.preventDefault();
-    $('.hidden.assessment').first().removeClass("hidden")
-  });
-}
-
-function shouldHideAssessment(assessment) {
-  if ($(assessment).is("#assessment-0")) {
-    return false;
-  }
-  else if ($(assessment.find(".date")).val()) { //need to figure out how to check value
-    return false;
-  }
-  else {
-    return true;
-  }
-}
+//
+// function hideAssessments() {
+//   $(".assessment").each(function() {
+//     var assessment = $(this)
+//     if (shouldHideAssessment(assessment)) {
+//       $(assessment).addClass("hidden");
+//     }
+//     $(assessment).find(".remove_field").click(function(event) {
+//       event.preventDefault();
+//       ($(assessment.find(".date")).val(null))
+//       $(assessment).addClass("hidden");
+//     });
+//   });
+//
+//   $("#show-assessment").click(function(event) {
+//     event.preventDefault();
+//     $('.hidden.assessment').first().removeClass("hidden")
+//   });
+// }
+//
+// function shouldHideAssessment(assessment) {
+//   if ($(assessment).is("#assessment-0")) {
+//     return false;
+//   }
+//   else if ($(assessment.find(".date")).val()) { //need to figure out how to check value
+//     return false;
+//   }
+//   else {
+//     return true;
+//   }
+// }
 
 
 $(function() {
- // hideReliefs();
+  hideReliefs();
  // hideAssessments();
 });
