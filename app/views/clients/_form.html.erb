@@ -133,14 +133,13 @@
         </div>
         <div class="small-9 columns">
           <% if !@client.new_record? && assessment_f.object.created_at %>
-            <%#= assessment_f.date_field :date, class: "date", disabled: true %>
             <span><%= assessment_f.object.date %>
             <%= assessment_f.check_box :_destroy %>
             <%= assessment_f.label :_destroy, "Delete Assessment", class: 'delete_check_box' %></span>
           <% else %>
             <%= assessment_f.date_field :date, class: "date" %>
           <% end %>
-          <% if assessment_f.index > 0 %>
+          <% if assessment_f.index > 0 && !assessment_f.object.created_at %>
             <a href='#' class='remove_field'>Remove field</a>
           <% end %>
         </div>
