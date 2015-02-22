@@ -21,7 +21,7 @@ function shouldHideRelief(relief) {
   if($(relief).is("#relief-0")) {
     return false;
   }
-  else if ($(relief).html().indexOf("DELETE") != -1)  {//else if ($((relief).innerHTML).indexOf("DELETE") !== -1) {
+  else if ($(relief).html().indexOf("Delete Relief") != -1)  {//else if ($((relief).innerHTML).indexOf("DELETE") !== -1) {
     return false;
   }
   //else if //($(relief).not('has:(".existing-relief")')) { //textContent.(contains("Please select"))) {//($(relief).find("input:checkbox")) { //($(relief).hasClass(".existing-relief")) {//($('relief:not(:contains("Please select"))')) {
@@ -35,40 +35,40 @@ function shouldHideRelief(relief) {
   }
 }
 
-//
-// function hideAssessments() {
-//   $(".assessment").each(function() {
-//     var assessment = $(this)
-//     if (shouldHideAssessment(assessment)) {
-//       $(assessment).addClass("hidden");
-//     }
-//     $(assessment).find(".remove_field").click(function(event) {
-//       event.preventDefault();
-//       ($(assessment.find(".date")).val(null))
-//       $(assessment).addClass("hidden");
-//     });
-//   });
-//
-//   $("#show-assessment").click(function(event) {
-//     event.preventDefault();
-//     $('.hidden.assessment').first().removeClass("hidden")
-//   });
-// }
-//
-// function shouldHideAssessment(assessment) {
-//   if ($(assessment).is("#assessment-0")) {
-//     return false;
-//   }
-//   else if ($(assessment.find(".date")).val()) { //need to figure out how to check value
-//     return false;
-//   }
-//   else {
-//     return true;
-//   }
-// }
+
+function hideAssessments() {
+  $(".assessment").each(function() {
+    var assessment = $(this)
+    if (shouldHideAssessment(assessment)) {
+      $(assessment).addClass("hidden");
+    }
+    $(assessment).find(".remove_field").click(function(event) {
+      event.preventDefault();
+      ($(assessment.find(".date")).val(null))
+      $(assessment).addClass("hidden");
+    });
+  });
+
+  $("#show-assessment").click(function(event) {
+    event.preventDefault();
+    $('.hidden.assessment').first().removeClass("hidden")
+  });
+}
+
+function shouldHideAssessment(assessment) {
+  if ($(assessment).is("#assessment-0")) {
+    return false;
+  }
+  else if ($(assessment).html().indexOf("Delete Assessment") != -1) { //need to figure out how to check value
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 
 $(function() {
   hideReliefs();
- // hideAssessments();
+  hideAssessments();
 });

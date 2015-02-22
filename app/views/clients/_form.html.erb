@@ -80,7 +80,7 @@
             <%= relief_f.object.relief_name %>
             <span class="check-box">
             <%= relief_f.check_box :_destroy %>
-            <%= relief_f.label :_destroy, "DELETE RELIEF", class: 'delete_check_box' %>
+            <%= relief_f.label :_destroy, "Delete Relief", class: 'delete_check_box' %>
             </span>
           </div>
         <% else %>
@@ -136,7 +136,7 @@
             <%#= assessment_f.date_field :date, class: "date", disabled: true %>
             <span><%= assessment_f.object.date %>
             <%= assessment_f.check_box :_destroy %>
-            <%= assessment_f.label :_destroy, "Remove Assessment", class: 'delete_check_box' %></span>
+            <%= assessment_f.label :_destroy, "Delete Assessment", class: 'delete_check_box' %></span>
           <% else %>
             <%= assessment_f.date_field :date, class: "date" %>
           <% end %>
