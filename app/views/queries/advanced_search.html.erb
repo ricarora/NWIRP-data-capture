@@ -27,11 +27,11 @@
   <div class="panel">
     <h3>SEARCH:</h3>
     <div class="radio">
-      <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? false : true  %>
+      <%= radio_button_tag "choice", "client", checked = params[:choice] && params[:choice] != "client" ? true : false %>
       <%= label_tag "choice", "CLIENTS", class: "search-option" %>
     </div>
     <div class="radio">
-      <%= radio_button_tag "choice", "conviction", checked = params[:choice] && params[:choice] == "conviction" ? true : false %>
+      <%= radio_button_tag "choice", "conviction", checked = params[:choice] && params[:choice] == "conviction" ? false : true %>
       <%= label_tag "choice", "CONVICTIONS", class: "search-option" %>
     </div>
   </div>
