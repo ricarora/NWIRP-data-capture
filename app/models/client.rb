@@ -105,6 +105,10 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def DRRU_CASE
+    self.drru_case ? "Yes" : "No"
+  end
+  
   def full_name
     self.first_name + ' ' + self.last_name
   end
