@@ -43,6 +43,10 @@ class Conviction < ActiveRecord::Base
     end
   end
 
+  def DV_ON_ROC
+    self.dv_on_roc ? "Yes" : "No"
+  end
+
   # ransacker :title_diddly do |parent|
   #   Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
   # end
