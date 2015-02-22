@@ -1,7 +1,7 @@
 class QueriesController < ApplicationController
 
   def advanced_search
-      if params[:choice] == "clients"
+      if params[:choice] == "client"
         @search = Client.search(params[:q])
         @search.build_condition if @search.conditions.empty?
         @clients  = params[:distinct].to_i.zero? ?
