@@ -28,3 +28,16 @@ grounds_of_removabilities = ["AGGRAVATED FELONY", "CIMT?", "PSC - ASYLUM?",
 grounds_of_removabilities.each do |ground|
   RemovabilityGround.where(name: ground).first_or_create
 end
+
+(1..10).each do
+  user = {
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    username: Faker::Internet.user_name,
+    password: Faker::Internet.password(10, 20),
+    storename: Faker::Company.name + "Store",
+    image_url: Faker::Avatar.image,
+  }
+
+  User.create(user)
+end
