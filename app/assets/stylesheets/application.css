@@ -229,3 +229,9 @@ table {
 fieldset {
   margin-top: 5px;
 }
+
+/* USERS */
+.highlight {
+  color: #951A1D;
+  padding-bottom: 5px;
+}
