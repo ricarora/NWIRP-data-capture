@@ -28,6 +28,11 @@
             <li><%= link_to "Add Client", new_client_path %></li>
             <li><%= link_to "Find Client", find_clients_path %>
             <li><%= link_to "Search Database", advanced_search_path %></li>
+            <% if user_signed_in? %>
+              <li>Logged in as <strong><%= current_user.name %></strong></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><% link_to "Login", new_user_session_path %></li>
           </ul>
         </section>
       </nav>
