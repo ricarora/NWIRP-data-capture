@@ -16,7 +16,11 @@
         <tr>
           <td><%= user.email %></td>
           <td><%= translate(user.approved.class) %></td>
-          <td><%#= link_to "Edit", edit_user_path(user) %>
+          <% if user.approved %>
+          <td><%= link_to "Remove User", user_path(user), method: :delete %></td>
+          <% else %>
+          <td><%#= link_to "Approve User", update_user_path(user) %></td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   after_create :send_admin_mail
+
   def send_admin_mail
     AdminMailer.new_user_waiting_for_approval(self).deliver
   end
@@ -33,5 +34,11 @@ class User < ActiveRecord::Base
 
   def self.find_all_by_approved(value)
     User.all.where(approved: :false)
+  end
+
+  def approve_user(user)
+    if current_user.admin
+      user.approved == true
+    end
   end
 end
