@@ -1,5 +1,5 @@
 class RemovabilityGroundsController < ApplicationController
-  before_action :set_removability_ground, only: [:show, :edit, :update, :destroy]
+  before_action :set_removability_ground, only: [:update, :destroy]
   before_filter :authenticate_user!
   respond_to :html
 

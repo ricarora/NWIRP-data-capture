@@ -39,7 +39,7 @@
                 <% if user_signed_in? %>
                   <% if current_user.admin == true %>
                     <li><%= link_to "Manage Users", users_path %></li>
-                    <li><%= link_to "Manage Relief Sought", "#" %></li>
+                    <li><%= link_to "Manage Relief Sought", relief_soughts_path %></li>
                     <li><%= link_to "Manage Grounds for Removability", removability_grounds_path %></li>
                   <% end %>
                   <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
