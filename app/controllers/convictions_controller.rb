@@ -1,5 +1,5 @@
 class ConvictionsController < ApplicationController
-  before_action :set_conviction, only: [:show, :edit, :update, :destroy]
+  before_action :set_conviction, only: [:edit, :update, :destroy]
   before_filter :authenticate_user!
 
   def index
@@ -64,8 +64,10 @@ class ConvictionsController < ApplicationController
   end
 
   def destroy
-    @conviction.destroy
-    redirect_to convictions_url, notice: 'Conviction was successfully destroyed.'
+    if current_user && current_user.admin
+      @conviction.destroy
+      redirect_to client_path(params[:client_id]), notice: 'Conviction was successfully destroyed.'
+    end
   end
 
   private
