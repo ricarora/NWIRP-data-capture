@@ -11,11 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= f.label :name, "NAME", class: "inline right" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :name %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Removability Ground", class: "button green-button" %>
   </div>
 <% end %>

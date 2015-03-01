@@ -1,5 +1,9 @@
-<h1>New removability_ground</h1>
+<h2>ADD REMOVABILITY GROUND</h2>
 
-<%= render 'form' %>
+<% if current_user && current_user.admin %>
+  <%= render 'form' %>
 
-<%= link_to 'Back', removability_grounds_path %>
+  <%= link_to 'Back', removability_grounds_path %>
+<% else %>
+  <h3>Sorry. Only admins can add removability grounds.</h3>
+<% end %>

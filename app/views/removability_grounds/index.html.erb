@@ -1,4 +1,4 @@
-<h1>Listing removability_grounds</h1>
+<h2>REMOVABILITY GROUNDS</h2>
 
 <table>
   <thead>
@@ -12,14 +12,17 @@
     <% @removability_grounds.each do |removability_ground| %>
       <tr>
         <td><%= removability_ground.name %></td>
-        <td><%= link_to 'Show', removability_ground %></td>
-        <td><%= link_to 'Edit', edit_removability_ground_path(removability_ground) %></td>
-        <td><%= link_to 'Destroy', removability_ground, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user && current_user.admin %>
+          <td><%= link_to 'Delete', removability_ground, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Removability ground', new_removability_ground_path %>
+<% if current_user && current_user.admin %>
+  <%= link_to 'Add Removability Ground', new_removability_ground_path %>
+<% end %>
