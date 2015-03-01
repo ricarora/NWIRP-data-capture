@@ -16,8 +16,12 @@ class RemovabilityGroundsController < ApplicationController
   def create
     if current_user && current_user.admin
       @removability_ground = RemovabilityGround.new(removability_ground_params)
-      @removability_ground.save
-      respond_with(@removability_ground)
+      @removability_ground.name.upcase!
+      if @removability_ground.save
+        redirect_to removability_grounds_path, notice: "Removability Ground successfully added."
+      else
+        redirect_to removability_grounds_path, notice: "Removability Ground unable to be added."
+      end
     else
       redirect_to removability_grounds_path, notice: "Only admin can create Removability Grounds"
     end
@@ -26,7 +30,7 @@ class RemovabilityGroundsController < ApplicationController
   def destroy
     if current_user && current_user.admin
       @removability_ground.destroy
-      respond_with(@removability_ground)
+      redirect_to removability_grounds_path, notice: "Removability Ground successfully deleted."
     else
       redirect_to removability_grounds_path, notice: "Only admin can delete Removability Grounds"
     end
@@ -34,7 +38,7 @@ class RemovabilityGroundsController < ApplicationController
 
   private
     def set_removability_ground
-      @removability_ground = RemovabilityGround.find(params[:id])
+      @removability_ground = RemovabilityGround.find(params[:name])
     end
 
     def removability_ground_params
