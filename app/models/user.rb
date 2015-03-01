@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     end
     recoverable
   end
+
+  def self.find_all_by_approved(value)
+    User.all.where(approved: :false)
+  end
 end

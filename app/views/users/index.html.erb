@@ -1,0 +1,26 @@
+<% if current_user && current_user.admin %>
+  <h2>USERS</h2>
+
+  View:
+  <%= link_to "All Users", action: :index  %>
+  <%= link_to "Users Awaiting Approval", action: :index, approved: :false %>
+
+  <table>
+      <thead>
+        <td>User Email</td>
+        <td>Approved by Admin?</td>
+        <td>Edit User</td>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= translate(user.approved.class) %></td>
+          <td><%#= link_to "Edit", edit_user_path(user) %>
+        </tr>
+        <% end %>
+      </tbody>
+  </table>
+<% else %>
+  <h3>Sorry. Only admins can see this page.</h3>
+<% end %>
