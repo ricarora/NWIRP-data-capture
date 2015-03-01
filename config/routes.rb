@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   resources :removability_grounds, param: :name
 
   devise_for :users#, path_names: {sign_in: "login", sign_out: "logout"}
-  #get 'users', to: 'users#index'
-  #get 'users/:id/edit', to: 'users#edit', as: edit_user_path
+
   resources :users
 
   resources :clients do

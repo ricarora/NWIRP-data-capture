@@ -36,9 +36,21 @@ class User < ActiveRecord::Base
     User.all.where(approved: :false)
   end
 
-  def approve_user(user)
-    if current_user.admin
-      user.approved == true
+  def approve_user(current_user)
+    if current_user && current_user.admin
+      self.approved = true
+    end
+  end
+
+  def approve_admin(current_user)
+    if current_user && current_user.admin
+      self.admin = true
+    end
+  end
+
+  def remove_admin(current_user)
+    if current_user && current_user.admin
+      self.admin = false
     end
   end
 end
