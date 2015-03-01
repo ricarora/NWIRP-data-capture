@@ -1,6 +1,7 @@
 class ConvictionsController < ApplicationController
   before_action :set_conviction, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+
   def index
     @convictions = Conviction.all
   end

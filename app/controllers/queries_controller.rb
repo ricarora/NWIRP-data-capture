@@ -1,5 +1,6 @@
 class QueriesController < ApplicationController
   before_filter :authenticate_user!
+  
   def advanced_search
       if params[:choice] == "client"
         @search = Client.search(params[:q])
