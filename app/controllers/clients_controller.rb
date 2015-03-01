@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
-
+  before_filter :authenticate_user!
+  
   def index
     @clients = Client.all
     if params[:a_number_search]
