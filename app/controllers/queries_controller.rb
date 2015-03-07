@@ -9,6 +9,7 @@ class QueriesController < ApplicationController
           @search.result(distinct: true)
       else
         @search = Conviction.search(params[:q])
+        raise
         @search.build_condition if @search.conditions.empty?
         @convictions  = params[:distinct].to_i.zero? ?
           @search.result :
