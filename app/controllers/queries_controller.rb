@@ -26,5 +26,6 @@ class QueriesController < ApplicationController
       q = Query.new(name: name, description: search)
       q.save
     end
+    # JSON.parse some.gsub('=>', ':')
   end
 end
