@@ -3,7 +3,7 @@ module QueriesHelper
     if @clients
       [:first_name, :middle_name, :last_name, :nationality, :gender, :DRRU_CASE, :represented ]
     elsif @convictions
-      [:crime_name, :rcw, :subsection, :DV_ON_ROC, :sentence, :ij_name, :nta_charges, :ij_finding]
+      [:crime_name, :statute_of_conviction, :subsection, :DV_ON_ROC, :sentence, :ij_name, :nta_charges, :ij_finding]
     end
   end
 

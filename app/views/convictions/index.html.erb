@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Crime name</th>
-      <th>Rcw</th>
+      <th>Statute of Conviction</th>
       <th>Subsection</th>
       <th>Sentence</th>
       <th>Ij name</th>
@@ -21,7 +21,7 @@
     <% @convictions.each do |conviction| %>
       <tr>
         <td><%= conviction.crime_name %></td>
-        <td><%= conviction.rcw %></td>
+        <td><%= conviction.statute_of_conviction %></td>
         <td><%= conviction.subsection %></td>
         <td><%= conviction.sentence %></td>
         <td><%= conviction.ij_name %></td>
