@@ -105,10 +105,13 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def self.find_client_by_name(last_name, first_name)
+  end
+
   def DRRU_CASE
     self.drru_case ? "Yes" : "No"
   end
-  
+
   def full_name
     self.first_name + ' ' + self.last_name
   end

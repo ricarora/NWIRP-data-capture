@@ -87,20 +87,6 @@ class ClientsController < ApplicationController
       @client = Client.find(params[:id])
     end
 
-    # def check_client_reliefs
-    #   @client.client_reliefs.each do |relief|
-    #     params[:client][:client_reliefs_attributes].each do |index, name|
-    #       name.each do |k,v|
-    #         if relief.relief_name == v
-    #           return true
-    #         else
-    #           relief.destroy
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
-
     def check_assessments
       @client.assessments.each do |assessment|
         params[:client][:assessments_attributes].each do |index, date|
@@ -152,7 +138,7 @@ class ClientsController < ApplicationController
 
     def client_params
       params.require(:client).permit(:last_name,
-                                     :middle_name
+                                     :middle_name,
                                      :first_name,
                                      :nationality,
                                      :ethnicity,
