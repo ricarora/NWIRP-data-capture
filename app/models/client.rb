@@ -106,6 +106,15 @@ class Client < ActiveRecord::Base
   end
 
   def self.find_client_by_name(last_name, first_name)
+    if last_name && first_name
+      @clients = self.all.where("last_name LIKE ? AND first_name LIKE ?", "%#{last_name}%", "%#{first_name}%")
+      @clients.to_a
+    elsif last_name
+      @clients = self.all.where("last_name LIKE ?", "%#{last_name}%")
+    else first_name
+      @clients = self.all.where("first_name LIKE ?", "%#{first_name}%")
+      @clients.to_a
+    end
   end
 
   def DRRU_CASE

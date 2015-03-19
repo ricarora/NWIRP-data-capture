@@ -13,6 +13,15 @@ class ClientsController < ApplicationController
         params[:a_number]
         render '/clients/find'
       end
+    elsif params[:last_name_search] || params[:first_name_search]
+      @clients = Client.find_client_by_name(params[:last_name_search], params[:first_name_search])
+      if !@clients.empty?
+        render :index
+      else
+        flash.now[:notice] = "There is currently no client with that name."
+        params[:a_number]
+        render '/clients/find'
+      end
     else
       render :index
     end
