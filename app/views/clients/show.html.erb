@@ -64,6 +64,7 @@
       </tr>
       <tr>
         <th>SENTENCE (IN DAYS)</th>
+        <th>TYPE OF SENTENCE</th>
         <th>IMMIGRATION JUDGE (IJ)</th>
         <th>NTA CHARGES</th>
         <th>IJ DECISION DATE</th>
@@ -71,6 +72,7 @@
       </tr>
       <tr>
         <td><%= conviction.sentence %></td>
+        <td><%= conviction.sentence_type %></td>
         <td><%= conviction.ij_name %></td>
         <td><%= conviction.nta_charges %></td>
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
