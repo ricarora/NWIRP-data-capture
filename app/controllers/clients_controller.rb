@@ -152,6 +152,7 @@ class ClientsController < ApplicationController
 
     def client_params
       params.require(:client).permit(:last_name,
+                                     :middle_name
                                      :first_name,
                                      :nationality,
                                      :ethnicity,
