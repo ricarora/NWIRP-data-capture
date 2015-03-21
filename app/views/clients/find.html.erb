@@ -1,5 +1,6 @@
 <h2>FIND CLIENT</h2>
 <p id="notice"><%= notice %></p>
+<h3>BY A NUMBER</h3>
 <div>
   <%= form_tag clients_path, method: :get do %>
   <div class="field row">
@@ -10,6 +11,26 @@
     <div class="small-9 columns">
       <%=text_field_tag :a_number_search, params[:a_number_search],
       placeholder: "XXX-XXX-XXX" %>
+    </div>
+  </div>
+  <%=submit_tag "Find Client", name: nil, class: "button green-button" %>
+  <% end %>
+<h3>BY NAME</h3>
+  <%= form_tag clients_path, method: :get do %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%=label_tag :last_name_search, "LAST NAME:", class: "inline right" %>
+    </div>
+    <div class="small-9 columns">
+      <%=text_field_tag :last_name_search, params[:last_name_search] %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%=label_tag :first_name_search, "FIRST NAME:", class: "inline right" %>
+    </div>
+    <div class="small-9 columns">
+      <%=text_field_tag :first_name_search, params[:first_name_search] %>
     </div>
   </div>
   <%=submit_tag "Find Client", name: nil, class: "button green-button" %>

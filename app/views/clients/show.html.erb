@@ -51,19 +51,20 @@
       <tr>
         <th>CRIME NAME</th>
         <th>STATE CRIME COMMITTED</th>
-        <th>RCW</th>
+        <th>STATUTE OF CONVICTION</th>
         <th>SUBSECTION</th>
         <th>DV ON ROC</th>
       </tr>
       <tr>
         <td><%= conviction.crime_name %></td>
         <td><%= conviction.state_committed %></td>
-        <td><%= conviction.rcw %></td>
+        <td><%= conviction.statute_of_conviction %></td>
         <td><%= conviction.subsection %></td>
         <td><%= translate(conviction.dv_on_roc.class) %></td>
       </tr>
       <tr>
         <th>SENTENCE (IN DAYS)</th>
+        <th>TYPE OF SENTENCE</th>
         <th>IMMIGRATION JUDGE (IJ)</th>
         <th>NTA CHARGES</th>
         <th>IJ DECISION DATE</th>
@@ -71,6 +72,7 @@
       </tr>
       <tr>
         <td><%= conviction.sentence %></td>
+        <td><%= conviction.sentence_type %></td>
         <td><%= conviction.ij_name %></td>
         <td><%= conviction.nta_charges %></td>
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
