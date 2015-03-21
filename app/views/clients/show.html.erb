@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h2>CLIENT: <%= @client.full_name %></h2>
 <div class="panel">
   <table role="grid" summary="Client">
@@ -41,6 +39,10 @@
       </tr>
   </table>
   <%= link_to "EDIT CLIENT", edit_client_path(@client), class: "update-link" %>
+  <% if current_user && current_user.admin %>
+    <%= link_to "DELETE CLIENT", client_path(@client), method: :delete,
+    class: "update-link", data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </div>
 
 
@@ -97,7 +99,12 @@
     </tr>
     <% end %>
   </table>
-  <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction), class: "update-link"%>
+  <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction),
+  class: "update-link"%>
+  <% if current_user && current_user.admin %>
+    <%= link_to "DELETE CONVICTION", client_conviction_path(@client, conviction), method: :delete,
+    class: "update-link", data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </div>
 <% end %>
 <%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button green-button" %>

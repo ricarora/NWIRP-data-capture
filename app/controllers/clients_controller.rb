@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
+  before_filter :authenticate_user!
 
   def index
     @clients = Client.all
@@ -87,8 +88,11 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client.destroy
-    redirect_to clients_url, notice: 'Client was successfully destroyed.'
+    if current_user && current_user.admin
+      @client.convictions.each {|conviction| conviction.destroy}
+      @client.destroy
+      redirect_to clients_url, notice: 'Client was successfully destroyed.'
+    end
   end
 
   private
