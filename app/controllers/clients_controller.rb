@@ -7,7 +7,8 @@ class ClientsController < ApplicationController
       format_a_number(params[:a_number_search])
       @client = Client.find_client_by_a_number(params[:a_number_search])
       if @client
-        redirect_to client_path(@client.id)
+        @clients = [@client]
+        render :index
       else
         flash.now[:notice] = "There is currently no client with A#: #{params[:a_number_search]}"
         params[:a_number]
