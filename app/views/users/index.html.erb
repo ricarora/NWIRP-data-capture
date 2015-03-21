@@ -1,0 +1,54 @@
+<% if current_user && current_user.admin %>
+  <h2>USERS</h2>
+
+  View:
+  <%= link_to "All Users", action: :index  %>
+  <%= link_to "Users Awaiting Approval", action: :index, approved: :false %>
+
+  <table>
+      <thead>
+        <td>User Email</td>
+        <td>User Status</td>
+        <td>Admin?</td>
+        <td>Make Admin</td>
+        <td>Remove User</td>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+
+          <% if user.approved %>
+            <td>Active</td>
+          <% else %>
+            <td><%= link_to "Approve User", user_path(user, approve: :user), method: :put %></td>
+          <% end %>
+
+          <% if user.admin %>
+            <td><%= translate(user.admin.class) %></td>
+          <% else %>
+            <td>No</td>
+          <% end %>
+
+
+          <% if user.admin && user != current_user %>
+            <td><%= link_to "Remove Admin Privileges", user_path(user, approve: :remove_admin), method: :put %></td>
+          <% elsif user.admin && user == current_user || !user.approved %>
+            <td></td>
+          <% else %>
+            <td><%= link_to "Make Admin", user_path(user, approve: :admin), method: :put %></td>
+          <% end %>
+
+          <% if user != current_user %>
+            <td><%= link_to "Remove User", user_path(user), method: :delete %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+
+        </tr>
+        <% end %>
+      </tbody>
+  </table>
+<% else %>
+  <h3>Sorry. Only admins can see this page.</h3>
+<% end %>

@@ -1,0 +1,32 @@
+<h2>ADD RELIEF SOUGHT</h2>
+<% if current_user && current_user.admin %>
+  <%= form_for(@relief_sought) do |f| %>
+    <% if @relief_sought.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@relief_sought.errors.count, "error") %> prohibited this removability_ground from being saved:</h2>
+
+        <ul>
+        <% @relief_sought.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field row">
+      <div class="small-3 columns">
+        <%= f.label :name, "NAME", class: "inline right" %>
+      </div>
+      <div class="small-9 columns">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "Create Relief Sought", class: "button green-button" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'BACK', relief_soughts_path %>
+<% else %>
+  <h3>Sorry. Only admins can add relief soughts.</h3>
+<% end %>

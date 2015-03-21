@@ -17,6 +17,11 @@
  */
 
 /* GLOBAL CSS */
+.logged-in {
+  padding: 10px;
+  color: white;
+  background-color: #0C0C0C;
+}
 
 .top-div {
   margin-top: 25px;
@@ -223,4 +228,10 @@ table {
 
 fieldset {
   margin-top: 5px;
+}
+
+/* USERS */
+.highlight {
+  color: #951A1D;
+  padding-bottom: 5px;
 }

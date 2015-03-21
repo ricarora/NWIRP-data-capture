@@ -1,6 +1,6 @@
 class RemovabilityGroundsController < ApplicationController
-  before_action :set_removability_ground, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_removability_ground, only: [:update, :destroy]
+  before_filter :authenticate_user!
   respond_to :html
 
   def index
@@ -8,37 +8,37 @@ class RemovabilityGroundsController < ApplicationController
     respond_with(@removability_grounds)
   end
 
-  def show
-    respond_with(@removability_ground)
-  end
-
   def new
     @removability_ground = RemovabilityGround.new
     respond_with(@removability_ground)
   end
 
-  def edit
-  end
-
   def create
-    @removability_ground = RemovabilityGround.new(removability_ground_params)
-    @removability_ground.save
-    respond_with(@removability_ground)
-  end
-
-  def update
-    @removability_ground.update(removability_ground_params)
-    respond_with(@removability_ground)
+    if current_user && current_user.admin
+      @removability_ground = RemovabilityGround.new(removability_ground_params)
+      @removability_ground.name.upcase!
+      if @removability_ground.save
+        redirect_to removability_grounds_path, notice: "Removability Ground successfully added."
+      else
+        redirect_to removability_grounds_path, notice: "Removability Ground unable to be added."
+      end
+    else
+      redirect_to removability_grounds_path, notice: "Only admin can create Removability Grounds"
+    end
   end
 
   def destroy
-    @removability_ground.destroy
-    respond_with(@removability_ground)
+    if current_user && current_user.admin
+      @removability_ground.destroy
+      redirect_to removability_grounds_path, notice: "Removability Ground successfully deleted."
+    else
+      redirect_to removability_grounds_path, notice: "Only admin can delete Removability Grounds"
+    end
   end
 
   private
     def set_removability_ground
-      @removability_ground = RemovabilityGround.find(params[:id])
+      @removability_ground = RemovabilityGround.find(params[:name])
     end
 
     def removability_ground_params
