@@ -30,7 +30,6 @@ class ConvictionsController < ApplicationController
     params[:conviction][:conviction_grounds_attributes].map do |key, cg_hash|
       @conviction.conviction_grounds(gor_name: cg_hash[:gor_name], status: cg_hash[:status])
     end
-    format_rcw
     @conviction.attributes = conviction_params
     @conviction.sentence = convert_to_days(conviction_params[:sentence].to_i, params[:conviction][:sentence_unit])
     if @conviction.save
@@ -55,7 +54,6 @@ class ConvictionsController < ApplicationController
 
   def update
     @client = Client.find(params[:client_id])
-    format_rcw
     if @conviction.update(conviction_params)
       redirect_to client_path(@conviction.client_id), notice: 'Conviction was successfully updated.'
     else
@@ -72,17 +70,23 @@ class ConvictionsController < ApplicationController
 
   private
 
-    def format_rcw
-      if params[:conviction][:rcw].length == 7
-        params[:conviction][:rcw].insert(2, ".").insert(5, ".")
-      end
-    end
-
     def set_conviction
       @conviction = Conviction.find(params[:id])
     end
 
     def conviction_params
-      params.require(:conviction).permit(:crime_name, :rcw, :dv_on_roc, :subsection, :sentence, :state_committed, :ij_name, :nta_charges, :ij_decision_date, :ij_finding, :notes, :conviction_grounds_attributes => [:id, :gor_name, :status])
+      params.require(:conviction).permit(:crime_name,
+                                        :statute_of_conviction,
+                                        :dv_on_roc,
+                                        :subsection,
+                                        :sentence,
+                                        :sentence_type,
+                                        :state_committed,
+                                        :ij_name,
+                                        :nta_charges,
+                                        :ij_decision_date,
+                                        :ij_finding,
+                                        :notes, 
+                                        :conviction_grounds_attributes => [:id, :gor_name, :status])
     end
 end
