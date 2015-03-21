@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class ConvictionGround < ActiveRecord::Base
   belongs_to :conviction
   belongs_to :removability_ground

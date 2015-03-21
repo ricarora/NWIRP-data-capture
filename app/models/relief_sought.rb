@@ -1,3 +1,6 @@
+
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class ReliefSought < ActiveRecord::Base
   has_many :clients, through: :client_reliefs
   has_many :client_reliefs

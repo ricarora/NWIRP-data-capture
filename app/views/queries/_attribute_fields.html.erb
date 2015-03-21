@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved. -->
+
 <% if @convictions %>
   <%= content_tag(:span, f.attribute_select(associations: %w(client conviction_grounds)),
     { class: 'fields', 'data-object-name' => f.object_name }, false) %>

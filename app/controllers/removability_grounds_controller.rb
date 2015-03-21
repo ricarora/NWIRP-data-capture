@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class RemovabilityGroundsController < ApplicationController
   before_action :set_removability_ground, only: [:show, :edit, :update, :destroy]
 

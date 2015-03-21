@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class Client < ActiveRecord::Base
   has_many :assessments, autosave: true, :dependent => :destroy
   has_many :convictions
@@ -108,7 +110,7 @@ class Client < ActiveRecord::Base
   def DRRU_CASE
     self.drru_case ? "Yes" : "No"
   end
-  
+
   def full_name
     self.first_name + ' ' + self.last_name
   end
