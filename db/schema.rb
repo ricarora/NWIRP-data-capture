@@ -73,6 +73,14 @@ ActiveRecord::Schema.define(version: 20150319005627) do
     t.string   "sentence_type"
   end
 
+  create_table "queries", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "search_preference"
+  end
+
   create_table "relief_soughts", id: false, force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
