@@ -1,0 +1,28 @@
+<h2>RELIEF SOUGHTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relief_soughts.each do |relief_sought| %>
+      <tr>
+        <td><%= relief_sought.name %></td>
+        <% if current_user && current_user.admin %>
+          <td><%= link_to 'Delete', relief_sought, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user && current_user.admin %>
+  <%= link_to 'ADD RELIEF SOUGHT', new_relief_sought_path %>
+<% end %>

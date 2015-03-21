@@ -19,6 +19,11 @@
   </head>
   <body>
     <div>
+      <% if user_signed_in? %>
+        <div class="logged-in">
+          Logged in as <strong><%= current_user.email %></strong>
+        </div>
+      <% end %>
       <nav role="navigation" class="top-bar" data-topbar>
         <ul class="title-area">
           <li class-"name"></li>
@@ -30,12 +35,30 @@
             <li><%= link_to "Add Client", new_client_path %></li>
             <li><%= link_to "Find Client", find_clients_path %>
             <li><%= link_to "Search Database", advanced_search_path %></li>
+            <li class="has-dropdown">
+              <a href="#">Account</a>
+              <ul class="dropdown">
+                <% if user_signed_in? %>
+                  <% if current_user.admin == true %>
+                    <li><%= link_to "Manage Users", users_path %></li>
+                    <li><%= link_to "Manage Relief Sought", relief_soughts_path %></li>
+                    <li><%= link_to "Manage Grounds for Removability", removability_grounds_path %></li>
+                  <% end %>
+                  <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                <% else %>
+                  <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                  <li><%= link_to "Login", new_user_session_path %></li>
+                <% end %>
+              </ul>
+            </li>
           </ul>
         </section>
       </nav>
     </div>
     <div class="columns small-12">
       <div class="row top-div">
+        <p id="notice"><%= notice %></p>
         <%= yield %>
       </div>
     </div>

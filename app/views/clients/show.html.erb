@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 <!-- Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved. -->
 
 <p id="notice"><%= notice %></p>
 
+=======
+>>>>>>> master
 <h2>CLIENT: <%= @client.full_name %></h2>
 <div class="panel">
   <table role="grid" summary="Client">
@@ -43,6 +46,10 @@
       </tr>
   </table>
   <%= link_to "EDIT CLIENT", edit_client_path(@client), class: "update-link" %>
+  <% if current_user && current_user.admin %>
+    <%= link_to "DELETE CLIENT", client_path(@client), method: :delete,
+    class: "update-link", data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </div>
 
 
@@ -53,19 +60,20 @@
       <tr>
         <th>CRIME NAME</th>
         <th>STATE CRIME COMMITTED</th>
-        <th>RCW</th>
+        <th>STATUTE OF CONVICTION</th>
         <th>SUBSECTION</th>
         <th>DV ON ROC</th>
       </tr>
       <tr>
         <td><%= conviction.crime_name %></td>
         <td><%= conviction.state_committed %></td>
-        <td><%= conviction.rcw %></td>
+        <td><%= conviction.statute_of_conviction %></td>
         <td><%= conviction.subsection %></td>
         <td><%= translate(conviction.dv_on_roc.class) %></td>
       </tr>
       <tr>
         <th>SENTENCE (IN DAYS)</th>
+        <th>TYPE OF SENTENCE</th>
         <th>IMMIGRATION JUDGE (IJ)</th>
         <th>NTA CHARGES</th>
         <th>IJ DECISION DATE</th>
@@ -73,6 +81,7 @@
       </tr>
       <tr>
         <td><%= conviction.sentence %></td>
+        <td><%= conviction.sentence_type %></td>
         <td><%= conviction.ij_name %></td>
         <td><%= conviction.nta_charges %></td>
         <td><%= conviction.ij_decision_date ? (conviction.ij_decision_date).strftime("%D") : nil %></td>
@@ -97,7 +106,12 @@
     </tr>
     <% end %>
   </table>
-  <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction), class: "update-link"%>
+  <%= link_to "EDIT CONVICTION", edit_client_conviction_path(@client, conviction),
+  class: "update-link"%>
+  <% if current_user && current_user.admin %>
+    <%= link_to "DELETE CONVICTION", client_conviction_path(@client, conviction), method: :delete,
+    class: "update-link", data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </div>
 <% end %>
 <%= link_to "Add Conviction", new_client_conviction_path(@client.id), class: "button green-button" %>

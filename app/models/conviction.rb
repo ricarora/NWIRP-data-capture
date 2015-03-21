@@ -7,8 +7,6 @@ class Conviction < ActiveRecord::Base
   has_many :conviction_grounds, autosave: true
   validates :crime_name, presence: true
   validates :sentence, numericality: { only_integer: true, allow_blank: true }
-  validates :rcw, format: { with: /9a..{2}..{3}/,
-    message: "Only allows this format: 9a.XX.XXX.", allow_blank: true }
   validates :dv_on_roc, inclusion: {in: [true, false], allow_blank: true}
   validates :ij_decision_date, presence:true, allow_blank: true
   validate :ij_decision_date_is_date?,
@@ -67,6 +65,6 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(crime_name rcw subsection sentence ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
+    %w(crime_name statute_of_conviction subsection sentence sentence_type ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
   end
 end

@@ -1,6 +1,7 @@
 # Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
+  before_filter :authenticate_user!
 
   def index
     @clients = Client.all
@@ -8,9 +9,19 @@ class ClientsController < ApplicationController
       format_a_number(params[:a_number_search])
       @client = Client.find_client_by_a_number(params[:a_number_search])
       if @client
-        redirect_to client_path(@client.id)
+        @clients = [@client]
+        render :index
       else
         flash.now[:notice] = "There is currently no client with A#: #{params[:a_number_search]}"
+        params[:a_number]
+        render '/clients/find'
+      end
+    elsif params[:last_name_search] || params[:first_name_search]
+      @clients = Client.find_client_by_name(params[:last_name_search], params[:first_name_search])
+      if !@clients.empty?
+        render :index
+      else
+        flash.now[:notice] = "There is currently no client with that name."
         params[:a_number]
         render '/clients/find'
       end
@@ -78,8 +89,11 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client.destroy
-    redirect_to clients_url, notice: 'Client was successfully destroyed.'
+    if current_user && current_user.admin
+      @client.convictions.each {|conviction| conviction.destroy}
+      @client.destroy
+      redirect_to clients_url, notice: 'Client was successfully destroyed.'
+    end
   end
 
   private
@@ -87,20 +101,6 @@ class ClientsController < ApplicationController
     def set_client
       @client = Client.find(params[:id])
     end
-
-    # def check_client_reliefs
-    #   @client.client_reliefs.each do |relief|
-    #     params[:client][:client_reliefs_attributes].each do |index, name|
-    #       name.each do |k,v|
-    #         if relief.relief_name == v
-    #           return true
-    #         else
-    #           relief.destroy
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
 
     def check_assessments
       @client.assessments.each do |assessment|
@@ -153,6 +153,7 @@ class ClientsController < ApplicationController
 
     def client_params
       params.require(:client).permit(:last_name,
+                                     :middle_name,
                                      :first_name,
                                      :nationality,
                                      :ethnicity,
