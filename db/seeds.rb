@@ -29,6 +29,9 @@ grounds_of_removabilities.each do |ground|
   RemovabilityGround.where(name: ground).first_or_create
 end
 
+User.create(email: "bill@nwirp.org", password: "Bill@NWIRP1", password_confirmation: "Bill@NWIRP1", approved: true, name: "Bill", admin: true)
+
+
 (1..10).each do
   client = {
     a_number: "#{Faker::Number.number(3)}-#{Faker::Number.number(3)}-#{Faker::Number.number(3)}",
@@ -65,6 +68,6 @@ end
     grounds_of_removabilities.each do |ground|
       con.conviction_grounds.append(ConvictionGround.new(gor_name: ground, status: ["Yes", "No", "Finding Not Made"].sample))
     end
-    con.save  
+    con.save
   end
 end
