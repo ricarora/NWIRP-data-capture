@@ -62,6 +62,6 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(crime_name rcw subsection sentence ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
+    %w(crime_name statute_of_conviction subsection sentence sentence_type ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
   end
 end

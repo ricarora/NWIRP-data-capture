@@ -132,6 +132,6 @@ class Client < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w(first_name last_name nationality gender represented drru_case) + _ransackers.keys
+    %w(first_name middle_name last_name nationality gender represented drru_case) + _ransackers.keys
   end
 end
