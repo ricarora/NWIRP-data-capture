@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class ClientRelief < ActiveRecord::Base
   belongs_to :client
   belongs_to :relief_sought

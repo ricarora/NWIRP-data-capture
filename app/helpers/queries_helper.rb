@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 module QueriesHelper
   def model_fields # which fields to display and sort by
     if @clients

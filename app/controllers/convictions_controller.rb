@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class ConvictionsController < ApplicationController
   before_action :set_conviction, only: [:edit, :update, :destroy]
   before_filter :authenticate_user!

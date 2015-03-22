@@ -1,3 +1,4 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy, :destroy_assessment]
   before_filter :authenticate_user!

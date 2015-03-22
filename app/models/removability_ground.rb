@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 class RemovabilityGround < ActiveRecord::Base
   has_many :convictions, through: :conviction_grounds
   has_many :conviction_grounds

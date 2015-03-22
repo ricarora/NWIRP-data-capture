@@ -1,3 +1,6 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
+
 class Conviction < ActiveRecord::Base
   belongs_to :client
   has_many :removability_grounds, through: :conviction_grounds

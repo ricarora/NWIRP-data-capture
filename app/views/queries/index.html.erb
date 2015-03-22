@@ -1,0 +1,12 @@
+<h2>SAVED QUERIES</h2>
+
+<% @saved_queries.each do |saved_query| %>
+  <table>
+    <th>
+    <h4><%= link_to "#{saved_query.name}", advanced_search_show_path(saved_query.id) %></h4>
+    <th>
+    <th>
+    <%= button_to "Delete This Query", delete_query_path(:id => saved_query.id), method: :delete, class: "button red-button" %>
+    </th>
+  </table>
+<% end %>
