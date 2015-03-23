@@ -50,8 +50,13 @@
 <% end %>
 <% if @query.new_record? %>
   <%= form_for @query do |f| %>
-    <%= label_tag :query_name %>
-    <%= text_field_tag :query_name, params[:query_name] %>
+  <div class="field row">
+    <div class="small-3 columns">
+      <%= label_tag :query_name %>
+    </div>
+    <div class="small-9 columns">
+      <%= text_field_tag :query_name, params[:query_name] %>
+    </div>
     <%= hidden_field_tag :description, params[:q] %>
     <%= hidden_field_tag :choice, params[:choice] %>
     <%= f.submit "Save Query", class: "button green-button" %>
