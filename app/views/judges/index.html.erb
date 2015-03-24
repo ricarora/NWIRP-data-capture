@@ -1,0 +1,30 @@
+<!-- Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved. -->
+
+<h2>JUDGES</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @judges.each do |judge| %>
+      <tr>
+        <td><%= judge.name %></td>
+        <% if current_user && current_user.admin %>
+          <td><%= link_to 'Edit', edit_judge_path(judge.id)%></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user && current_user.admin %>
+  <%= link_to 'ADD JUDGE', new_judge_path %>
+<% end %>
