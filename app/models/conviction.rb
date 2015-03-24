@@ -44,6 +44,15 @@ class Conviction < ActiveRecord::Base
     end
   end
 
+  def self.to_csv(list, options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      list.each do |conviction|
+        csv << conviction.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def DV_ON_ROC
     self.dv_on_roc ? "Yes" : "No"
   end
