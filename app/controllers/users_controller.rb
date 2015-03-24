@@ -1,3 +1,4 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
 class UsersController < ApplicationController
   def index
      if params[:approved] == "false"
