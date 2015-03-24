@@ -21,6 +21,14 @@ class Client < ActiveRecord::Base
       }
 
   def self.to_csv(list, options = {})
+    column_names = ["last_name",
+                    "first_name",
+                    "middle_name",
+                    "nationality",
+                    "ethnicity",
+                    "gender",
+                    "represented",
+                    "drru_case"]
     CSV.generate(options) do |csv|
       csv << column_names
       list.each do |client|
