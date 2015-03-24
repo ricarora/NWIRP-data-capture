@@ -1,3 +1,4 @@
+// Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
 //add crime name
 
 //function toggle create/select
