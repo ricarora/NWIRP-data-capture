@@ -1,7 +1,6 @@
 <!-- Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved. -->
 
 <h2>SEARCH DATABASE</h2>
-Download: <%= link_to "Excel", advanced_search_path(params.merge(format: 'xls')) %>
 <%= search_form_for(
   @search,
   url: advanced_search_path,
@@ -48,6 +47,9 @@ Download: <%= link_to "Excel", advanced_search_path(params.merge(format: 'xls'))
 <% elsif @convictions %>
   <%= render 'conviction_results' %>
 <% end %>
+<hr>
+<h3>DOWNLOAD SPREADSHEET OF QUERY</h3>
+<%= button_to "Download Excel", advanced_search_path(params.merge(format: 'xls')), class: "button green-button" %>
 <hr>
 <h3>SAVE THIS QUERY</h3>
 <% if @query.new_record? %>
