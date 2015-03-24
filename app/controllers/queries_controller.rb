@@ -3,8 +3,9 @@ class QueriesController < ApplicationController
   before_filter :authenticate_user!
 
   def advanced_search
-      build_search
-      @query = Query.new
+      
+    build_search
+    @query = Query.new
   end
 
   def index

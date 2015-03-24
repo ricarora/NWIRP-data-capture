@@ -48,10 +48,6 @@ class Conviction < ActiveRecord::Base
     self.dv_on_roc ? "Yes" : "No"
   end
 
-  # ransacker :title_diddly do |parent|
-  #   Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
-  # end
-
   def self.all_crime_names
     Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:blank?)
   end
