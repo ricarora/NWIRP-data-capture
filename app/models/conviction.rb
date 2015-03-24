@@ -18,7 +18,7 @@ class Conviction < ActiveRecord::Base
 
   attr_accessor :sentence_unit
 
-  IJ_NAME = ["Odell", "Scala", "Fitting"]
+  IJ_NAME = Judge.all.map {|j| j.name}
 
   STATE_COMMITTED = ["Washington", "Alabama", "Alaska", "Arizona", "Arkansas", "California",
     "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
@@ -41,6 +41,15 @@ class Conviction < ActiveRecord::Base
   def ij_decision_date_cannot_be_in_the_future
     if ij_decision_date.present? && ij_decision_date > Date.today
       errors.add(:ij_decision_date, "can't be in the future")
+    end
+  end
+
+  def self.to_csv(list, options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      list.each do |conviction|
+        csv << conviction.attributes.values_at(*column_names)
+      end
     end
   end
 

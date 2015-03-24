@@ -5,6 +5,17 @@ class QueriesController < ApplicationController
   def advanced_search
     build_search
     @query = Query.new
+    if @clients
+      respond_to do |format|
+        format.html
+        format.xls { send_data Client.to_csv(@search.result(distinct: true)) }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.xls { send_data Conviction.to_csv(@search.result(distinct: true)) }
+      end
+    end
   end
 
   def index
@@ -27,6 +38,17 @@ class QueriesController < ApplicationController
   def show
     @query = Query.find(params[:id])
     build_search(@query)
+    if @clients
+      respond_to do |format|
+        format.html
+        format.xls { send_data Client.to_csv(@search.result(distinct: true)) }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.xls { send_data Conviction.to_csv(@search.result(distinct: true)) }
+      end
+    end
   end
 
   def destroy
