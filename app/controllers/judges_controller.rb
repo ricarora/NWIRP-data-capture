@@ -28,12 +28,16 @@ class JudgesController < ApplicationController
     end
   end
 
-  def destroy
+  def edit
+    set_judge
+  end
+
+  def update
     if current_user && current_user.admin
-      @judge.destroy
-      redirect_to judges_path, notice: "Judge successfully deleted."
+      @judge.update(judge_params)
+      redirect_to judges_path, notice: "Judge successfully updated."
     else
-      redirect_to judges_path, notice: "Only admin can delete Judges."
+      redirect_to judges_path, notice: "Only admin can update Judge."
     end
   end
 
