@@ -18,7 +18,7 @@ class Conviction < ActiveRecord::Base
 
   attr_accessor :sentence_unit
 
-  IJ_NAME = ["Odell", "Scala", "Fitting"]
+  IJ_NAME = Judge.all.map {|j| j.name}
 
   STATE_COMMITTED = ["Washington", "Alabama", "Alaska", "Arizona", "Arkansas", "California",
     "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
@@ -44,13 +44,18 @@ class Conviction < ActiveRecord::Base
     end
   end
 
+  def self.to_csv(list, options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      list.each do |conviction|
+        csv << conviction.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def DV_ON_ROC
     self.dv_on_roc ? "Yes" : "No"
   end
-
-  # ransacker :title_diddly do |parent|
-  #   Arel::Nodes::InfixOperation.new('||', parent.table[:title], '-diddly')
-  # end
 
   def self.all_crime_names
     Conviction.select(:crime_name).map(&:crime_name).uniq.reject(&:blank?)

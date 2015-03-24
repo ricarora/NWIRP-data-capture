@@ -1,3 +1,5 @@
+# Copyright (c) 2015 Richa Arora and Kate Fulton All Rights Reserved.
+
 Rails.application.routes.draw do
   get '/saved_queries', to: 'queries#index', as: :saved_queries
   get '/advanced_search', to: 'queries#advanced_search', as: :advanced_search

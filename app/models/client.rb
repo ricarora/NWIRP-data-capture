@@ -20,6 +20,15 @@ class Client < ActiveRecord::Base
         attributes.all? {|k,v| v.blank?}
       }
 
+  def self.to_csv(list, options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      list.each do |client|
+        csv << client.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def validate_a_number_uniqueness
     Client.all.reject {|client| client.id == self.id}.each do |client|
       if client.a_number == self.a_number

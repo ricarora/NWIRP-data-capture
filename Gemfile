@@ -38,7 +38,7 @@ end
 
 gem 'therubyracer', platforms: :ruby
 
-gem 'ransack', '1.6.3'
+gem 'ransack'
 
 gem 'faker'
 # Use unicorn as the app server

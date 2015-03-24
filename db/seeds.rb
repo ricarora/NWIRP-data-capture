@@ -31,6 +31,10 @@ end
 
 User.create(email: "bill@nwirp.org", password: "Bill@NWIRP1", password_confirmation: "Bill@NWIRP1", approved: true, name: "Bill", admin: true)
 
+judge_name = ["Odell", "Scala", "Fitting"]
+judge_name.each do |judge|
+  Judge.where(name: judge).first_or_create
+end
 
 (1..10).each do
   client = {
