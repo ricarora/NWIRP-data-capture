@@ -45,6 +45,17 @@ class Conviction < ActiveRecord::Base
   end
 
   def self.to_csv(list, options = {})
+    column_names = ["crime_name",
+                    "state_committed",
+                    "statute_of_conviction",
+                    "subsection", "sentence",
+                    "sentence_type",
+                    "nta_charges",
+                    "dv_on_roc",
+                    "ij_name",
+                    "ij_decision_date",
+                    "ij_finding",
+                    "notes"]
     CSV.generate(options) do |csv|
       csv << column_names
       list.each do |conviction|
