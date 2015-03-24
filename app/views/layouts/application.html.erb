@@ -32,9 +32,20 @@
         <section class="top-bar-section">
           <ul class="right">
             <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Add Client", new_client_path %></li>
-            <li><%= link_to "Find Client", find_clients_path %>
-            <li><%= link_to "Search Database", advanced_search_path %></li>
+            <li class="has-dropdown">
+              <a href="#">Client</a>
+              <ul class="dropdown">
+                <li><%= link_to "Add Client", new_client_path %></li>
+                <li><%= link_to "Find Client", find_clients_path %></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">Database</a>
+              <ul class="dropdown">
+                <li><%= link_to "Search Database", advanced_search_path %></li>
+                <li><%= link_to "Saved Queries", saved_queries_path %></li>
+              </ul>
+            </li>
             <li class="has-dropdown">
               <a href="#">Account</a>
               <ul class="dropdown">

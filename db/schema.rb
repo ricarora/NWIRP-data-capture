@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 20150324173223) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "search_preference"
-    t.string   "choice"
   end
 
   create_table "relief_soughts", id: false, force: true do |t|
