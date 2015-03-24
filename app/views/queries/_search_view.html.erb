@@ -48,15 +48,21 @@
 <% elsif @convictions %>
   <%= render 'conviction_results' %>
 <% end %>
+<hr>
+<h3>SAVE THIS QUERY</h3>
 <% if @query.new_record? %>
   <%= form_for @query do |f| %>
   <div class="field row">
-    <div class="small-3 columns">
-      <%= label_tag :query_name %>
+    <div class="small-6 columns">
+      <br>
     </div>
-    <div class="small-9 columns">
+    <div class="small-2 columns">
+      <%= label_tag :query_name, "NAME QUERY", class: "right inline" %>
+    </div>
+    <div class="small-4 columns">
       <%= text_field_tag :query_name, params[:query_name] %>
     </div>
+  </div>
     <%= hidden_field_tag :description, params[:q] %>
     <%= hidden_field_tag :choice, params[:choice] %>
     <%= f.submit "Save Query", class: "button green-button" %>
