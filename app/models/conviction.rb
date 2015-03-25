@@ -27,7 +27,7 @@ class Conviction < ActiveRecord::Base
     "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
     "Texas", "Utah", "Vermont", "Virginia", "West Virginia", "Wisconsin", "Wyoming"]
 
-  # validates :ij_name, :inclusion => {:in => Judge.all.map {|j| j.name}, allow_blank: true}
+  validates :ij_name, :inclusion => {:in => Judge.all.map {|j| j.name}, allow_blank: true}
   validates :state_committed, :inclusion => {:in => Conviction::STATE_COMMITTED, allow_blank: true}
 
   def ij_decision_date_is_date?
