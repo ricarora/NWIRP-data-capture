@@ -41,6 +41,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'ransack'
 
 gem 'faker'
+
+gem 'rails_12factor'
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
