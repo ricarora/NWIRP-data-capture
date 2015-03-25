@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: NWIRP-data-capture_production
-  username: ubuntu
+  username: NWIRP-data-capture
   password: <%= ENV['NWIRP-DATA-CAPTURE_DATABASE_PASSWORD'] %>
