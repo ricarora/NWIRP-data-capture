@@ -10,7 +10,7 @@ class ConvictionGround < ActiveRecord::Base
 
   STATUS_OPTION = [["Yes", "Yes"], ["No", "No"], ["Finding Not Made", "Finding Not Made"]]
 
-  GROUNDS = RemovabilityGround.all.map {|ground| ground.name}
+  #GROUNDS = RemovabilityGround.all.map {|ground| ground.name}
 
   GROUNDS.each do |ground|
     ransacker ground.to_sym do |parent|
