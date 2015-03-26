@@ -18,7 +18,7 @@ class Conviction < ActiveRecord::Base
 
   attr_accessor :sentence_unit
 
-  IJ_NAME = Judge.all.map {|j| j.name}
+  IJ_NAME = Judge.judge_arr
 
   STATE_COMMITTED = ["Washington", "Alabama", "Alaska", "Arizona", "Arkansas", "California",
     "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
