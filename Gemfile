@@ -28,13 +28,13 @@ group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
 
-group :development do
-  gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem "capistrano-passenger"
-end
+# group :development do
+#   gem 'capistrano'
+#   gem 'capistrano-rvm'
+#   gem 'capistrano-bundler'
+#   gem 'capistrano-rails'
+#   gem "capistrano-passenger"
+# end
 
 gem 'therubyracer', platforms: :ruby
 
