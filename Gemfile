@@ -36,7 +36,7 @@ end
 #   gem "capistrano-passenger"
 # end
 
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 gem 'ransack'
 
