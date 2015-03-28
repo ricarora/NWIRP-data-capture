@@ -38,7 +38,7 @@ end
 
 # gem 'therubyracer', platforms: :ruby
 
-gem 'ransack'
+gem 'ransack', '1.6.3'
 
 gem 'faker'
 
