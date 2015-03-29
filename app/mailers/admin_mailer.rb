@@ -5,7 +5,7 @@ class AdminMailer < ActionMailer::Base
 
   def new_user_waiting_for_approval(user)
     @user = user
-    mail(to: "katesuzannefulton@gmail.com",
+    mail(to: "bill@nwirp.org",
     subject: "Registration Request for <#{user.email}>")
   end
 
