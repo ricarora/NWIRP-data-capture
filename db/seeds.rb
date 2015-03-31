@@ -36,7 +36,7 @@ end
 
 nwirp_admin = User.new
 nwirp_admin.email = "bill@nwirp.org"
-nwirp_admin.password = "Bill@NWIRP1"
+nwirp_admin.password = "12345678"
 nwirp_admin.password_confirmation = "12345678"
 nwirp_admin.approved = true
 nwirp_admin.name = "Bill"
