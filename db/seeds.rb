@@ -38,7 +38,7 @@ nwirp_admin = User.new
 nwirp_admin.email = "bill@nwirp.org"
 nwirp_admin.password = "12345678"
 nwirp_admin.password_confirmation = "12345678"
-nwirp_admin.approved = true
+nwirp_admin.toggle!(:approved)
 nwirp_admin.name = "Bill"
-nwirp_admin.admin = true
+nwirp_admin.toggle!(:admin)
 nwirp_admin.save!
