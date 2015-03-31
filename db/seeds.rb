@@ -34,4 +34,11 @@ judge_name.each do |judge|
   Judge.where(name: judge).first_or_create
 end
 
-User.create(email: "bill@nwirp.org", password: "Bill@NWIRP1", password_confirmation: "Bill@NWIRP1", approved: true, name: "Bill", admin: true)
+nwirp_admin = User.new
+nwirp_admin.email = "bill@nwirp.org"
+nwirp_admin.password = "Bill@NWIRP1"
+nwirp_admin.password_confirmation = "12345678"
+nwirp_admin.approved = true
+nwirp_admin.name = "Bill"
+nwirp_admin.admin = true
+nwirp_admin.save!
