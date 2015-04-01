@@ -15,7 +15,7 @@ class UsersController < ApplicationController
    def update
      user = User.find(params[:id])
      @current_user = current_user
-     if current_user && current_user.admin
+     #if current_user && current_user.admin
        if params[:approve] == "admin"
          user.approve_admin(@current_user)
        end
@@ -30,9 +30,9 @@ class UsersController < ApplicationController
        else
          redirect_to users_path, notice: "Unable to update user.."
        end
-     else
-       redirect_to users_path, notice: "Only admin can update users."
-     end
+    #  else
+    #    redirect_to users_path, notice: "Only admin can update users."
+    #  end
    end
 
    def destroy
