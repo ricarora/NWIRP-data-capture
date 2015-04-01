@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   after_create :send_admin_mail
 
   def send_admin_mail
-    true#AdminMailer.new_user_waiting_for_approval(self).deliver
+    AdminMailer.new_user_waiting_for_approval(self).deliver
   end
 
   def active_for_authentication?
@@ -39,15 +39,15 @@ class User < ActiveRecord::Base
   end
 
   def approve_user(current_user)
-    #if current_user && current_user.admin
+    if current_user && current_user.admin
       self.approved = true
-    #end
+    end
   end
 
   def approve_admin(current_user)
-    #if current_user && current_user.admin
+    if current_user && current_user.admin
       self.admin = true
-    #end
+    end
   end
 
   def remove_admin(current_user)
