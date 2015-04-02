@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   after_create :send_admin_mail
 
   def send_admin_mail
-    true #AdminMailer.new_user_waiting_for_approval(self).deliver
+    AdminMailer.new_user_waiting_for_approval(self).deliver
   end
 
   def active_for_authentication?
