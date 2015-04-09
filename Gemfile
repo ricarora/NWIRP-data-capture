@@ -27,7 +27,7 @@ gem 'attr_encryptor', '~> 2.0.0'
 group :test do
   gem "factory_girl_rails", "~> 4.0"
 end
-
+gem 'dotenv-rails', :groups => [:development, :test]
 # group :development do
 #   gem 'capistrano'
 #   gem 'capistrano-rvm'
