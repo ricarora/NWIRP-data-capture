@@ -21,14 +21,14 @@ class Client < ActiveRecord::Base
       }
 
   def self.to_csv(list, options = {})
-    # column_names = ["last_name",
-    #                 "first_name",
-    #                 "middle_name",
-    #                 "nationality",
-    #                 "ethnicity",
-    #                 "gender",
-    #                 "represented",
-    #                 "drru_case"]
+    column_names = ["last_name",
+                    "first_name",
+                    "middle_name",
+                    "nationality",
+                    "ethnicity",
+                    "gender",
+                    "represented",
+                    "drru_case"]
     CSV.generate(options) do |csv|
       csv << column_names
       list.each do |client|
@@ -126,12 +126,12 @@ class Client < ActiveRecord::Base
 
   def self.find_client_by_name(last_name, first_name)
     if last_name && first_name
-      @clients = self.all.where("last_name LIKE ? AND first_name LIKE ?", "%#{last_name}%", "%#{first_name}%")
+      @clients = self.all.where("last_name ILIKE ? AND first_name ILIKE ?", "%#{last_name}%", "%#{first_name}%")
       @clients.to_a
     elsif last_name
-      @clients = self.all.where("last_name LIKE ?", "%#{last_name}%")
+      @clients = self.all.where("last_name ILIKE ?", "%#{last_name}%")
     else first_name
-      @clients = self.all.where("first_name LIKE ?", "%#{first_name}%")
+      @clients = self.all.where("first_name ILIKE ?", "%#{first_name}%")
       @clients.to_a
     end
   end
