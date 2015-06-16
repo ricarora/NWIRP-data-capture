@@ -80,7 +80,14 @@ class Conviction < ActiveRecord::Base
     Conviction.select(:nta_charges).map(&:nta_charges).uniq.reject(&:blank?)
   end
 
+  def client_name
+    @client = Client.all.where(id: self.client_id)[0]
+    if @client != nil
+      @client.first_name + " " + @client.last_name
+    end
+  end
+
   def self.ransackable_attributes(auth_object = nil)
-    %w(crime_name statute_of_conviction subsection sentence sentence_type ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
+    %w(client_name crime_name statute_of_conviction subsection sentence sentence_type ij_name nta_charges ij_decision_date ij_finding notes) + _ransackers.keys
   end
 end
