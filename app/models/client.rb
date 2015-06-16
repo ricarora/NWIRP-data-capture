@@ -50,7 +50,7 @@ class Client < ActiveRecord::Base
   before_save :name_cap
 
   def name_cap
-    self.last_name = self.last_name.capitalize
+    self.last_name = self.last_name
     if self.first_name != nil
       self.first_name = self.first_name.capitalize
     end
