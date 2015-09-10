@@ -17,10 +17,10 @@ The business requirements:
 
 Implementation:
 * Database: PgSQL
-* Domain Tables that ensure the quality of database
-* Overwriting Primary Keys help simplify an already complex query system
-* Two Simple Forms that contain multiple models
-* One Advanced Query Page that dynamically changes to fit user’s needs and allows them to search clients or convictions
+* Domain tables that ensure the flexibility of database
+* Overriding primary keys help simplify an already complex query system
+* Two simple forms that contain multiple models
+* One advanced query page that dynamically changes to fit user’s needs and allows them to search clients or convictions
 * Client can save queries by name and also export the results in Excel
-* Encryption of sensitive data using two point decryption
+* Encryption of sensitive data
 * Admin dashboard for approving users and maintaining domain tables
