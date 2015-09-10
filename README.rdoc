@@ -2,7 +2,7 @@ Capstone Project by Richa Arora and Kate Fulton:
 
 An application for Northwest Immigrant Rights Project (NWIRP).
 
-It's a database where NWIRP staff can enter in information about clients who have criminal convictions.
+It's a case management app where NWIRP staff can enter in information about clients who have criminal convictions.
 And then that data can be queried in a variety of ways.
 The goal is for NWIRP to better understand how certain convictions play out with people's immigration cases--for example if certain convictions tend to have particularly harsh immigration consequences for individuals.
 Then, with this data, NWIRP and other organizations that they work with can provide more accurate information about these consequences when public defenders are negotiating plea deals.
