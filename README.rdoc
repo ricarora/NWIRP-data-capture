@@ -1,28 +1,23 @@
-== README
+Capstone Project by Richa Arora and Kate Fulton:
+An application for Northwest Immigrant Rights Project (NWIRP).
+It's a database where NWIRP staff can enter in information about clients who have criminal convictions.
+And then that data can be queried in a variety of ways.
+The goal is for NWIRP to better understand how certain convictions play out with people's immigration cases--for example if certain convictions tend to have particularly harsh immigration consequences for individuals.
+Then, with this data, NWIRP and other organizations that they work with can provide more accurate information about these consequences when public defenders are negotiating plea deals.
+The hope is that this data will help eliminate and/or mitigate immigration consequences for non-citizens, or at the very least help accurately inform individuals of the immigration consequences they will most likely face.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The business requirements:
+* Create, edit, and store information about Northwest Immigrant Rights Project (NWIRP) clients who have criminal convictions
+* Allow flexible queries for users to search the data
+* Better understand how certain convictions play out with people's immigration cases
+* Provide more accurate information about these consequences when public defenders are negotiating plea deals
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Implementation:
+* Database: PgSQL
+* Domain Tables that ensure the quality of database
+* Overwriting Primary Keys help simplify an already complex query system
+* Two Simple Forms that contain multiple models
+* One Advanced Query Page that dynamically changes to fit user’s needs and allows them to search clients or convictions
+* Client can save queries by name and also export the results in Excel
+* Encryption of sensitive data using two point decryption
+* Admin dashboard for approving users and maintaining domain tables
